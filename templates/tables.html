@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/table.css">
+    <title>Create-schema</title>
+</head>
+<body>
+    <section>
+        <h2>Create schema</h2>
+    
+
+    <div>
+        <input type="text" id="create_schema" placeholder="création de schéma">
+        <button type="button" id="create_schema_btn">Valider le schéma</button>
+    </div>
+    </section>
+
+    
+
+    <section>
+        <h3>Créer une table</h3>
+        <div class="select_schema"></div>
+        <form id="createTableForm">
+            <label for="tableName">Nom de la table :</label>
+            <input type="text" id="tableName" name="tableName" required>
+
+            <!-- Ici tu insères le bloc de règles --> 
+            <!-- <div class="verification_name" data-target="tableName"></div> -->
+            <br>
+
+
+
+            <div id="columns">
+                <h3>Colonnes</h3>
+                <table border="1">
+                <thead>
+                    <tr>
+                    <th>Nom de colonne</th>
+                    <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="columnsBody">
+                    <tr class="column">
+                    <td>
+                        <input type="text" name="column_name" placeholder="Nom de colonne" required>
+                    </td>
+                    <td>
+                        <div id="typeSelectContainer"></div>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- Ici tu insères le bloc de règles --> 
+            <!-- <div class="verification_name" data-target="column_name"></div> -->
+
+
+            <button type="button" id="addColumnBtn">Ajouter une colonne</button>
+
+            <button type="submit" id="createTableBtn">Créer la table</button>
+
+            
+
+        </form>
+    </section>
+
+    <section>
+        <h3>list schema and table:</h3>
+        <div id="schema_container"></div>
+    </section>
+
+   
+    <!-- --------------------create schema--------------------------------- -->
+    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_create_schema.js"></script>
+    <script type="module" src="/static/JS/method_post/post_schema.js"></script>
+    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/conserve_json.js"></script>
+
+    <!-- --------------------get schema & table--------------------------------- -->
+     <script type="module" src="/static/JS/component_ui/display_table_schema.js"></script>
+     <script type="module" src="/static/JS/method_get/get_list_schema_table.js"></script>
+     <script type="module" src="/static/JS/component_ui/list_schema.js"></script>
+
+     <!-- --------------------------post create table----------------------------- -->
+      <script type="module" src="/static/JS/component_ui/select_schema.js"></script>
+      <script type="module" src="/static/JS/component_ui/add_column.js"></script>
+      <script type="module" src="/static/JS/method_post/post_create_table.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+Postgresql
+voici la structure du json
+{
+    "schema_name": "nom du schema"
+
+}
+
+Voici la requête du db postgresql
+# postgresql.py
+def create_schema_query(schema_name: str) -> str:
+    return f"CREATE SCHEMA {schema_name};"

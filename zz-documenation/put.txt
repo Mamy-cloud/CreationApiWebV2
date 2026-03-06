@@ -1,0 +1,15 @@
+--------------------rename columns---------------------------------
+{
+  "schema_name": "nom du schema",
+  "table_name": "nom de la table",
+  "columns": [
+    {
+      "old_name_name": "fer",
+      "new_name": "fes23"
+    },
+    {
+      "old_name_name": "fe55",
+      "new_name": "fdd545"
+    }
+  ]
+}

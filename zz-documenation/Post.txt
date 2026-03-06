@@ -1,0 +1,37 @@
+---------------------create table--------------------------
+lorsqu'on utilise psycopg2, on n'utilise jamais SQLAlchemy
+
+
+Model Json:
+
+{
+  "schema_name": "select",
+  "table_name": "essai",
+  "columns": [
+    {
+      "column_name": "fer",
+      "type_of_column": "INTEGER"
+    }
+  ]
+}
+--------------------rename table---------------------------
+model Json:
+{
+  "schema_name": "nom du schema",
+  "old_name": "nom actuel de la table",
+  "new_name": "nouvel nom de la table"
+}
+
+------------------add columns---------------------------------
+
+{
+  "schema_name": "nom du schema",
+  "table_name": "nom de la table",
+  "columns": [
+    {
+      "column_name": "fer",
+      "type_of_column": "INTEGER"
+    }
+  ]
+}
+

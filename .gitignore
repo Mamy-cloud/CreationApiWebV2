@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Poetry cache
+.cache/
+poetry.toml
+
+# fichiers système
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+
+# variables d'environnement
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+#env
+.env
