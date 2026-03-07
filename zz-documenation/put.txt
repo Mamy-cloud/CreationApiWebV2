@@ -13,3 +13,40 @@
     }
   ]
 }
+
+
+dans le fichier json_rename_columns.js, il construit le json reçu du fichier rename_multi_column.js:
+import { renamedColumns } from "./display_colums_list.js";
+
+export function getRenameColumnsData() {
+
+  const pathParts = window.location.pathname.split("/");
+
+  const schemaName = pathParts[2];
+  const tableName = pathParts[3];
+
+  return {
+    schema_name: schemaName,
+    table_name: tableName,
+    columns: renamedColumns
+  };
+
+}
+
+voici le model json à suivre:
+{
+  "schema_name": "nom du schema",
+  "table_name": "nom de la table",
+  "columns": [
+    {
+      "old_name_name": "fer",
+      "new_name": "fes23"
+    },
+    {
+      "old_name_name": "fe55",
+      "new_name": "fdd545"
+    }
+  ]
+}
+
+puis une fois le json construit, on fait l'appel api put_rename_columns.js, et dans le fichier put_rename_columns.js qu'on fait l'appel avec le bouton Valider les changements

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/table.css">
+    <title>Rename one column</title>
+</head>
+<body>
+
+    <!-- Bouton retour --> 
+    <button id="backBtn">Revenir à la table</button>
+    <section>
+        <form id="renameColumnForm">
+        <p>Old column name: <span id="old_name"></span></p>
+        <p>Column type: <span id="column_type"></span></p>
+        <input type="text" id="new_column_name" required>
+        <button type="submit" id="rename_button">Rename Column</button>
+        </form>
+
+
+    </section>
+    <script type="module" src="/static/JS/component_ui/rename_one_column_form.js"></script>
+    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_rename_columns.js"></script>
+    <script type="module" src="/static/JS/method_put/put_rename_columns.js"></script>
+    <script>
+        // Action du bouton retour
+        document.getElementById("backBtn").addEventListener("click", () => {
+            const path = window.location.pathname.split("/");
+            const schema_name = path[2];
+            const table_name = path[3];
+            // Redirection vers la page qui liste les tables
+            window.location.href = `/admin/${schema_name}/${table_name}`;
+        });
+
+     </script>
+    
+</body>
+</html>

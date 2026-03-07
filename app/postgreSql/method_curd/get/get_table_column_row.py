@@ -7,7 +7,7 @@ import psycopg2.extras
 
 router = APIRouter()
 
-@router.get("/admin/{schema_name}/{table_name}/get_table/json")
+@router.get("/admin/{schema_name}/{table_name}/methods/get/get_table/postgresql/json")
 def get_table(schema_name: str, table_name: str):
     """
     Retourne le JSON complet d'une table PostgreSQL dans le format attendu :

@@ -24,7 +24,7 @@ const tableName = pathParts[pathParts.length - 1];  // dernier segment
 console.log(tableName)
 
 function loadTable() {
-  fetch(`/admin/${schemaName}/${tableName}/get_table/json`)
+  fetch(`/admin/${schemaName}/${tableName}/methods/get/get_table/postgresql/json`)
     .then(response => response.json())
     .then(data => {
 
@@ -41,6 +41,7 @@ function loadTable() {
 
       // --- Création de l’en-tête ---
       buildTableHeader(thead, columns);
+      
 
       // --- Création des lignes ---
       buildTableRows(tbody, data, columns);
