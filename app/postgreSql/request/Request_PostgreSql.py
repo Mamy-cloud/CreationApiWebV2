@@ -164,3 +164,38 @@ def generate_rename_columns_queries(schema_name: str, table_name: str, rename_ma
         queries.append(f'ALTER TABLE {schema}.{table} RENAME COLUMN {old} TO {new};')
 
     return queries
+
+#---------------------------put modify value row----------------------------------
+# Request_PostgreSql.py
+
+def update_row(schema_name: str, table_name: str, row_id: int, column_updates: dict):
+    """
+    Génère une requête SQL UPDATE sécurisée pour modifier une ou plusieurs colonnes.
+
+    Args:
+        schema_name (str): nom du schéma
+        table_name (str): nom de la table
+        row_id (int): identifiant de la ligne à modifier
+        updates (dict): dictionnaire {colonne: nouvelle_valeur}
+
+    Returns:
+        tuple: (query, values) pour être utilisé avec cursor.execute()
+    """
+
+    # construction sécurisée de la clause SET
+    set_clause = sql.SQL(", ").join(
+        sql.SQL("{} = %s").format(sql.Identifier(col))
+        for col in column_updates.keys()
+    )
+
+    # construction sécurisée de la requête
+    query = sql.SQL("UPDATE {}.{} SET {} WHERE id = %s").format(
+        sql.Identifier(schema_name),
+        sql.Identifier(table_name),
+        set_clause
+    )
+
+    # valeurs à injecter
+    values = list(column_updates.values()) + [row_id]
+
+    return query, values

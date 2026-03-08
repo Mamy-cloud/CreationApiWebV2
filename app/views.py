@@ -51,3 +51,13 @@ async def show_table_page(schema_name: str, table_name: str):
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
 
     return FileResponse(file_path)
+
+
+@router.get("/admin/{schema_name}/{table_name}/modify_row/value")
+async def show_table_page(schema_name: str, table_name: str, id: int = Query(...)):
+    file_path = BASE_DIR / "templates" / "modify_row.html"
+
+    if not file_path.exists():
+        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
+
+    return FileResponse(file_path)

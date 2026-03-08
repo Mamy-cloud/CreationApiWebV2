@@ -14,6 +14,7 @@ from app.postgreSql.method_curd.get import get_table_column_row
 
 #-----------------put--------------------------------------
 from app.postgreSql.method_curd.put import put_rename_columns
+from app.postgreSql.method_curd.put import put_modify_value_row
 
 #---------------------views--------------------------------------
 from fastapi.staticfiles import StaticFiles
@@ -54,6 +55,7 @@ app.include_router(get_table_column_row.router)
 
 #------------------put------------------------------------------------
 app.include_router(put_rename_columns.router)
+app.include_router(put_modify_value_row.router)
 
 #-----------------------------interface graphique-----------------------
 BASE_DIR = Path(__file__).resolve().parent.parent

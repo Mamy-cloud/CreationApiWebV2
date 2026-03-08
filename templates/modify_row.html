@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/table.css">
+    <title>modify row</title>
+</head>
+<body>
+
+    <!-- Bouton retour --> 
+    <button id="backBtnToTable">Revenir à la table</button>
+    
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de la colonne</th>
+                <th>Valeurs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="columnsTypeDataTableList"></tbody>
+
+    </table>
+
+
+    
+    <script type="module" src="/static/JS/component_ui/display_columns_list_with_id.js"></script>
+    <script type="module" src="/static/JS/component_ui/action_modify_value_row.js"></script>
+
+    <script>
+        // Action du bouton retour
+        document.getElementById("backBtnToTable").addEventListener("click", () => {
+            const path = window.location.pathname.split("/");
+            const schema_name = path[2];
+            const table_name = path[3];
+            // Redirection vers la page qui liste les tables
+            window.location.href = `/admin/${schema_name}/${table_name}`;
+        });
+
+     </script>
+</body>
+</html>

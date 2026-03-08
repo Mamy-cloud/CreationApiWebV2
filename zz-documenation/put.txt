@@ -50,3 +50,15 @@ voici le model json à suivre:
 }
 
 puis une fois le json construit, on fait l'appel api put_rename_columns.js, et dans le fichier put_rename_columns.js qu'on fait l'appel avec le bouton Valider les changements
+
+-----------------------put modify value row----------------
+{
+  "schema_name": "public",
+  "table_name": "employes",
+  "row_id": 7,
+  "column_updates": {
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "poste": "Manager"
+  }
+}
