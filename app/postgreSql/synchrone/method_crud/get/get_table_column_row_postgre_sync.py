@@ -1,6 +1,6 @@
 # get_table.py
 from fastapi import APIRouter, HTTPException
-from app.postgreSql.synchrone.request.Request_PostgreSql import request_get_table_PostgreSql_sync_safe
+from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_get_table_PostgreSql_sync_safe
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 import psycopg2
 import psycopg2.extras

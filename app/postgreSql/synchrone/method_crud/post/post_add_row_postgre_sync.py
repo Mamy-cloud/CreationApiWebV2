@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 import psycopg2
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
-from app.postgreSql.synchrone.request.Request_PostgreSql import request_post_add_row_postgre_sync
+from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_post_add_row_postgre_sync
 from app.postgreSql.synchrone.json_base_model.model_add_row_postgre_sync import AddRowsModelPostgreSync
 
 router = APIRouter()

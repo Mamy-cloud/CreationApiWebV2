@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 from app.postgreSql.synchrone.json_base_model.postgre_sync_model_create_schema import PostgreSyncSchemaCreate
-from app.postgreSql.synchrone.request.Request_PostgreSql import postgre_sync_request_create_schema_query
+from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import postgre_sync_request_create_schema_query
 
 router = APIRouter()
 

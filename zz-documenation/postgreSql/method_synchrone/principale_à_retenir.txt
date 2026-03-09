@@ -1,0 +1,3 @@
+On utilise psycopg2 pour le traitement synchone.
+On utilise poetry car poetry support les installations pip puis c'est facile de déployer le projet avec pip
+¨Pour l'asynchrone on utilise SQLAlchemy qu'on paramètre avec alembic

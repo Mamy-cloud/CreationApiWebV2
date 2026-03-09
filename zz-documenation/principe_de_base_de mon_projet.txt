@@ -1,25 +1,28 @@
-----------gestion de db--------------------------------
+----------PLATFORME DE GESTION DE MULTI-DB PAR LE SERVEUR--------------------------------
 
-Mon projet se base sur l'indépendance aux maximums de chaque code et module.
-Mais on utilisera les fonctions et module.
-Comme chaque module et chaque code sont idépendant, ce sera très facile de vérifier où se trouve le bug.
+Mon projet se base sur l'indépendance aux maximums de chaque code et module. 
+Les method, calcul, opérations seront indépendant des un des autre le maximum possible.
+Ils auront leurs propres module et variables.
+La coordination client/serveur se fera par le json.
 
-pour cela, il faut faire une norme des noms de variables et de url.
 
-A- côté back-end
+Comme chaque module et chaque code sont indépendant, ce sera très facile de vérifier où se trouve le bug.
+pour cela, il faut faire une norme des noms de variables, dossier et de url ce qui seront utilisé pour l'importation
 
-nommage de fichier: nomdb_async ou sync_calcul ou method ou model_personnalisationLogique.py
+-----------------------------------A- côté back-end--------------------------
+le principale est de mettre nomDB et sync/async qu'importe la place, il faut ajouter simplement des mots logiques
 
-le nommage des var suit principalement le chemin du dossier pour le back-end
+-nommage de fichier: nomdb_async ou sync_calcul ou method ou model_personnalisationLogique.py
+
+-le nommage des var suit principalement le chemin du dossier pour le back-end
 url backend: /app/postgreSql/asynchrone ou synchone / calcul, model ou crud/personnalisation logique
-var pour les importation: 
-(calcul ou model ou get)_(personalisation nom logique) _ (nom du db) _ (asynchrone ou synchrone)
+
+-(calcul ou model ou get)_(personalisation nom logique) _ (nom du db) _ (asynchrone ou synchrone)
 ex: get_create_row_postgre_sync
 ou: GetCreateRowPostgreSync
 
 
-url views.py: /admin/nom du schema du bd/nom de la table du db/ nom du db/ calcul method/ personnalisation logique
-
+-url views.py: /admin/nom du schema du bd/nom de la table du db/ nom du db/ calcul method/ personnalisation logique
 NB: le plus important, est de mettre le nom du bd, asynchrone ou synchone, calcul, personnalisation logique-------
 
 
@@ -27,10 +30,10 @@ B- côté front-end
 pour le front-end:
 
 on sépare le html et js pour chaque db.
--pour le html, on nommera le dossier comme suit: nomDb_personnalisationLogique.html
-le nom id, class: nomdb_personnalisation
--pour le js, on nommera le dossier comme suit: nomDb_personnalisationLogique.js
--pour le css, on utilisera les id et class spécifique: nomdb_personnalisation
+-pour le html, on nommera le dossier comme suit: nomDb+personnalisationLogique.html
+le nom id, class: nomdb+personnalisation
+-pour le js, on nommera le dossier comme suit: nomDb+personnalisationLogique.js
+-pour le css, on utilisera les id et class spécifique: nomdb+personnalisation
 
 on utilisera une classe et id global pour le style global
 le nom id, class: global_personnalisation
