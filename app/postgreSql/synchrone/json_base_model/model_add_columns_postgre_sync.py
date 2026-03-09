@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import List
-from app.postgreSql.json_base_model.type_data import SQL_TYPES, map_type_to_postgres
+from app.postgreSql.synchrone.json_base_model.type_data import SQL_TYPES, map_type_to_postgres
 
 # Liste plate de tous les types autorisés
 ALL_SQL_TYPES = [t for sublist in SQL_TYPES.values() for t in sublist]
@@ -24,7 +24,7 @@ class ColumnDefinition(BaseModel):
         return pg_type
 
 
-class AddColumnsRequest(BaseModel):
+class AddColumnsModelPostgreSync(BaseModel):
     schema_name: str = Field(..., example="public")
     table_name: str = Field(..., example="produits")
     columns: List[ColumnDefinition]

@@ -1,20 +1,23 @@
 from fastapi import FastAPI, Depends
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+
 
 #----------------post---------------------------------
-from app.postgreSql.method_curd.post import create_schema
-from app.postgreSql.method_curd.post import post_create_table
-from app.postgreSql.method_curd.post import post_rename_table
-from app.postgreSql.method_curd.post import post_add_columns
-from app.postgreSql.method_curd.post import post_add_row
+from app.postgreSql.synchrone.method_crud.post import postgre_sync_post_create_schema
+from app.postgreSql.synchrone.method_crud.post import post_create_table_postgre_sync
+from app.postgreSql.synchrone.method_crud.post import post_rename_table_postgre_sync
+from app.postgreSql.synchrone.method_crud.post import post_add_columns_postgre_sync
+from app.postgreSql.synchrone.method_crud.post import post_add_row_postgre_sync
 
 #-----------------get----------------------------------
-from app.postgreSql.method_curd.get import get_list_schema_table
-from app.postgreSql.method_curd.get import get_table_column_row
+from app.postgreSql.synchrone.method_crud.get import postgre_sync_get_schema_table
+from app.postgreSql.synchrone.method_crud.get import get_table_column_row_postgre_sync
 
 #-----------------put--------------------------------------
-from app.postgreSql.method_curd.put import put_rename_columns
-from app.postgreSql.method_curd.put import put_modify_value_row
+from app.postgreSql.synchrone.method_crud.put import put_rename_columns_postgre_sync
+from app.postgreSql.synchrone.method_crud.put import put_modify_value_row_postgre_sync
+
+
 
 #---------------------views--------------------------------------
 from fastapi.staticfiles import StaticFiles
@@ -42,35 +45,23 @@ app.add_middleware(
 )
 
 #-----------------------post--------------------------------------------
-app.include_router(create_schema.router)
-app.include_router(post_create_table.router)
-app.include_router(post_rename_table.router)
-app.include_router(post_add_columns.router)
-app.include_router(post_add_row.router)
+app.include_router(postgre_sync_post_create_schema.router)
+app.include_router(post_create_table_postgre_sync.router)
+app.include_router(post_rename_table_postgre_sync.router)
+app.include_router(post_add_columns_postgre_sync.router)
+app.include_router(post_add_row_postgre_sync.router)
 
 
 #--------------------get---------------------------------------------------
-app.include_router(get_list_schema_table.router)
-app.include_router(get_table_column_row.router)
+app.include_router(postgre_sync_get_schema_table.router)
+app.include_router(get_table_column_row_postgre_sync.router)
 
 #------------------put------------------------------------------------
-app.include_router(put_rename_columns.router)
-app.include_router(put_modify_value_row.router)
-
-#-----------------------------interface graphique-----------------------
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# static
-app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
-
-# routes
-app.include_router(views_router)
-
-
-
+app.include_router(put_rename_columns_postgre_sync.router)
+app.include_router(put_modify_value_row_postgre_sync.router)
 #---------------------page d'accueil principal--------------
 @app.get("/")
-def read_root(db = Depends(connect_to_db)):
+def read_root(db = Depends(postgre_sync_connect_to_db)):
     cursor = db.cursor()
     cursor.execute("SELECT 1")
     result = cursor.fetchone()[0]
@@ -82,3 +73,10 @@ def read_root(db = Depends(connect_to_db)):
         "message": "Connexion réussie avec psycopg2",
         "result": result
     }
+#-----------------------------interface graphique-----------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# routes
+app.include_router(views_router)
+# static
+app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")

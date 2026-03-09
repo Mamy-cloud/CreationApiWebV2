@@ -1,22 +1,22 @@
 from fastapi import APIRouter, HTTPException
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.json_base_model.create_schema_model import SchemaCreate
-from app.postgreSql.request.Request_PostgreSql import create_schema_query
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.json_base_model.postgre_sync_model_create_schema import PostgreSyncSchemaCreate
+from app.postgreSql.synchrone.request.Request_PostgreSql import postgre_sync_request_create_schema_query
 
 router = APIRouter()
 
-@router.post("/admin/create_schema")
-def create_schema(schema: SchemaCreate):
+@router.post("/app/postgre/sync/method/post/schema")
+def postgre_post_create_schema(schema: PostgreSyncSchemaCreate):
     conn = None
     cursor = None
     
     try:
         # Connexion à la base
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
 
         # Génération requête sécurisée
-        query = create_schema_query(schema.schema_name)
+        query = postgre_sync_request_create_schema_query(schema.schema_name)
 
         # Exécution
         cursor.execute(query)

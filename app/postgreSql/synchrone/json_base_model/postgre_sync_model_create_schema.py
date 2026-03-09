@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class SchemaCreate(BaseModel):
+class PostgreSyncSchemaCreate(BaseModel):
     schema_name: str

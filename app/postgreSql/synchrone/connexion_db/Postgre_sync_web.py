@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def connect_to_db(database_url=None):
+def postgre_sync_connect_to_db(database_url=None):
     if database_url is None:
         database_url = os.getenv("DATA_URL_POSTGRESQL")
         if not database_url:

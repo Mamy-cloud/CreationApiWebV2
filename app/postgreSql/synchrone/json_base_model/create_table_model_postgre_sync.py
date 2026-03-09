@@ -1,6 +1,6 @@
 from pydantic import BaseModel, field_validator
 from typing import List
-from app.postgreSql.json_base_model.type_data import SQL_TYPES, map_type_to_postgres
+from app.postgreSql.synchrone.json_base_model.type_data import SQL_TYPES, map_type_to_postgres
 
 
 # -------------------------
@@ -31,7 +31,7 @@ class ColumnItem(BaseModel):
 # -------------------------
 # Modèle pour création table
 # -------------------------
-class CreateTableRequest(BaseModel):
+class CreateTableModelPostgreSync(BaseModel):
     schema_name: str
     table_name: str
     columns: List[ColumnItem]

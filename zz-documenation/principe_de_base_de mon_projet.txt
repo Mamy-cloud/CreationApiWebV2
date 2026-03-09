@@ -8,6 +8,8 @@ pour cela, il faut faire une norme des noms de variables et de url.
 
 A- côté back-end
 
+nommage de fichier: nomdb_async ou sync_calcul ou method ou model_personnalisationLogique.py
+
 le nommage des var suit principalement le chemin du dossier pour le back-end
 url backend: /app/postgreSql/asynchrone ou synchone / calcul, model ou crud/personnalisation logique
 var pour les importation: 
@@ -15,10 +17,6 @@ var pour les importation:
 ex: get_create_row_postgre_sync
 ou: GetCreateRowPostgreSync
 
-les data Json et dans les DB pour les constantes(tout mettre en majuscule)
-NOMDB_ASYN/SYN_PERSONNALISATION_NOM
-
-ex: POSTGRE_SYN_SCHEMA_NAME
 
 url views.py: /admin/nom du schema du bd/nom de la table du db/ nom du db/ calcul method/ personnalisation logique
 
@@ -36,3 +34,6 @@ le nom id, class: nomdb_personnalisation
 
 on utilisera une classe et id global pour le style global
 le nom id, class: global_personnalisation
+
+
+DONC POUR LE NOMMAGE, SOIT : NOMDB_SYNC SONT LES PLUS IMPORTANTS

@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.request.Request_PostgreSql import post_add_columns
-from app.postgreSql.json_base_model.add_columns_model import AddColumnsRequest
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import request_post_add_columns_postgre_sync
+from app.postgreSql.synchrone.json_base_model.model_add_columns_postgre_sync import AddColumnsModelPostgreSync
 
 router = APIRouter()
 
 
 @router.post("/admin/methods/post/schema/table/add_column")
-def add_columns(data: AddColumnsRequest):
+def add_columns_endpoint_postgre_sync(data: AddColumnsModelPostgreSync):
     """
     Endpoint pour ajouter une ou plusieurs colonnes à une table PostgreSQL
     dans un schéma spécifique.
@@ -17,7 +17,7 @@ def add_columns(data: AddColumnsRequest):
 
     try:
         # Connexion à la DB
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
 
         print("verif cursor")
@@ -27,7 +27,7 @@ def add_columns(data: AddColumnsRequest):
         print("liste colonne", columns_data)
 
         # Génère la requête SQL sécurisée
-        query = post_add_columns(
+        query = request_post_add_columns_postgre_sync(
             schema_name=data.schema_name,
             table_name=data.table_name,
             columns=columns_data

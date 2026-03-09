@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException
 from psycopg2 import sql
 
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.request.Request_PostgreSql import update_row
-from app.postgreSql.json_base_model.json_modify_value_row_model import ModifyValueRowRequest
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import request_update_row_postgre_sync
+from app.postgreSql.synchrone.json_base_model.model_modify_value_row_postgre_sync import ModifyValueRowModelPostgreSync
 
 router = APIRouter()
 
-@router.put("/admin/method/put/modify/value/row/postgresql")
-def modify_row(data: ModifyValueRowRequest):
+@router.put("/app/postgre/synchrone/method_crud/modify/value_row")
+def modify_row_endpoint_postgre_sync(data: ModifyValueRowModelPostgreSync):
     # debug
     print("debug data", data)
     print("debug dict", data.dict())
@@ -18,11 +18,11 @@ def modify_row(data: ModifyValueRowRequest):
 
     try:
         # connexion à la base
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cur = conn.cursor()
 
         # génération de la requête
-        query, values = update_row(
+        query, values = request_update_row_postgre_sync(
             schema_name=data.schema_name,
             table_name=data.table_name,
             row_id=data.row_id,

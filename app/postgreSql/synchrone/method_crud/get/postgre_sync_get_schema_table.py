@@ -1,17 +1,17 @@
 from fastapi import APIRouter, HTTPException
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.request.Request_PostgreSql import get_schema_table
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import postgre_sync_get_schema_table
 
 router = APIRouter()
 
-@router.get("/admin/get_schema/list/json")
-def read_schema_table():
+@router.get("/app/sync/method_crud/get/schema_table")
+def postgre_sync_get_schema_table():
     conn = None
     cursor = None
     try:
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
-        result = get_schema_table(cursor)
+        result = postgre_sync_get_schema_table(cursor)
         return result  # renvoie directement le JSON attendu
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

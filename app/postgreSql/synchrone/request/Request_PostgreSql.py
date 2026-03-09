@@ -1,7 +1,7 @@
 from psycopg2 import sql
 import re
 
-def create_schema_query(schema_name: str):
+def postgre_sync_request_create_schema_query(schema_name: str):
     """
     Génère une requête sécurisée pour créer un schéma.
     """
@@ -10,7 +10,7 @@ def create_schema_query(schema_name: str):
     )
 
 #----------------------liste schema et table-----------------------------
-def get_schema_table(cursor):
+def postgre_sync_get_schema_table(cursor):
     cursor.execute("""
         SELECT json_agg(schema_data) AS schemas
         FROM (
@@ -44,7 +44,7 @@ def safe_identifier(name: str) -> str:
 
 #-------------------------------createTable------------------------------------------
 
-def create_table_sql(schema_name: str, table_name: str, columns: list[dict]) -> str:
+def postgre_sync_request_create_table_sql(schema_name: str, table_name: str, columns: list[dict]) -> str:
     """
     Génère une requête CREATE TABLE simple.
     columns : liste de dicts { "column_name": str, "type": str }
@@ -65,7 +65,7 @@ def create_table_sql(schema_name: str, table_name: str, columns: list[dict]) -> 
 
 
 # Request_PostgreSql.py
-def get_table_PostgreSql_safe(schema_name: str, table_name: str):
+def request_get_table_PostgreSql_sync_safe(schema_name: str, table_name: str):
     if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', table_name):
         raise ValueError(f"Nom de table invalide : {table_name}")
     if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', schema_name):
@@ -84,7 +84,7 @@ def get_table_PostgreSql_safe(schema_name: str, table_name: str):
 
 # -------------------- post table_name ----------------------------------
 
-def post_rename_table_sql(schema_name: str, old_name: str, new_name: str):
+def request_post_rename_table_postgre_sync(schema_name: str, old_name: str, new_name: str):
     """
     Retourne la requête SQL sécurisée pour renommer une table
     PostgreSQL dans un schéma spécifique.
@@ -98,7 +98,7 @@ def post_rename_table_sql(schema_name: str, old_name: str, new_name: str):
 
 # -------------------- add columns to table --------------------
 
-def post_add_columns(schema_name: str, table_name: str, columns: list):
+def request_post_add_columns_postgre_sync(schema_name: str, table_name: str, columns: list):
 
     add_column_clauses = [
         sql.SQL("ADD COLUMN {} {}").format(
@@ -117,7 +117,7 @@ def post_add_columns(schema_name: str, table_name: str, columns: list):
     return query
 
 #-------------------add rows-------------------------------------
-def build_insert_query(tuple_data):
+def request_post_add_row_postgre_sync(tuple_data):
     """
     Génère une requête SQL INSERT INTO schema.table (...) VALUES (...)
     - tuple_data : (schema_name, table_name, columns, rows)
@@ -138,7 +138,7 @@ def build_insert_query(tuple_data):
     return sql_query
 
 #--------------------------------rename column----------------------------
-def generate_rename_columns_queries(schema_name: str, table_name: str, rename_map: dict) -> list[str]:
+def request_rename_columns_postgre_sync(schema_name: str, table_name: str, rename_map: dict) -> list[str]:
     """
     Génère une liste de requêtes SQL pour renommer une ou plusieurs colonnes
     de manière sécurisée (protège contre l'injection SQL).
@@ -171,7 +171,7 @@ def generate_rename_columns_queries(schema_name: str, table_name: str, rename_ma
 # Request_PostgreSql.py
 from typing import List
 
-def update_row(schema_name: str, table_name: str, row_id: int, columns: List):
+def request_update_row_postgre_sync(schema_name: str, table_name: str, row_id: int, columns: List):
     """
     Génère une requête SQL UPDATE sécurisée pour modifier une ou plusieurs colonnes.
 

@@ -1,15 +1,15 @@
 from fastapi import APIRouter, HTTPException
 import psycopg2
 from psycopg2 import sql
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.request.Request_PostgreSql import create_table_sql
-from app.postgreSql.json_base_model.create_table_model import CreateTableRequest
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import postgre_sync_request_create_table_sql
+from app.postgreSql.synchrone.json_base_model.create_table_model_postgre_sync import CreateTableModelPostgreSync
 
 router = APIRouter()
 
 
-@router.post("/admin/method/post/create_table")
-def create_table_endpoint(request: CreateTableRequest):
+@router.post("/app/postgre/synchrone/method/post_create_table")
+def create_table_endpoint_postgre_sync(request: CreateTableModelPostgreSync):
     """
     Endpoint POST pour créer une table PostgreSQL depuis un JSON, sans SQLAlchemy.
     """
@@ -17,7 +17,7 @@ def create_table_endpoint(request: CreateTableRequest):
     cur = None
     try:
         # 🔹 Générer le SQL de création de table
-        sql_query = create_table_sql(
+        sql_query = postgre_sync_request_create_table_sql(
             schema_name=request.schema_name,
             table_name=request.table_name,
             columns=[col.model_dump() for col in request.columns]
@@ -26,7 +26,7 @@ def create_table_endpoint(request: CreateTableRequest):
         print("SQL généré :", sql_query)
 
         # 🔹 Connexion directe à PostgreSQL
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cur = conn.cursor()
 
         # 🔹 Créer le schema si nécessaire

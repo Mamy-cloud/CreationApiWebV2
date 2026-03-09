@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException
 import psycopg2
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
-from app.postgreSql.request.Request_PostgreSql import build_insert_query
-from app.postgreSql.json_base_model.add_rows_model import AddRowsRequest
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import request_post_add_row_postgre_sync
+from app.postgreSql.synchrone.json_base_model.model_add_row_postgre_sync import AddRowsModelPostgreSync
 
 router = APIRouter()
 
 
-@router.post("/admin/method/post/table/add_row")
-def add_row(data: AddRowsRequest):
+@router.post("/app/postgre/sync/method_crud/add/rows/")
+def add_row_endpoint_postgre_sync(data: AddRowsModelPostgreSync):
     """
     Ajoute une ou plusieurs lignes dans une table PostgreSQL
     en utilisant schema_name.
@@ -19,10 +19,10 @@ def add_row(data: AddRowsRequest):
         tuple_data = data.to_tuple()
 
         # Générer la requête SQL
-        query = build_insert_query(tuple_data)
+        query = request_post_add_row_postgre_sync(tuple_data)
 
         # Connexion à la base
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
 
         # Exécuter la requête

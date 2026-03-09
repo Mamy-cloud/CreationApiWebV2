@@ -1,14 +1,14 @@
 # get_table.py
 from fastapi import APIRouter, HTTPException
-from app.postgreSql.request.Request_PostgreSql import get_table_PostgreSql_safe
-from app.postgreSql.connexion_db.db_PostgreSql_web import connect_to_db
+from app.postgreSql.synchrone.request.Request_PostgreSql import request_get_table_PostgreSql_sync_safe
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 import psycopg2
 import psycopg2.extras
 
 router = APIRouter()
 
 @router.get("/admin/{schema_name}/{table_name}/methods/get/get_table/postgresql/json")
-def get_table(schema_name: str, table_name: str):
+def get_table_postgre_sync(schema_name: str, table_name: str):
     """
     Retourne le JSON complet d'une table PostgreSQL dans le format attendu :
     {
@@ -19,11 +19,11 @@ def get_table(schema_name: str, table_name: str):
     """
     conn = None
     try:
-        conn = connect_to_db()
+        conn = postgre_sync_connect_to_db()
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 
             # Récupérer les requêtes sécurisées pour le schéma et la table
-            columns_query, rows_query = get_table_PostgreSql_safe(schema_name, table_name)
+            columns_query, rows_query = request_get_table_PostgreSql_sync_safe(schema_name, table_name)
 
             # Colonnes
             cur.execute(columns_query)

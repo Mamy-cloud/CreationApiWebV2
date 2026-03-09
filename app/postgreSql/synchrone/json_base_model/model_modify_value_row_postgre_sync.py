@@ -5,7 +5,7 @@ class ColumnRowItem(BaseModel):
     column_name: str
     new_value: Optional[Any]
 
-class ModifyValueRowRequest(BaseModel):
+class ModifyValueRowModelPostgreSync(BaseModel):
     schema_name: str
     table_name: str
     row_id: int
