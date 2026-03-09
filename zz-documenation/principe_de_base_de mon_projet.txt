@@ -1,32 +1,64 @@
 ----------PLATFORME DE GESTION DE MULTI-DB PAR LE SERVEUR--------------------------------
 
-Mon projet se base sur l'indépendance aux maximums de chaque code et module. 
-Les method, calcul, opérations seront indépendant des un des autre le maximum possible.
-Ils auront leurs propres module et variables.
-La coordination client/serveur se fera par le json.
+Objectif du projet:
+-la plus importante est de créer une documentation la plus simple pour que tout le monde puisse comprendre les documents, mais il faut les connaissances de base.
+-chaque traitement(method, calcul, admin, auth, token,...) a sa propre code et son propre module indépendemment des autres.
+-la communication entre différent traitement se basera uniquement sur le json.
+-permettre de gérer plusieurs db mais on commence d'abord par le postgreSql.
+-plusieurs utilisateur peut manipuler une même db
+-plusieurs utilisateur peut manipuler leurs propres db sur un même serveur
+-le logiciel permettra une gestion d'api donc on peut faire un appel api
+-il peut aussi être utiliser comme serveur pour gérer le back-end, calcul, method,...
+-dans le futur, il pourra être utiliser pour la data science, cloud-computing, deep-learning
 
 
-Comme chaque module et chaque code sont indépendant, ce sera très facile de vérifier où se trouve le bug.
-pour cela, il faut faire une norme des noms de variables, dossier et de url ce qui seront utilisé pour l'importation
+Base technique:
+1- Mon projet se base sur l'indépendance aux maximums de chaque code et module. 
+2-Les method, calcul, opérations seront indépendant des un des autres le maximum possible.
+Par exemple la méthod get pour la création de table aura sa propre requête, son propre endpoint, les autres calcul et méthode auront aussi leurs propres codes et modules indépendant des autres.
+Mais quelques fois ils auront un module en commun mais ce module ne dois jamais être modifiés.
+3-La coordination client/serveur se fera uniquement par le json.
+4-Si dans le futur, il y aura des bug, et il y aura des bugs importants. On isole simplement les codes venant du bug pour que les autres services et traitements marchent.
+
+Avantages:
+Comme chaque module et chaque code sont indépendants, ce sera très facile de vérifier où se trouve le bug.
+Il sera maintenable facilement et évolutif dans le sens où chaques personnes veut développer son propre logiciel.
+Dans le futur si plusieurs personnes ou équipes développent leur propres projets, les modules seront indépendants, donc chacun peut modifier précisemment le calcul et la méthode sans touché aux autres codes pour éviter les mauvaises manipulations d'un autre qui pourrais géner l'autre.
+
+Structure du projet:
+-il sera regrouper selon le db, mode de traitement, calcul et method, Structure et commande/requête,
+    ainsi si j'utilise postgreSql, je sépare d'abord le traitement synchrone et asynchrone, et chaque traitement aura leur code et module de calcul, ou admin pour éviter que les traitements s'entre-mêles.
+-pour les autres db, ce sera le même principe, séparer d'abord le traitement, les modules et codes pour les calculs.
+    chaque db, utilisera son propres codes, method, calcul, model
+-il y aura simplement un super utilisateur qui gère simplement s'il y aura une sauvegarde de donné depuis un db vers un autre db, et qui gère de comment cadencer le sauvegarde
+    rappelant que la communication même entre deux db se fera uniquement avec le json
+    ainsi si par exemple j'utilise mongoDB mais le sauvegarde ne peux pas se faire vers postgreSql, ce n'est pas grave, le serveur ne bloque pas, la résolution du bug n'interfère pas avec les deux db
+
+
+Méthode inchangeable:
+-il faut faire une norme des noms de variables, dossiers et de url ce qui seront utilisé surtout pour ce qui seront utiliser pour l'importation vers d'autre fichier.
+-séparer au maximum les modules pour chaque traitement et calcul.
+-le principale est de mettre nomDB et sync/async qu'importe la place, il faut ajouter simplement des mots logiques
 
 -----------------------------------A- côté back-end--------------------------
-le principale est de mettre nomDB et sync/async qu'importe la place, il faut ajouter simplement des mots logiques
-
 -nommage de fichier: nomdb_async ou sync_calcul ou method ou model_personnalisationLogique.py
 
--le nommage des var suit principalement le chemin du dossier pour le back-end
+-le nommage des url suit principalement le chemin du dossier pour le back-end
 url backend: /app/postgreSql/asynchrone ou synchone / calcul, model ou crud/personnalisation logique
 
--(calcul ou model ou get)_(personalisation nom logique) _ (nom du db) _ (asynchrone ou synchrone)
+-nommage des variables
+(calcul ou model ou get)_(personalisation nom logique) _ (nom du db) _ (asynchrone ou synchrone)
 ex: get_create_row_postgre_sync
 ou: GetCreateRowPostgreSync
 
 
 -url views.py: /admin/nom du schema du bd/nom de la table du db/ nom du db/ calcul method/ personnalisation logique
+
+
 NB: le plus important, est de mettre le nom du bd, asynchrone ou synchone, calcul, personnalisation logique-------
 
 
-B- côté front-end
+-----------------------------B- côté front-end--------------------------------------
 pour le front-end:
 
 on sépare le html et js pour chaque db.
@@ -37,6 +69,6 @@ le nom id, class: nomdb+personnalisation
 
 on utilisera une classe et id global pour le style global
 le nom id, class: global_personnalisation
-
-
 DONC POUR LE NOMMAGE, SOIT : NOMDB_SYNC SONT LES PLUS IMPORTANTS
+
+-ainsi dans le futur, on pourra aussi relier l'interface graphique d'adminisatration du back-end avec des framework front-end grâces aux url du view.py
