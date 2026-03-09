@@ -53,12 +53,25 @@ puis une fois le json construit, on fait l'appel api put_rename_columns.js, et d
 
 -----------------------put modify value row----------------
 {
-  "schema_name": "public",
-  "table_name": "employes",
-  "row_id": 7,
-  "column_updates": {
-    "nom": "Dupont",
-    "prenom": "Jean",
-    "poste": "Manager"
-  }
+  "schema_name": "schema1mars",
+  "table_name": "essai3mars53",
+  "row_id": 1,
+  "columns": [
+    {
+      "column_name": "fer235mars",
+      "new_value": 210
+    },
+    {
+      "column_name": "sde3mars",
+      "new_value": null
+    },
+    {
+      "column_name": "nom",
+      "new_value": "Dupont"
+    },
+    {
+      "column_name": "prenom",
+      "new_value": "Jean"
+    }
+  ]
 }

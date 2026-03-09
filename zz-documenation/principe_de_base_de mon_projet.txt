@@ -1,0 +1,38 @@
+----------gestion de db--------------------------------
+
+Mon projet se base sur l'indépendance aux maximums de chaque code et module.
+Mais on utilisera les fonctions et module.
+Comme chaque module et chaque code sont idépendant, ce sera très facile de vérifier où se trouve le bug.
+
+pour cela, il faut faire une norme des noms de variables et de url.
+
+A- côté back-end
+
+le nommage des var suit principalement le chemin du dossier pour le back-end
+url backend: /app/postgreSql/asynchrone ou synchone / calcul, model ou crud/personnalisation logique
+var pour les importation: 
+(calcul ou model ou get)_(personalisation nom logique) _ (nom du db) _ (asynchrone ou synchrone)
+ex: get_create_row_postgre_sync
+ou: GetCreateRowPostgreSync
+
+les data Json et dans les DB pour les constantes(tout mettre en majuscule)
+NOMDB_ASYN/SYN_PERSONNALISATION_NOM
+
+ex: POSTGRE_SYN_SCHEMA_NAME
+
+url views.py: /admin/nom du schema du bd/nom de la table du db/ nom du db/ calcul method/ personnalisation logique
+
+NB: le plus important, est de mettre le nom du bd, asynchrone ou synchone, calcul, personnalisation logique-------
+
+
+B- côté front-end
+pour le front-end:
+
+on sépare le html et js pour chaque db.
+-pour le html, on nommera le dossier comme suit: nomDb_personnalisationLogique.html
+le nom id, class: nomdb_personnalisation
+-pour le js, on nommera le dossier comme suit: nomDb_personnalisationLogique.js
+-pour le css, on utilisera les id et class spécifique: nomdb_personnalisation
+
+on utilisera une classe et id global pour le style global
+le nom id, class: global_personnalisation

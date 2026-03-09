@@ -63,9 +63,11 @@ export function displayColumnTypeDataList() {
         const actionTd = document.createElement("td");
 
         const modifyBtn = document.createElement("button");
+        modifyBtn.type = "button";
         modifyBtn.textContent = "Modifier valeur";
 
         const clearBtn = document.createElement("button");
+        clearBtn.type = "button";
         clearBtn.textContent = "Vider valeur";
 
         if (col.name === "id") {

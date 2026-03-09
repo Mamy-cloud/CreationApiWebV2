@@ -12,23 +12,35 @@
     <button id="backBtnToTable">Revenir à la table</button>
     
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom de la colonne</th>
-                <th>Valeurs</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+    <form id="modifyRowForm">
 
-        <tbody id="columnsTypeDataTableList"></tbody>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom de la colonne</th>
+                    <th>Valeurs</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-    </table>
+            <tbody id="columnsTypeDataTableList"></tbody>
+
+        </table>
+
+        <div style="margin-top:20px;">
+            <button type="submit" id="validateAllChangesBtn">
+                Valider tous les changements
+            </button>
+        </div>
+
+    </form>
 
 
     
     <script type="module" src="/static/JS/component_ui/display_columns_list_with_id.js"></script>
     <script type="module" src="/static/JS/component_ui/action_modify_value_row.js"></script>
+    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_modify_row.js"></script>
+    <script type="module" src="/static/JS/method_put/put_modify_row.js"></script>
 
     <script>
         // Action du bouton retour

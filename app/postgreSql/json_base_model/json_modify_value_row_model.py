@@ -1,9 +1,12 @@
+from typing import List, Optional, Any
 from pydantic import BaseModel
-from typing import Dict, Optional, Any
 
+class ColumnRowItem(BaseModel):
+    column_name: str
+    new_value: Optional[Any]
 
 class ModifyValueRowRequest(BaseModel):
     schema_name: str
     table_name: str
     row_id: int
-    column_updates: Dict[str, Optional[Any]]
+    columns: List[ColumnRowItem]
