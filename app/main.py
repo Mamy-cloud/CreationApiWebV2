@@ -12,6 +12,7 @@ from app.postgreSql.synchrone.method_crud.post import post_add_row_postgre_sync
 #-----------------get----------------------------------
 from app.postgreSql.synchrone.method_crud.get import postgre_sync_get_schema_table
 from app.postgreSql.synchrone.method_crud.get import get_table_column_row_postgre_sync
+from app.postgreSql.synchrone.method_crud.get import get_global_bonjour
 
 #-----------------put--------------------------------------
 from app.postgreSql.synchrone.method_crud.put import put_rename_columns_postgre_sync
@@ -55,6 +56,7 @@ app.include_router(post_add_row_postgre_sync.router)
 #--------------------get---------------------------------------------------
 app.include_router(postgre_sync_get_schema_table.router)
 app.include_router(get_table_column_row_postgre_sync.router)
+app.include_router(get_global_bonjour.router)
 
 #------------------put------------------------------------------------
 app.include_router(put_rename_columns_postgre_sync.router)
