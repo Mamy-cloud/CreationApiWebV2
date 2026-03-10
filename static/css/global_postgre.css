@@ -1,0 +1,84 @@
+/*--------------déclaration des variables--------------------*/
+:root{
+    --background-body: #2c2b2b;
+    --color-text: #ffffff;
+    --color-first: #1a5c0c;
+    --color-second: #36f506;
+    --color-third: #f5063a;
+    --color-forth: #6206f5;
+}
+
+
+#id_menu_global_postgre{
+  padding: 0;
+}
+
+#id_menu_style_postgre:hover{
+  cursor: pointer;
+  background-color: var(--color-second);
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid var(--color-text);
+  text-align: center;
+}
+td {
+  padding: 8px;
+  border: 1px solid var(--color-text);
+}
+th{
+  background-color: var(--color-third);
+}
+
+input[name="column_name"] {
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* model border pour les grids
+border-width: 1px 2px 3px 4px;
+top    = 1px
+right  = 2px
+bottom = 3px
+left   = 4px/*
+/*-----------------------header grid schema and table---------------------------------*/
+.header_grid_schema_postgre{
+  font-weight: bold;
+  border: solid var(--color-text);
+  border-width: 1px 0px 1px 1px;
+  padding: 9px;
+  width: 200px;
+  color: var(--color-text);
+  text-align: center;
+}
+.head_table_name_div_postgre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: solid var(--color-text);
+  border-width: 1px 1px 1px 2px;
+  padding: 6px;
+}
+.head_table_name_div_postgre, .header_grid_schema_postgre{
+  background-color: var(--color-third);
+}
+/*---------------------div container qui englobe la table tout entier-------------------*/
+.div_schema_table_postgre{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: 1px solid var(--color-text);
+  width: 100%;
+}
+
+/*-----------------------taille et dimensionnement dans les colonnes pour les tableaux--------*/
+.column-name{
+  font-size: 16px;
+  margin-top: 10px;
+}
+.column-type{
+  font-size: 10px;
+  margin-bottom: 10px;
+}

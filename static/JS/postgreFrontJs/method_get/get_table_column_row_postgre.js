@@ -11,17 +11,19 @@
 //et aussi le thead, script dans le html;
 
 
-import { buildTableHeader } from "../component_ui/display_table_header.js";
-import { buildTableRows } from "../component_ui/display_table_row.js";
-import { addRow } from "../component_ui/add_row.js";
+import { buildTableHeaderPostgre } from "../component_ui/display_table_column_row/display_table_header_postgre.js";
+import { buildTableRowsPostgre } from "../component_ui/display_table_column_row/display_table_row_postgre.js";
+/* import { addRow } from "../component_ui/add_row.js"; */
 
 // Récupérer schema_name et table_name depuis l'URL
-const pathParts = window.location.pathname.split("/").filter(Boolean);
-const schemaName = pathParts[pathParts.length - 2]; // avant-dernier segment
-console.log(schemaName);
+const pathParts = window.location.pathname.split("/");
 
-const tableName = pathParts[pathParts.length - 1];  // dernier segment
-console.log(tableName)
+// Exemple d'URL: /admin/public/users
+const schemaName = pathParts[2];
+const tableName = pathParts[3];
+
+console.log("SchemaName:", schemaName);
+console.log("TableName:", tableName);
 
 function loadTable() {
   fetch(`/admin/${schemaName}/${tableName}/methods/get/get_table/postgresql/json`)
@@ -32,7 +34,7 @@ function loadTable() {
       const thead = document.getElementById("columnsTable");
       const tbody = document.getElementById("rowsTable");
 
-      document.getElementById("tableTitle").textContent = `${tableName}`;
+      document.getElementById("tableTitlePostgre").textContent = `${tableName}`;
       
       
 
@@ -40,11 +42,11 @@ function loadTable() {
       let columns = data.columns;
 
       // --- Création de l’en-tête ---
-      buildTableHeader(thead, columns);
+      buildTableHeaderPostgre(thead, columns);
       
 
       // --- Création des lignes ---
-      buildTableRows(tbody, data, columns);
+      buildTableRowsPostgre(tbody, data, columns);
     })
     .catch(error => {
       console.error("Erreur lors du chargement du tableau:", error);

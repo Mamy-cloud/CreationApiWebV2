@@ -7,20 +7,10 @@ router = APIRouter()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-@router.get("/admin/tables")
-async def get_table_page():
-    file_path = BASE_DIR / "templates" / "tables.html"
-
-    if not file_path.exists():
-        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
-
-    return FileResponse(file_path)
-
-
-@router.get("/admin/{schema_name}/{table_name}")
-async def show_table_page(schema_name: str, table_name: str):
-    file_path = BASE_DIR / "templates" / "tables_name.html"
+#get schema table postgre
+@router.get("/admin/tables/schema/postgresql/interface/views")
+async def get_table_page_postgre():
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "tables.html"
 
     if not file_path.exists():
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
@@ -28,24 +18,34 @@ async def show_table_page(schema_name: str, table_name: str):
     return FileResponse(file_path)
 
 
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views")
+async def show_table_page_postgre(schema_name: str, table_name: str):
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "tables_name.html"
 
-@router.get("/admin/{schema_name}/{table_name}/modify_colonnes/rename_one_column")
-async def show_table_page(
+    if not file_path.exists():
+        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
+
+    return FileResponse(file_path)
+
+
+
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/rename_one_column")
+async def show_table_page_postgre(
     schema_name: str,
     table_name: str,
     column: str = Query(...),        # query parameter obligatoire
     type: str = Query(...)           # query parameter obligatoire
 ):
-    file_path = BASE_DIR / "templates" / "rename_one_columns.html"
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "rename_one_columns.html"
 
     if not file_path.exists():
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
 
     return FileResponse(file_path)
 
-@router.get("/admin/{schema_name}/{table_name}/modify_colonnes/rename_multi_column")
-async def show_table_page(schema_name: str, table_name: str):
-    file_path = BASE_DIR / "templates" / "rename_multi_columns.html"
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/rename_multi_column")
+async def show_table_page_postgre(schema_name: str, table_name: str):
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "rename_multi_columns.html"
 
     if not file_path.exists():
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
@@ -53,9 +53,9 @@ async def show_table_page(schema_name: str, table_name: str):
     return FileResponse(file_path)
 
 
-@router.get("/admin/{schema_name}/{table_name}/modify_row/value")
-async def show_table_page(schema_name: str, table_name: str, id: int = Query(...)):
-    file_path = BASE_DIR / "templates" / "modify_row.html"
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_row/value")
+async def show_table_page_postgre(schema_name: str, table_name: str, id: int = Query(...)):
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "modify_row.html"
 
     if not file_path.exists():
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")

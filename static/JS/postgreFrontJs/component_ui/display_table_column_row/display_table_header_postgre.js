@@ -1,8 +1,8 @@
-import { SelectRenameDeleteColumns } from "./select_rename_delete_columns.js";
+import { SelectRenameDeleteColumns } from "../select_rename_delete_columns.js";
 
 //---------------------affichage des colonne sous forme de thead--------------------------------------------
 
-export function buildTableHeader(thead, columns, schema_name, table_name) {
+export function buildTableHeaderPostgre(thead, columns, schema_name, table_name) {
 
   // Vide le thead avant de reconstruire
   thead.innerHTML = "";
@@ -36,8 +36,9 @@ export function buildTableHeader(thead, columns, schema_name, table_name) {
 
     // 🔒 Bloquer les actions si la colonne est "id"
     if (col.name === "id") {
-      select.disabled = true;
-      select.title = "id non modifiable";
+      /* select.disabled = true;
+      select.title = "id non modifiable"; */
+      select.style.display = "none";
     }
 
     actionDiv.appendChild(select);

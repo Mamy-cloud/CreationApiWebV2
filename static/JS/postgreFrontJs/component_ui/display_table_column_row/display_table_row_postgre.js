@@ -1,4 +1,4 @@
-export function buildTableRows(tbody, data, columns) {
+export function buildTableRowsPostgre(tbody, data, columns) {
   // Vide le tbody avant de reconstruire le tableau
   tbody.innerHTML = "";
 
@@ -16,10 +16,12 @@ export function buildTableRows(tbody, data, columns) {
 
       // première colonne → afficher valeur + select
       if (index === 0) {
+        td.style.backgroundColor = "#6206f5";
 
         // valeur de l'id
         const valueDiv = document.createElement("div");
         valueDiv.textContent = textValue;
+        
 
         // select
         const select = document.createElement("select");

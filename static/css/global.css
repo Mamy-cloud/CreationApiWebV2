@@ -1,0 +1,105 @@
+/*--------------déclaration des variables--------------------*/
+:root{
+    --background-body: #2c2b2b;
+    --color-text: #ffffff;
+    --color-first: #1a5c0c;
+    --color-second: #36f506;
+}
+
+body{
+    background-color: #2c2b2b;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    color: var(--color-text);
+}
+
+/*-----------------menu global style--------------------*/
+
+body #id_menu_global{
+    /* color: #ffffff; */
+    position: fixed;
+    background-color: var(--color-first);
+    height: 100%;
+    padding:0;
+    margin-right: 60px;
+    text-align: center;
+
+}
+#id_menu_global img{
+    width: 45px;
+    height: 40px;
+}
+
+#id_menu_global p{
+    margin: 0;
+    font-size: 13px;
+}
+
+#id_menu_global div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 70px;
+    height: 80px;
+}
+
+/*------------------------position de l'affichage à du container à droite du menu-----------------------------------------*/
+
+#id_container_postgre{
+    margin-left: 120px;
+    margin-top: 20px;
+}
+/*-----------------------------état du balise select----------------*/
+select {
+
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+
+    color: #ffffff;
+    background-color: transparent;
+
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+select option {
+    background-color: var(--background-body);
+    color: var(--color-text);
+    font-size: 14px;
+    border: 1px solid var(--color-text);
+}
+
+select option:checked {
+    background-color: var(--background-body);
+    color: var(--color-text);
+}
+/*------------------btn---------------------------------*/
+button {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+
+    color: var(--color-text);
+    background-color: var(--color-first);
+
+    border: 1px solid var(--color-text);
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--color-second);
+}

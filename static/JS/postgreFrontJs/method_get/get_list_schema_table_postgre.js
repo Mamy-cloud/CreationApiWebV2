@@ -1,8 +1,8 @@
-import { renderSchemaTable } from "../component_ui/display_table_schema.js";
+import { renderSchemaTablePostgre } from "../component_ui/display_list_schema_table/display_table_schema_postgre.js";
 
 async function getSchemas() {
     try {
-        const response = await fetch("/admin/get_schema/list/json");
+        const response = await fetch("/app/postgre/sync/method_crud/get/schema_table");
 
         console.log("réponse backend:" ,response);
         
@@ -16,7 +16,7 @@ async function getSchemas() {
             return;
         }
 
-        renderSchemaTable(data); // 🔹 passer directement les données
+        renderSchemaTablePostgre(data); // 🔹 passer directement les données
 
     } catch (error) {
         console.error("Erreur GET schema :", error);

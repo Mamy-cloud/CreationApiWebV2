@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table</title>
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
+<body>
+
+    
+
+   <!--  menu -->
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+
+    
+    <!-- <form id="renameTableForm">
+        <input type="text" id="newName" placeholder="Nouveau nom de table" required>
+        <button type="submit">Renommer</button>
+    </form> -->
+
+    <div id="id_container_postgre">
+        
+        <!-- Bouton retour --> 
+        <button id="backBtnPostgre">return to list table</button>
+        <br> 
+        <div style="display: flex; flex-direction: row;">
+            <p style="margin-right: 5px;">Table Name : </p> <p id="tableTitlePostgre"></p>
+        </div>
+
+        <table border="1"> 
+            <thead id="columnsTable"></thead> 
+            <tbody id="rowsTable"></tbody> 
+        </table> 
+        <br>
+        <br>
+        <!-- ajout de ligne -->
+        <button type="button" id="addRowBtn">Ajouter une ligne</button>
+        <button type="button" id="submitRowBtn">valider des lignes</button>
+
+    </div>
+   
+
+    
+
+    
+
+    <!-- <h2>Ajouter une colonne</h2>
+
+    <form id="addColumnForm"> -->
+
+        <!-- créer une colonne -->
+        <!-- <div id="columns">
+            <table border="1">
+            <thead>
+                <tr>
+                <th>Nom de colonne</th>
+                <th>Type</th>
+                </tr>
+            </thead>
+            <tbody id="columnsBody">
+                <tr class="column">
+                <td>
+                    <input type="text" name="column_name" placeholder="Nom de colonne" required>
+                </td>
+                <td>
+                    <div id="typeSelectContainer"></div>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        
+        <br>
+        <button type="button" id="addColumnBtn">Ajouter une colonne</button>
+
+
+    <br>
+
+
+     <button type="button" id="validateColumnsBtn">Valider la ou toutes colonnes</button>
+    </form> -->
+    
+     <!-- charger le webSocket de fastApi -->
+     <!-- <script src="/static/JS/webSocket.js"></script> -->
+
+     <script>
+        // Action du bouton retour
+        document.getElementById("backBtnPostgre").addEventListener("click", () => {
+            // Redirection vers la page qui liste les tables
+            window.location.href = "/admin/tables/schema/postgresql/interface/views";
+        });
+
+     </script>
+
+     
+     <!-- get table -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_header_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_row_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/method_get/get_table_column_row_postgre.js"></script>
+     <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+
+      <!-- charger le formulaire pour la colonne -->
+     <!-- <script type="module" src="/static/JS/component_ui/add_column.js"></script> -->
+     
+
+      <!-- ajout ligne -->
+       <!-- <script type="module" src="/static/JS/postgreSql_data/input_radio_boolean.js"></script>
+       <script type="module" src="/static/JS/postgreSql_data/input_type.js"></script>
+       <script type="module" src="/static/JS/component_ui/add_row.js"></script>
+       <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_create_row.js"></script>
+       <script type="module" src="/static/JS/method_post/post_row.js"></script>
+ -->
+     
+
+     <!-- <script src="/static/JS/method_post/post_rename_table.js"></script>
+
+     <script type="module" src="/static/JS/method_post/post_column.js"></script>
+
+     <script type="module" src="/static/JS/postgreSql_data/list_type_data.js"></script> -->
+</body>
+</html>

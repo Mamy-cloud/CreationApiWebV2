@@ -1,6 +1,6 @@
 // list_schema.js
 
-export function createSchemaSelect(data, defaultText = "Sélectionner un schema") {
+export function createSchemaSelectPostgre(data, defaultText = "Sélectionner un schema") {
     const select = document.createElement("select");
 
     // Option par défaut

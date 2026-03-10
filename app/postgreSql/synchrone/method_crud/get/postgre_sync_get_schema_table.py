@@ -4,8 +4,8 @@ from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import postgr
 
 router = APIRouter()
 
-@router.get("/app/sync/method_crud/get/schema_table")
-def postgre_sync_get_schema_table():
+@router.get("/app/postgre/sync/method_crud/get/schema_table")
+def postgre_sync_endpoint_get_schema_table():
     conn = None
     cursor = None
     try:
