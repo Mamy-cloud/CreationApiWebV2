@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
+    <title>Créer schema</title>
+</head>
+<body>
+
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+    <div id="id_container_postgre">
+        
+        <!-- Bouton retour --> 
+        <button id="backBtnPostgre">retourner à la liste des tables</button>
+        <br> 
+
+        <!-- création de schema -->
+        <section>
+            <h2>Create schema</h2>
+        
+
+            <div>
+                <input type="text" id="create_schema_postgre" placeholder="création de schéma" name="create_schema_postgre">
+                <button type="button" id="create_schema_btn_postgre">Valider le schéma</button>
+            </div>
+            <!-- Ici tu insères le bloc de règles --> 
+            <div class="verification_error" data-target="create_schema_postgre"></div>
+        </section>
+        
+    </div>
+    
+    <script>
+        // Action du bouton retour
+        document.getElementById("backBtnPostgre").addEventListener("click", () => {
+            // Redirection vers la page qui liste les tables
+            window.location.href = "/admin/tables/schema/postgresql/interface/views";
+        });
+
+     </script>
+    <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
+
+     <!-- -------------------------------------vérification d'orthogaphe pour éviter les erreurs SQL------------ -->
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_name_create_schema.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_button_create_schema.js"></script>
+      
+
+     <!-- --------------------create schema--------------------------------- -->
+    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_schema_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/method_post/post_schema_postgre.js"></script>
+    <!-- <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/conserve_json.js"></script> -->
+</body>
+</html>

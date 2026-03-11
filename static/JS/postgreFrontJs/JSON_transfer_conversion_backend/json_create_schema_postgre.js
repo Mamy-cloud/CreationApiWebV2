@@ -1,6 +1,6 @@
 // schema_json.js
 
-export function buildSchemaJson(schemaName) {
+export function buildSchemaJsonPostgre(schemaName) {
     if (!schemaName || !schemaName.trim()) {
         throw new Error("Le nom du schéma est vide");
     }

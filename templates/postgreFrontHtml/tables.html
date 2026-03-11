@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/global_postgre.css">
     <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/create_db_postgre.css">
     <title>Choix table pour le traitement</title>
 </head>
 <body>
     <!-- <div id="id_menu_global">
         <menu id="id_menu_global_postgre">
-            <div class="menu_display_table_postgre">
-                <img src="/static/img/postgre/menu/icons8-table-100.png" alt="list-table">
-                <p>display</p>
-                <p>table</p>
+            <div class="menu_create_db_postgre" id="id_menu_style_postgre">
+                <main>
+                    <img src="/static/img/postgre/menu/icons8-table-100.png" alt="list-table">
+                    <p>display</p>
+                    <p>table</p>
+                </main>
+                <nav>
+                    <p>Créer schema</p>
+                    <p>Créer Table</p>
+                </nav>
             </div>
             <div class="menu_method_crud_postgre">
                 <img src="/static/img/postgre/menu/icons8-crud-64.png" alt="method-crud">
@@ -20,7 +27,10 @@
                 <p>crud</p>
             </div>
         </menu>
+        
     </div> -->
+    
+    
     <div id="id_menu_global">
         <menu id="id_menu_global_postgre">
         </menu>
@@ -87,14 +97,10 @@
     </div>
     
     
-    
-    
-
-    <!-- Ici tu insères le bloc de règles --> 
-                <!-- <div class="verification_name" data-target="tableName"></div> -->
-    
     <!-- ------------------------------menu container------------------------- -->
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
    
     <!-- --------------------create schema--------------------------------- -->
    <!--  <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_schema.js"></script>

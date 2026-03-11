@@ -31,10 +31,22 @@ th{
   background-color: var(--color-third);
 }
 
-input[name="column_name"] {
-  border: 1px solid;
-  border-radius: 6px;
-  padding: 8px;
+input {
+    padding: 6px;          /* espace à l'intérieur */
+    font-size: 16px;             /* taille du texte */ 
+    color: var(--color-text);                 /* couleur du texte */
+    background-color: var(--background-body);      /* fond blanc */
+    border: 1px solid var(--color-text);      /* bordure grise */
+    border-radius: 5px;          /* coins arrondis */
+    outline: none;               /* supprime le contour par défaut */
+    box-sizing: border-box;      /* padding inclus dans la largeur */
+    transition: all 0.2s ease;  /* transition douce pour hover/focus */
+}
+
+/*---------------------état des div dans le menu----------------------------*/
+.menu_selected_postgre{
+    background-color: var(--color-second);
+    
 }
 
 /* model border pour les grids
@@ -81,4 +93,10 @@ left   = 4px/*
 .column-type{
   font-size: 10px;
   margin-bottom: 10px;
+}
+
+/*----------------------container nav-------------------------------------------*/
+nav h3:hover{
+  cursor: pointer;
+  color: var(--color-second);
 }

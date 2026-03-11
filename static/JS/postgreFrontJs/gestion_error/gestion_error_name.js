@@ -1,5 +1,5 @@
 // Injection du bloc HTML des règles dans tous les éléments ayant la classe "verification_name"
-document.querySelectorAll(".verification_name").forEach(container => {
+document.querySelectorAll(".verification_error").forEach(container => {
   const wrapper = document.createElement("div");
 
   const rules = [

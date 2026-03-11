@@ -8,7 +8,7 @@ router = APIRouter()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 #get schema table postgre
-@router.get("/admin/tables/schema/postgresql/interface/views")
+@router.get("/admin/method/get/tables/schema/postgresql/interface/views")
 async def get_table_page_postgre():
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "tables.html"
 
@@ -27,6 +27,15 @@ async def show_table_page_postgre(schema_name: str, table_name: str):
 
     return FileResponse(file_path)
 
+#create schema
+@router.get("/admin/method/create/schema/postgresql/interface/views")
+async def create_schema_page_postgre():
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "create_schema.html"
+
+    if not file_path.exists():
+        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
+
+    return FileResponse(file_path)
 
 
 @router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/rename_one_column")

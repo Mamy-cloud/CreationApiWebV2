@@ -6,7 +6,7 @@ from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import postgr
 router = APIRouter()
 
 @router.post("/app/postgre/sync/method/post/schema")
-def postgre_post_create_schema(schema: PostgreSyncSchemaCreate):
+def endpoint_postgre_post_create_schema(schema: PostgreSyncSchemaCreate):
     conn = None
     cursor = None
     

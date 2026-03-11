@@ -1,0 +1,8 @@
+/*-------------effet bouton create schema------------------*/
+#create_schema_btn_postgre:disabled{
+    opacity: 0.4;
+    background-color: transparent;
+    border: 1px solid #aaa;
+    color: #777;
+    cursor: not-allowed;
+}
