@@ -4,6 +4,7 @@
     <title>Table</title>
     <link rel="stylesheet" href="/static/css/global_postgre.css">
     <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
 </head>
 <body>
 
@@ -26,9 +27,12 @@
         
         <!-- Bouton retour --> 
         <button id="backBtnPostgre">revenir à la liste des tables</button>
+        <br>
         <br> 
+        <div id="list_method_crud_postgre"></div>
+        <br>
         <div style="display: flex; flex-direction: row;">
-            <p style="margin-right: 5px;">Table Name : </p> <p id="tableTitlePostgre"></p>
+            <p style="margin-right: 5px;">Nom de la table : </p> <p id="tableTitlePostgre"></p>
         </div>
 
         <table border="1"> 
@@ -38,8 +42,8 @@
         <br>
         <br>
         <!-- ajout de ligne -->
-        <button type="button" id="addRowBtn">Ajouter une ligne</button>
-        <button type="button" id="submitRowBtn">valider des lignes</button>
+        <!-- <button type="button" id="addRowBtn">Ajouter une ligne</button>
+        <button type="button" id="submitRowBtn">valider des lignes</button> -->
 
     </div>
    
@@ -105,6 +109,9 @@
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
+
+     <!-- liste de méthode crud -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/list_method_crud.js"></script>
       <!-- charger le formulaire pour la colonne -->
      <!-- <script type="module" src="/static/JS/component_ui/add_column.js"></script> -->
      

@@ -1,15 +1,15 @@
 
 
 // get_create_table.js
-import { addColumn } from "../component_ui/add_column.js";
-import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column.js";
+import { addColumn } from "../component_ui/display_create_table_column/add_column_postgre.js";
+import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column_postgre.js";
 
-document.getElementById("createTableForm").addEventListener("submit", async function(e) {
+document.getElementById("createTableFormPostgre").addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const schemaSelect = document.querySelector(".select_schema select").value;
+    const schemaSelect = document.querySelector(".select_schema_postgre select").value;
 
-    const tableName = document.getElementById("tableName").value;
+    const tableName = document.getElementById("tableNamePostgre").value;
 
     // ⚡ Récupérer toutes les lignes <tr> du tableau en JSON
     const columns = postColumnsJSON();
@@ -23,7 +23,7 @@ document.getElementById("createTableForm").addEventListener("submit", async func
     
 
     try {
-        const response = await fetch("/admin/method/post/create_table", {
+        const response = await fetch("/app/postgre/synchrone/method/post_create_table", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(payload)

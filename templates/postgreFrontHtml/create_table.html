@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+
+    <div id="id_container_postgre">
+
+        <!-- Bouton retour --> 
+        <button id="backBtnPostgre">retourner à la liste des tables</button>
+        <br> 
+
+        <section>
+            <h3>Créer une table</h3>
+
+            <!-- schema name -->
+            <div class="select_schema_postgre"></div>
+            <br>
+            <br>
+
+            <form id="createTableFormPostgre">
+
+                <!-- création de nom de la table -->
+                <label for="tableNamePostgre">Nom de la table :</label>
+                <input type="text" id="tableNamePostgre" name="tableNamePostgre" required>
+                <!-- Ici tu insères le bloc de règles --> 
+                <div class="verification_error" data-target="tableNamePostgre"></div>
+                
+                <br>
+
+                <div id="columns">
+                    <h5>Ajouter des colonnes</h5>
+
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Nom de colonne</th>
+                                <th>Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="columnsBody">
+                            <tr class="column">
+                                <td>
+                                    <input type="text" name="column_name" placeholder="Nom de colonne" required>
+                                </td>
+
+                                <td>
+                                    <div id="typeSelectContainer"></div>
+                                </td>
+
+                                <td>
+                                    <button type="button" class="removeColumnBtn">Annuler</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="verification_error" data-target="column_name"></div>
+                </div>
+
+                <br>
+
+                <button type="button" id="addColumnBtn">Ajouter une colonne</button>
+
+                <button type="submit" id="createTableBtnPostgre">Créer la table</button>
+
+                
+
+            </form>
+        </section>
+
+    </div>
+    
+
+    <script>
+        // Action du bouton retour
+        document.getElementById("backBtnPostgre").addEventListener("click", () => {
+            // Redirection vers la page qui liste les tables
+            window.location.href = "/admin/method/get/tables/schema/postgresql/interface/views";
+        });
+
+     </script>
+    
+
+    <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
+        <!-- --------------------------post create table----------------------------- -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_create_table_column/select_schema_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_create_table_column/add_column_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/create_json_column_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/method_post/post_create_table_postgre.js"></script>
+
+     <!--  --------------------------gestion erreur syntaxe SQL----------------------------- -->
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_table/verification_name_create_column.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_table/verification_name_create_table.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_table/verification_button_create_table.js"></script>
+
+
+</body>
+</html>

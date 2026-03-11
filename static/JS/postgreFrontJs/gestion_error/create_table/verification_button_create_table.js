@@ -4,7 +4,7 @@ import { verifierColonnes } from './verification_name_create_column.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const addColumnBtn = document.getElementById("addColumnBtn");
-  const createTableBtn = document.getElementById("createTableBtn");
+  const createTableBtn = document.getElementById("createTableBtnPostgre");
 
   function verifierFormulaire() {
     const tableValid = verifierTableName();
@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     createTableBtn.disabled = !allValid;
   }
 
-  document.getElementById("tableName").addEventListener("input", verifierFormulaire);
+  document.getElementById("tableNamePostgre").addEventListener("input", verifierFormulaire);
   document.addEventListener("input", (e) => {
     if (e.target.name === "column_name") {
       verifierFormulaire();
     }
   });
 
-  document.getElementById("createTableForm").addEventListener("submit", (event) => {
+  document.getElementById("createTableFormPostgre").addEventListener("submit", (event) => {
     verifierFormulaire();
     if (createTableBtn.disabled) {
       event.preventDefault();

@@ -1,8 +1,8 @@
 // select_schema.js
-import { createSchemaSelect } from "./list_schema.js";
+import { createSchemaSelectPostgre } from "../display_list_schema_table/list_schema_postgre.js";
 
 // Sélecteur du div placeholder
-const container = document.querySelector('.select_schema');
+const container = document.querySelector('.select_schema_postgre');
 
 /**
  * Fonction qui crée le select dans le div
@@ -18,7 +18,7 @@ export function renderSchemaSelect(dataSchemas) {
     }
 
     // Crée le select
-    const schemaSelect = createSchemaSelect(dataSchemas);
+    const schemaSelect = createSchemaSelectPostgre(dataSchemas);
 
     // Ajoute le select dans le div
     container.appendChild(schemaSelect);
@@ -42,7 +42,7 @@ export function renderSchemaSelect(dataSchemas) {
 /**
  * Exemple d'utilisation avec des données fetchées
  */
-export async function initSchemaSelect(apiUrl = '/admin/get_schema/list/json') {
+export async function initSchemaSelect(apiUrl = '/app/postgre/sync/method_crud/get/schema_table') {
     try {
 
         const response = await fetch(apiUrl);

@@ -26,7 +26,7 @@ console.log("SchemaName:", schemaName);
 console.log("TableName:", tableName);
 
 function loadTable() {
-  fetch(`/admin/${schemaName}/${tableName}/methods/get/get_table/postgresql/json`)
+  fetch(`/app/${schemaName}/${tableName}/methods/get/get_table/postgresql/json`)
     .then(response => response.json())
     .then(data => {
 

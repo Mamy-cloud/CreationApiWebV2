@@ -31,6 +31,9 @@ export function initCreateDbMenu() {
 
         const pTable = document.createElement("h3");
         pTable.textContent = "Créer table";
+        pTable.addEventListener("click", () => {
+            window.location.href = "/admin/method/create/table/postgresql/interface/views";
+        });
 
         nav.append(pSchema, pTable);
 

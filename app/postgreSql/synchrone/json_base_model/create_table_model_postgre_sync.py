@@ -10,7 +10,7 @@ class ColumnItem(BaseModel):
     column_name: str
     type_of_column: str
 
-    @field_validator("type_of_column")
+    """ @field_validator("type_of_column")
     @classmethod
     def validate_column_type(cls, value: str) -> str:
         # Récupération de tous les types SQL autorisés
@@ -25,7 +25,24 @@ class ColumnItem(BaseModel):
                 f"Types valides: {valid_types}"
             )
 
-        return value
+        return value """
+    @field_validator("type_of_column")
+    @classmethod
+    def validate_column_type(cls, value: str) -> str:
+
+        valid_types = [
+            item for sublist in SQL_TYPES.values()
+            for item in sublist
+        ]
+
+        if value not in valid_types:
+            raise ValueError(
+                f"Type de colonne invalide : {value}. "
+                f"Types valides: {valid_types}"
+            )
+
+        # transformation ici
+        return map_type_to_postgres(value)
 
 
 # -------------------------
