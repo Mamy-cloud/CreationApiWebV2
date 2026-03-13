@@ -24,7 +24,7 @@ document.getElementById("renameTableForm").addEventListener("submit", async (e) 
   
 
   try {
-    const response = await fetch(`/admin/method/post/rename_table/new_name`, {
+    const response = await fetch(`/app/postgre/synchrone/method/crud/post/rename_table`, {
       
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ document.getElementById("renameTableForm").addEventListener("submit", async (e) 
     alert("✅ " + result.message);
 
     // Recharge la page admin de la table renommée
-    window.location.href = `/admin/${schemaName}/${newName}`;
+    window.location.href = `/admin/${schemaName}/${newName}/postgresql/interface/views`;
 
   } catch (error) {
     alert("❌ Erreur: " + error.message);

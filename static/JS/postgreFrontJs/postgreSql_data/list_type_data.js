@@ -29,11 +29,35 @@ const DEFAULT_VALUES = {
 
 
 // list_type_data.js
-export function createTypeSelect(name = "type_of_column", id = null) {
+/* export function createTypeSelect(name = "type_of_column", id = null) {
     const select = document.createElement("select");
     select.name = name;
     if (id) select.id = id;
 
+    Object.values(SQL_TYPES).flat().forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        select.appendChild(option);
+    });
+
+    return select;
+} */
+export function createTypeSelect(name = "type_of_column", id = null) {
+    const select = document.createElement("select");
+    select.name = name;
+    select.required = true; // obligatoire
+    if (id) select.id = id;
+
+    // option par défaut pour indiquer "choisir type"
+    const defaultOption = document.createElement("option");
+    defaultOption.value = ""; // valeur vide = invalide pour required
+    defaultOption.textContent = "Choisir type";
+    defaultOption.selected = true;
+    defaultOption.disabled = true; // pour éviter que l'utilisateur puisse la sélectionner après avoir choisi un type
+    select.appendChild(defaultOption);
+
+    // ajouter les types
     Object.values(SQL_TYPES).flat().forEach(type => {
         const option = document.createElement("option");
         option.value = type;

@@ -6,7 +6,7 @@ from app.postgreSql.synchrone.json_base_model.model_add_columns_postgre_sync imp
 router = APIRouter()
 
 
-@router.post("/admin/methods/post/schema/table/add_column")
+@router.post("/app/method/post/add_column/postgre/synchrone")
 def add_columns_endpoint_postgre_sync(data: AddColumnsModelPostgreSync):
     """
     Endpoint pour ajouter une ou plusieurs colonnes à une table PostgreSQL

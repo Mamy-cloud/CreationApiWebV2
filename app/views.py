@@ -17,7 +17,7 @@ async def get_table_page_postgre():
 
     return FileResponse(file_path)
 
-#get table
+#get table/ rename table
 @router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views")
 async def show_table_page_postgre(schema_name: str, table_name: str):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "display_table.html"

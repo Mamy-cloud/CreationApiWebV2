@@ -22,18 +22,18 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     defaultOption.textContent = "method post / put / delete";
     defaultOption.selected = true;
 
-    // option 1 : ajouter colonnes
+    // option 1 : renommer table
     const option1 = document.createElement("option");
     option1.value = "rename_table";
     option1.textContent = "renommer la table";
 
-    // option 2 : ajouter lignes
-    /* const option2 = document.createElement("option");
-    option2.value = "add_rows";
-    option2.textContent = "ajouter une ou plusieurs lignes"; */
+    // option 2 : ajouter colonne
+    const option2 = document.createElement("option");
+    option2.value = "add_column";
+    option2.textContent = "ajouter une ou plusieurs colonnes";
 
     // ajout des options dans le select
-    select.append(defaultOption, option1, /* option2 */);
+    select.append(defaultOption, option1, option2);
 
     // ajout du select dans le div
     container.appendChild(select);
@@ -42,9 +42,9 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     select.addEventListener("change", (e) => {
         const value = e.target.value;
 
-        if (value === "add_columns") {
+        /* if (value === "add_columns") {
             window.location.href = "/admin/post/add/columns";
-         } /*else if (value === "add_rows") {
+         } */ /*else if (value === "add_rows") {
             window.location.href = "/admin/post/add/rows";
         } */
     });

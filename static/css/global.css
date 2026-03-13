@@ -72,6 +72,18 @@ select {
     cursor: pointer;
 }
 
+
+/* option placeholder */
+select option[disabled] {
+  color: #888;
+}
+
+/* focus */
+select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
 select option {
     background-color: var(--background-body);
     color: var(--color-text);
@@ -102,4 +114,11 @@ button {
 
 button:hover{
     background-color: var(--color-second);
+}
+button:disabled{
+    opacity: 0.4;
+    background-color: transparent;
+    border: 1px solid #aaa;
+    color: #777;
+    cursor: not-allowed;
 }

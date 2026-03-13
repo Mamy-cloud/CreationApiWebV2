@@ -1,5 +1,5 @@
 // post_column.js
-import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column.js";
+import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column_postgre.js";
 
 const pathParts = window.location.pathname.split("/");
 
@@ -27,7 +27,7 @@ document.getElementById("validateColumnsBtn").addEventListener("click", async ()
   console.log("Payload envoyé :", payload);
 
   try {
-    const response = await fetch("/admin/methods/post/schema/table/add_column", {
+    const response = await fetch("/app/method/post/add_column/postgre/synchrone", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)  // ✅ CORRECT

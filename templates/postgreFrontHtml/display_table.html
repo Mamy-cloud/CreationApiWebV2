@@ -16,34 +16,87 @@
         </menu>
     </div>
 
-
-    
-    <!-- <form id="renameTableForm">
-        <input type="text" id="newName" placeholder="Nouveau nom de table" required>
-        <button type="submit">Renommer</button>
-    </form> -->
-
     <div id="id_container_postgre">
         
         <!-- Bouton retour --> 
         <button id="backBtnPostgre">revenir à la liste des tables</button>
         <br>
         <br> 
-        <div id="list_method_crud_postgre"></div>
-        <br>
-        <div style="display: flex; flex-direction: row;">
+        <!-- input method crud -->
+        <div id="list_method_crud_postgre" style="margin-bottom: 5px;"></div>
+
+        <!----------------------- table name / rename table ---------------------------------->
+        <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
             <p style="margin-right: 5px;">Nom de la table : </p> <p id="tableTitlePostgre"></p>
         </div>
 
-        <table border="1"> 
-            <thead id="columnsTable"></thead> 
-            <tbody id="rowsTable"></tbody> 
-        </table> 
-        <br>
-        <br>
+        <div id="rename_table_postgre" style="margin-bottom: 5px;">
+            <form id="renameTableForm">
+                <input type="text" id="newName" name="newName" placeholder="Nouveau nom de table" required>
+                <button type="submit" id="renameBtnTablePostgre">Renommer</button>
+                <div class="verification_error" data-target="newName"></div>
+            </form>
+        </div>
+        <!----------------------- fin table name / rename table ---------------------------------->
+        
+
+
+        <div id="container_table_postgre">
+            <table border="1"> 
+                <thead id="columnsTable"></thead> 
+                <tbody id="rowsTable"></tbody> 
+            </table> 
+
+        </div>
         <!-- ajout de ligne -->
         <!-- <button type="button" id="addRowBtn">Ajouter une ligne</button>
         <button type="button" id="submitRowBtn">valider des lignes</button> -->
+
+        <!-- ------------------------ajouter colonne-------------------------------- -->
+
+        <div id="containerAddColumnPostgre">
+
+            <div id="columns">
+                <h5>Ajouter des colonnes</h5>
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nom de colonne</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="columnsBody">
+                        <tr class="column">
+                            <td>
+                                <input type="text" name="column_name" placeholder="Nom de colonne" required>
+                            </td>
+
+                            <td>
+                                <div id="typeSelectContainer"></div>
+                            </td>
+
+                            <td>
+                                <button type="button" class="removeColumnBtn">Annuler</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="verification_error" data-target="column_name"></div>
+            </div>
+
+            <br>
+
+            <button type="button" id="addColumnBtn">Ajouter une colonne</button>
+            <button type="button" id="validateColumnsBtn">Valider les colonnes</button>
+
+        </div>
+
+        
+        <!-- ------------------------fin ajouter colonne-------------------------------- -->
 
     </div>
    
@@ -52,41 +105,7 @@
 
     
 
-    <!-- <h2>Ajouter une colonne</h2>
-
-    <form id="addColumnForm"> -->
-
-        <!-- créer une colonne -->
-        <!-- <div id="columns">
-            <table border="1">
-            <thead>
-                <tr>
-                <th>Nom de colonne</th>
-                <th>Type</th>
-                </tr>
-            </thead>
-            <tbody id="columnsBody">
-                <tr class="column">
-                <td>
-                    <input type="text" name="column_name" placeholder="Nom de colonne" required>
-                </td>
-                <td>
-                    <div id="typeSelectContainer"></div>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-        
-        <br>
-        <button type="button" id="addColumnBtn">Ajouter une colonne</button>
-
-
-    <br>
-
-
-     <button type="button" id="validateColumnsBtn">Valider la ou toutes colonnes</button>
-    </form> -->
+    
     
      <!-- charger le webSocket de fastApi -->
      <!-- <script src="/static/JS/webSocket.js"></script> -->
@@ -111,9 +130,24 @@
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
 
      <!-- liste de méthode crud -->
-      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/list_method_crud.js"></script>
-      <!-- charger le formulaire pour la colonne -->
-     <!-- <script type="module" src="/static/JS/component_ui/add_column.js"></script> -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/list_method_crud.js"></script>
+    <!-- --------------------rename table--------------------------- -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_table/rename_table_ui_postgre.js"></script>
+     <script src="/static/JS/postgreFrontJs/method_post/post_rename_table_postgre.js"></script>
+     <!-- verification nom table -->
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_table/verif_name_table_postgre.js"></script> 
+    <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_table/btn_validate_new_name_postgre.js"></script>     
+     
+     
+     <!-- ajouter colonne -->
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_create_table_column/add_column_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/create_json_column_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_column/ui_add_column_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/method_post/post_add_column_postgre.js"></script>
+    <!-- vérification nom colonne -->
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_table/verification_name_create_column.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/add_column/btn_verif_column_postgre.js"></script>
      
 
       <!-- ajout ligne -->
@@ -125,10 +159,12 @@
  -->
      
 
-     <!-- <script src="/static/JS/method_post/post_rename_table.js"></script>
+     <!-- 
 
      <script type="module" src="/static/JS/method_post/post_column.js"></script>
 
      <script type="module" src="/static/JS/postgreSql_data/list_type_data.js"></script> -->
+
+
 </body>
 </html>

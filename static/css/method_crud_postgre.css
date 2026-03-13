@@ -8,26 +8,5 @@
     --color-forth: #6206f5;
 }
 
-/*-------------effet bouton create schema------------------*/
-#create_schema_btn_postgre:disabled{
-    opacity: 0.4;
-    background-color: transparent;
-    border: 1px solid #aaa;
-    color: #777;
-    cursor: not-allowed;
-}
+
 /*------------------- état des btn dans create table    -----------------*/
-#addColumnBtn:disabled{
-    opacity: 0.4;
-    background-color: transparent;
-    border: 1px solid #aaa;
-    color: #777;
-    cursor: not-allowed;
-}
-#createTableBtnPostgre:disabled{
-    opacity: 0.4;
-    background-color: transparent;
-    border: 1px solid #aaa;
-    color: #777;
-    cursor: not-allowed;
-}
