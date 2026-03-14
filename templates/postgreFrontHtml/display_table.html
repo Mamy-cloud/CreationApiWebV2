@@ -38,19 +38,24 @@
             </form>
         </div>
         <!----------------------- fin table name / rename table ---------------------------------->
-        
 
+        <!-- ------------------------------afficher / ajouter lignes---------------------------- -->
+         <div id="container_table_postgre">
+            <table border="1">
+                <thead id="columnsTable"></thead>
+                <tbody id="rowsTable"></tbody>
 
-        <div id="container_table_postgre">
-            <table border="1"> 
-                <thead id="columnsTable"></thead> 
-                <tbody id="rowsTable"></tbody> 
-            </table> 
-
+                <!-- tbody pour l'ajout de ligne qui est par défaut display none -->
+                <tbody id="rowsTablePostgre"></tbody>
+            </table>
         </div>
-        <!-- ajout de ligne -->
-        <!-- <button type="button" id="addRowBtn">Ajouter une ligne</button>
-        <button type="button" id="submitRowBtn">valider des lignes</button> -->
+
+        <div id="container_btn_add_column_postgre" style="display:inline-flex; flex-direction:column;">
+            <button type="button" id="addRowBtn">Ajouter une ligne</button>
+            <button type="button" id="submitRowBtn">Valider les lignes</button>
+        </div>
+        <!-- ------------------------------ fin afficher / ajouter lignes---------------------------- -->
+    
 
         <!-- ------------------------ajouter colonne-------------------------------- -->
 
@@ -90,8 +95,11 @@
 
             <br>
 
-            <button type="button" id="addColumnBtn">Ajouter une colonne</button>
-            <button type="button" id="validateColumnsBtn">Valider les colonnes</button>
+            <div style="display: inline-flex; flex-direction: column;">
+                <button type="button" id="addColumnBtn">Ajouter une colonne</button>
+                <button type="button" id="validateColumnsBtn">Valider les colonnes</button>
+            </div>
+            
 
         </div>
 
@@ -114,7 +122,7 @@
         // Action du bouton retour
         document.getElementById("backBtnPostgre").addEventListener("click", () => {
             // Redirection vers la page qui liste les tables
-            window.location.href = "/admin/tables/schema/postgresql/interface/views";
+            window.location.href = "/admin/method/get/tables/schema/postgresql/interface/views";
         });
 
      </script>
@@ -141,6 +149,7 @@
      
      
      <!-- ajouter colonne -->
+    <!-- <script type="module" src="/static/JS/postgreFontJs/postgreSql_data/list_type_data.js"></script> -->
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_create_table_column/add_column_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/create_json_column_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_column/ui_add_column_postgre.js"></script>
@@ -151,19 +160,12 @@
      
 
       <!-- ajout ligne -->
-       <!-- <script type="module" src="/static/JS/postgreSql_data/input_radio_boolean.js"></script>
-       <script type="module" src="/static/JS/postgreSql_data/input_type.js"></script>
-       <script type="module" src="/static/JS/component_ui/add_row.js"></script>
-       <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_create_row.js"></script>
-       <script type="module" src="/static/JS/method_post/post_row.js"></script>
- -->
-     
-
-     <!-- 
-
-     <script type="module" src="/static/JS/method_post/post_column.js"></script>
-
-     <script type="module" src="/static/JS/postgreSql_data/list_type_data.js"></script> -->
+       <script type="module" src="/static/JS/postgreFrontJs/postgreSql_data/input_radio_boolean.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/postgreSql_data/input_type.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_row/ui_add_row_postgre.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_row/ui_select_option_add_row.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_row_postgre.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/method_post/post_row_postgre.js"></script>
 
 
 </body>

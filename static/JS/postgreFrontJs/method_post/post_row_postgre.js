@@ -1,4 +1,4 @@
-import { constructJsonForRow } from '../JSON_transfer_conversion_backend/json_create_row.js';
+import { constructJsonForRow } from '../JSON_transfer_conversion_backend/json_create_row_postgre.js';
 
 
 
@@ -9,7 +9,7 @@ export function sendRowToBackend() {
   console.log("JSON envoyé :", jsonData);
 
   // Envoyer au backend
-  fetch(`/admin/method/post/table/add_row`, {
+  fetch(`/app/postgre/sync/method_crud/add/rows/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
