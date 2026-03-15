@@ -3,26 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/table.css">
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
     <title>Rename one column</title>
 </head>
 <body>
 
-    <!-- Bouton retour --> 
-    <button id="backBtn">Revenir à la table</button>
-    <section>
-        <form id="renameColumnForm">
-        <p>Old column name: <span id="old_name"></span></p>
-        <p>Column type: <span id="column_type"></span></p>
-        <input type="text" id="new_column_name" required>
-        <button type="submit" id="rename_button">Rename Column</button>
-        </form>
+    
+
+        <!--  menu -->
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+    <div id="id_container_postgre">
+        <!-- Bouton retour --> 
+        <button id="backBtn">Revenir à la table</button>
+        
+
+            <!-- -----------------------------renommer une colonne----------------------------------- -->
+
+        <div id="container_modify_name_one_column_postgre">
+            <form id="renameColumnForm">
+            <div style="display: flex; flex-direction: row;"><p style="margin-right: 5px;">Nom actuel de la colonne :</p> <p id="old_name"></p></div>
+            <!-- <div><p>Column type:</p> <p id="column_type"></p></div> -->
+            <!-- <p>Old column name: <span id="old_name"></span></p>
+            <p>Column type: <span id="column_type"></span></p> -->
+            <input type="text" id="new_one_column_name" placeholder="Nouveau nom colonne" required>
+
+            <button type="submit" id="rename_one_column_button">Renommer colonne</button>
+            <div class="verification_error" data-target="new_one_column_name"></div>
+            </form>
+            <!-- ----------------------------- fin renommer une colonne----------------------------------- -->
 
 
-    </section>
-    <script type="module" src="/static/JS/component_ui/rename_one_column_form.js"></script>
-    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_rename_columns.js"></script>
-    <script type="module" src="/static/JS/method_put/put_rename_columns.js"></script>
+        </div>
+    </div>
+
+        
+
+    <!-- --------------------------------modifier nom d'une colonne--------------------------- -->
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/rename_one_column_form_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/display_name_for_rename_one_colonne.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_rename_columns_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/method_put/put_rename_columns_postgre.js"></script>
+    <!-- verif rename col -->
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/verif_rename_column.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/btn_verif_rename_one_column.js"></script>
     <script>
         // Action du bouton retour
         document.getElementById("backBtn").addEventListener("click", () => {
@@ -30,10 +60,15 @@
             const schema_name = path[2];
             const table_name = path[3];
             // Redirection vers la page qui liste les tables
-            window.location.href = `/admin/${schema_name}/${table_name}`;
+            window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
         });
 
      </script>
+
+     <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
     
 </body>
 </html>

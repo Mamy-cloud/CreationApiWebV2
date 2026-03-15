@@ -1,4 +1,4 @@
-import { SelectRenameDeleteColumns } from "../select_rename_delete_columns.js";
+import { SelectRenameDeleteColumns } from "./select_rename_delete_columns_postgre.js";
 
 //---------------------affichage des colonne sous forme de thead--------------------------------------------
 
@@ -32,7 +32,8 @@ export function buildTableHeaderPostgre(thead, columns, schema_name, table_name)
     actionDiv.classList.add("column-actions");
 
     // passer schema et table
-    const select = SelectRenameDeleteColumns(schema_name, table_name);
+    //const select = SelectRenameDeleteColumns(schema_name, table_name);
+    const select = SelectRenameDeleteColumns();
 
     // 🔒 Bloquer les actions si la colonne est "id"
     if (col.name === "id") {

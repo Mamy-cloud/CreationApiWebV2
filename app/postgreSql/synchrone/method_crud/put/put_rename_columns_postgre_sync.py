@@ -22,7 +22,7 @@ def rename_columns_endpoint_postgre_sync(data: RenameColumnsModelPostgreSync):
         ]
     }
     """
-
+    print("base model", data)
     try:
         # Générer les requêtes SQL sécurisées
         rename_map = {col.old_name_name: col.new_name for col in data.columns}
@@ -31,6 +31,7 @@ def rename_columns_endpoint_postgre_sync(data: RenameColumnsModelPostgreSync):
             table_name=data.table_name,
             rename_map=rename_map
         )
+        print("sql créé:", queries)
 
         # Connexion et exécution
         conn = postgre_sync_connect_to_db()

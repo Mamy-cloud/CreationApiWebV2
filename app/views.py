@@ -47,9 +47,9 @@ async def create_table_page_postgre():
 
     return FileResponse(file_path)
 
-
+#renommer une colonne
 @router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/rename_one_column")
-async def add_row_page_postgre(
+async def rename_one_column_page_postgre(
     schema_name: str,
     table_name: str,
     column: str = Query(...),        # query parameter obligatoire
@@ -62,8 +62,9 @@ async def add_row_page_postgre(
 
     return FileResponse(file_path)
 
+#renommer plusieur colonnes
 @router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/rename_multi_column")
-async def show_table_page_postgre(schema_name: str, table_name: str):
+async def rename_multi_col_page_postgre(schema_name: str, table_name: str):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "rename_multi_columns.html"
 
     if not file_path.exists():
@@ -71,9 +72,9 @@ async def show_table_page_postgre(schema_name: str, table_name: str):
 
     return FileResponse(file_path)
 
-
+#modifier une valeur de la ligne
 @router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_row/value")
-async def show_table_page_postgre(schema_name: str, table_name: str, id: int = Query(...)):
+async def modify_value_row_page_postgre(schema_name: str, table_name: str, id: int = Query(...)):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "modify_row.html"
 
     if not file_path.exists():

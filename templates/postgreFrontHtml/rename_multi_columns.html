@@ -3,39 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/table.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
+    <title>Renommer plusieurs colonnes</title>
 </head>
 <body>
-    <!-- Bouton retour --> 
-    <button id="backBtnToTable">Revenir à la table</button>
+
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+    <div id="id_container_postgre">
+
+        <!-- Bouton retour --> 
+        <button id="backBtnToTable">Revenir à la table</button>
 
 
-    <form id="renameColumnsForm">
+        <form id="renameColumnsForm">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom de la colonne</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom de la colonne</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-            <tbody id="columnsTableList"></tbody>
+                <tbody id="columnsTableList"></tbody>
 
-        </table>
+            </table>
 
-        <div style="margin-top:15px;">
-            <button type="submit" id="submitRenameColumns">
-                Valider les changements
-            </button>
-        </div>
+            <div style="margin-top:15px;">
+                <button type="submit" id="submitRenameColumns">
+                    Valider les changements
+                </button>
+            </div>
 
-    </form>
+        </form>
 
-    <script type="module" src="/static/JS/component_ui/display_colums_list.js"></script>
-    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_rename_columns.js"></script>
-    <script type="module" src="/static/JS/method_put/put_rename_columns.js"></script>
+    </div>
+    
+
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/display_multi_colums_list.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_rename_columns_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/method_put/put_rename_columns_postgre.js"></script>
+    <!-- verif rename col -->
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/verif_multi_col.js"></script>
+     <!-- <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/btn_verif_rename_one_column.js"></script> -->
     <script>
         // Action du bouton retour
         document.getElementById("backBtnToTable").addEventListener("click", () => {
@@ -43,10 +60,14 @@
             const schema_name = path[2];
             const table_name = path[3];
             // Redirection vers la page qui liste les tables
-            window.location.href = `/admin/${schema_name}/${table_name}`;
+            window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
         });
 
      </script>
+     <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
    
 </body>
 </html>

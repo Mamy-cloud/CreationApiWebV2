@@ -25,6 +25,13 @@
         <!-- input method crud -->
         <div id="list_method_crud_postgre" style="margin-bottom: 5px;"></div>
 
+        <!-- -----------------------------indication modifier nom table et modifier valeur colonne---------------------- -->
+         <div id="text_indication_modify_column_postgre">
+            <p>Aller sur les colonnes et choisir les actions</p>
+        </div>
+
+        <!-- ----------------------------- fin indication modifier nom table et modifier valeur colonne---------------------- -->
+
         <!----------------------- table name / rename table ---------------------------------->
         <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
             <p style="margin-right: 5px;">Nom de la table : </p> <p id="tableTitlePostgre"></p>
@@ -57,7 +64,7 @@
         <!-- ------------------------------ fin afficher / ajouter lignes---------------------------- -->
     
 
-        <!-- ------------------------ajouter colonne-------------------------------- -->
+        <!-- ------------------------afficher / ajouter colonne-------------------------------- -->
 
         <div id="containerAddColumnPostgre">
 
@@ -106,6 +113,8 @@
         
         <!-- ------------------------fin ajouter colonne-------------------------------- -->
 
+        
+
     </div>
    
 
@@ -137,8 +146,9 @@
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
 
-     <!-- liste de méthode crud -->
+     <!-- liste dans la balise select de méthode crud -->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/list_method_crud.js"></script>
+
     <!-- --------------------rename table--------------------------- -->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_table/rename_table_ui_postgre.js"></script>
      <script src="/static/JS/postgreFrontJs/method_post/post_rename_table_postgre.js"></script>
@@ -148,7 +158,7 @@
     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_table/btn_validate_new_name_postgre.js"></script>     
      
      
-     <!-- ajouter colonne -->
+     <!-- -------------------------ajouter colonne ---------------------------------------->
     <!-- <script type="module" src="/static/JS/postgreFontJs/postgreSql_data/list_type_data.js"></script> -->
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_create_table_column/add_column_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/create_json_column_postgre.js"></script>
@@ -159,7 +169,7 @@
      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/add_column/btn_verif_column_postgre.js"></script>
      
 
-      <!-- ajout ligne -->
+      <!------------------------------- ajout ligne---------------------------------- -->
        <script type="module" src="/static/JS/postgreFrontJs/postgreSql_data/input_radio_boolean.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/postgreSql_data/input_type.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_row/ui_add_row_postgre.js"></script>
@@ -167,6 +177,8 @@
        <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_row_postgre.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/method_post/post_row_postgre.js"></script>
 
+       <!-- ----------------choix rename one colunm sur le select----------------------------- -->
+        <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/ui_select_option_rename_column.js"></script>
 
 </body>
 </html>

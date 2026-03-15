@@ -12,7 +12,9 @@ export function getColumnRenameInfo() {
   const schema_name = path[2];
   const table_name = path[3];
 
-  const new_name_input = document.getElementById("new_column_name");
+  
+
+  const new_name_input = document.getElementById("new_one_column_name");
   const new_name = new_name_input ? new_name_input.value.trim() : "";
 
   return {
@@ -22,3 +24,4 @@ export function getColumnRenameInfo() {
     new_name
   };
 }
+

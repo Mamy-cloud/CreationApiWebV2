@@ -1,14 +1,20 @@
 // put_rename_columns.js
 
-import { createRenameColumnsJSON } from "../JSON_transfer_conversion_backend/json_rename_columns.js";
+import { createRenameColumnsJSON } from "../JSON_transfer_conversion_backend/json_rename_columns_postgre.js";
 
 export async function putRenameColumns() {
+  const path = window.location.pathname.split("/");
+
+  const schema_name = path[2];
+  const table_name = path[3];
 
   const data = createRenameColumnsJSON();
+  console.log("json rename one col", data);
+  
 
   try {
 
-    const response = await fetch("/admin/method/table/rename_columns", {
+    const response = await fetch("/app/postgre/sync/method/put/rename/colunm", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -17,14 +23,15 @@ export async function putRenameColumns() {
     });
 
     if (!response.ok) {
-      throw new Error("Erreur serveur");
+      throw new Error("Erreur serveur", response);
     }
 
     const result = await response.json();
 
     console.log("Réponse API :", result);
-    alert("Column renamed successfully");
+    alert("Colonne renommer avec succès");
 
+     window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
     return result;
 
   } catch (error) {
@@ -47,7 +54,7 @@ if (renameButton) {
 }
 
 //------------------------multi-columns------------------------------------
-import { getRenameColumnsData } from "../JSON_transfer_conversion_backend/json_rename_columns.js";
+import { getRenameColumnsData } from "../JSON_transfer_conversion_backend/json_rename_columns_postgre.js";
 
 export function putRenameMultiColumns() {
 
@@ -69,7 +76,7 @@ export function putRenameMultiColumns() {
       console.log("Données envoyées :", data); // debug
 
       // appel API PUT
-      fetch("/admin/method/table/rename_columns", {
+      fetch("/app/postgre/sync/method/put/rename/colunm", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -83,6 +90,12 @@ export function putRenameMultiColumns() {
       .then(result => {
         console.log("Succès :", result);
         alert("Changements enregistrés avec succès !");
+        const pathParts = window.location.pathname.split("/");
+
+        // Exemple d'URL: /admin/public/users
+        const schemaName = pathParts[2];
+        const tableName = pathParts[3];
+        window.location.href = `/admin/${schemaName}/${tableName}/postgresql/interface/views`;
       })
       .catch(error => {
         console.error("Erreur :", error);

@@ -1,6 +1,6 @@
 // json_rename_columns.js
 
-import { getColumnRenameInfo } from "../component_ui/rename_one_column_form.js";
+import { getColumnRenameInfo } from "../component_ui/method_crud/rename_column/rename_one_column_form_postgre.js";
 
 export function createRenameColumnsJSON() {
 
@@ -22,7 +22,7 @@ export function createRenameColumnsJSON() {
 }
 
 //-------------------------------multi columns-------------------------------
-import { renamedColumns } from "../component_ui/display_colums_list.js";
+import { renamedColumns } from "../component_ui/method_crud/rename_column/display_multi_colums_list.js";
 
 export function getRenameColumnsData() {
 

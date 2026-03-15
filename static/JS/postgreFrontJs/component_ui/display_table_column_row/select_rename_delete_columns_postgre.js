@@ -1,5 +1,5 @@
 // actionSelect.js
-export function SelectRenameDeleteColumns(schema_name, table_name) {
+export function SelectRenameDeleteColumns() {
 
   const select = document.createElement("select");
 
@@ -31,6 +31,9 @@ export function SelectRenameDeleteColumns(schema_name, table_name) {
   select.appendChild(renameMultipleOption);
   select.appendChild(deleteMultipleOption);
 
+
+
+
   // 🎯 gestion des actions
   select.addEventListener("change", function () {
 
@@ -47,14 +50,14 @@ export function SelectRenameDeleteColumns(schema_name, table_name) {
     if (this.value === "rename") {
 
       window.location.href =
-      `/admin/${schema_name}/${table_name}/modify_colonnes/rename_one_column?column=${column_name}&type=${column_type}`;
+      `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_colonnes/rename_one_column?column=${column_name}&type=${column_type}`;
 
     }
 
     if (this.value === "rename_multiple") {
 
       window.location.href =
-      `/admin/${schema_name}/${table_name}/modify_colonnes/rename_multi_column`;
+      `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_colonnes/rename_multi_column`;
 
     }
 

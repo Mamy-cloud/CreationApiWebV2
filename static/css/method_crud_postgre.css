@@ -9,4 +9,14 @@
 }
 
 
-/*------------------- état des btn dans create table    -----------------*/
+/*<!-- -----------------------------indication modifier nom table et modifier valeur colonne---------------------- -->*/
+#text_indication_modify_column_postgre{
+    margin-bottom: 5px;
+    padding: 6px;
+    width: 30%;
+    background-color: var(--color-second);
+}
+
+#text_indication_modify_column_postgre p{
+    margin: 6px;
+}
