@@ -8,37 +8,20 @@
     <title>Choix table pour le traitement</title>
 </head>
 <body>
-    <!--
-    Model du menu
-    <div id="id_menu_global">
-        <menu id="id_menu_global_postgre">
-            <div class="menu_create_db_postgre" id="id_menu_style_postgre">
-                <main>
-                    <img src="/static/img/postgre/menu/icons8-table-100.png" alt="list-table">
-                    <p>display</p>
-                    <p>table</p>
-                </main>
-                <nav>
-                    <p>Créer schema</p>
-                    <p>Créer Table</p>
-                </nav>
-            </div>
-            <div class="menu_method_crud_postgre">
-                <img src="/static/img/postgre/menu/icons8-crud-64.png" alt="method-crud">
-                <p>method</p>
-                <p>crud</p>
-            </div>
-        </menu>
-        
-    </div> -->
+   
     
-    
-    <div id="id_menu_global">
+     <div id="id_menu_global">
         <menu id="id_menu_global_postgre">
         </menu>
     </div>
 
+    <!-- chargement --> 
+    <div id="globalSpinner"></div>
+
     <div id="id_container_postgre">
+
+        
+
         <section>
             <h4>Choisir le schema et la table pour le traitement:</h4>
             <div id="schema_container_postgres"></div>
@@ -46,25 +29,17 @@
     </div>
     
     
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
     <!-- ------------------------------menu container------------------------- -->
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
-   
-    <!-- --------------------create schema--------------------------------- -->
-   <!--  <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_schema.js"></script>
-    <script type="module" src="/static/JS/postgreFrontJs/method_post/post_schema.js"></script>
-    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/conserve_json.js"></script> -->
 
     <!-- --------------------get schema & table--------------------------------- -->
      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_list_schema_table/display_table_schema_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/method_get/get_list_schema_table_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_list_schema_table/list_schema_postgre.js"></script>
-
-     <!-- --------------------------post create table----------------------------- -->
-      <!-- <script type="module" src="/static/JS/postgreFrontJs/component_ui/select_schema.js"></script>
-      <script type="module" src="/static/JS/postgreFrontJs/component_ui/add_column.js"></script>
-      <script type="module" src="/static/JS/postgreFrontJs/method_post/post_create_table.js"></script> -->
 
 </body>
 </html>

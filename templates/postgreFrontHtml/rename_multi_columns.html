@@ -20,6 +20,9 @@
         <!-- Bouton retour --> 
         <button id="backBtnToTable">Revenir à la table</button>
 
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
+
 
         <form id="renameColumnsForm">
 
@@ -46,6 +49,10 @@
     </div>
     
 
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
+
+    
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/display_multi_colums_list.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_rename_columns_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/method_put/put_rename_columns_postgre.js"></script>

@@ -10,7 +10,7 @@
 
 
 /*<!-- -----------------------------indication modifier nom table et modifier valeur colonne---------------------- -->*/
-#text_indication_modify_column_postgre{
+#text_indication_modify_column_postgre, #text_indication_modify_row_postgre{
     margin-bottom: 5px;
     padding: 6px;
     width: 30%;
@@ -18,5 +18,8 @@
 }
 
 #text_indication_modify_column_postgre p{
+    margin: 6px;
+}
+#text_indication_modify_row_postgre p{
     margin: 6px;
 }

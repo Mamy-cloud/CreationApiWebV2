@@ -51,7 +51,7 @@ function loadPostgreMenu() {
     imgCrud.alt = "method-crud";
 
     const pMethod = document.createElement("p");
-    pMethod.textContent = "Processing";
+    pMethod.textContent = "Display";
 
     const pCrud = document.createElement("p");
     pCrud.textContent = "table";

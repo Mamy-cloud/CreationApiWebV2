@@ -1,4 +1,5 @@
 import { constructJsonForRow } from '../JSON_transfer_conversion_backend/json_create_row_postgre.js';
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
 
 
 
@@ -9,29 +10,41 @@ export function sendRowToBackend() {
   console.log("JSON envoyé :", jsonData);
 
   // Envoyer au backend
-  fetch(`/app/postgre/sync/method_crud/add/rows/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(jsonData)
-  })
-    .then(response => {
-      if (!response.ok) {
-        return response.json().then(err => { throw err; });
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log("Lignes ajoutées avec succès :", data);
-      alert("✅ lignes ajoutées avec succès !");
+  async function addRows(jsonData) {
+
+  startSpinner()
+  try {
+    const response = await fetch(`/app/postgre/sync/method_crud/add/rows/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jsonData)
+    });
+
+    // Vérifier le statut HTTP
+    if (!response.ok) {
+      const err = await response.json();
+      throw err;
+    }
+
+    const data = await response.json();
+    console.log("Lignes ajoutées avec succès :", data);
+    alert("✅ lignes ajoutées avec succès !");
     window.location.reload();
-    })
-    
-    .catch(error => {
+
+  } catch (error) {
     console.error("Erreur lors de l'ajout des lignes :", error);
     alert(`Erreur : ${JSON.stringify(error)}`);
-    });
+  } finally {
+    // ici tu peux arrêter ton spinner ou faire un nettoyage
+    stopSpinner();
+    console.log("Fin de l'opération POST add rows");
+  }
+}
+
+// Appel de la fonction avec tes données JSON
+addRows(jsonData);
     
 }
 

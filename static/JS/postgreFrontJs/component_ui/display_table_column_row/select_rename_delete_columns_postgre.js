@@ -5,7 +5,7 @@ export function SelectRenameDeleteColumns() {
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
-  defaultOption.textContent = "Action";
+  defaultOption.textContent = "Action colonne";
   defaultOption.disabled = true;
   defaultOption.selected = true;
 
@@ -19,11 +19,11 @@ export function SelectRenameDeleteColumns() {
 
   const renameMultipleOption = document.createElement("option");
   renameMultipleOption.value = "rename_multiple";
-  renameMultipleOption.textContent = "Renommer plusieurs colonnes";
+  renameMultipleOption.textContent = "Renommer des colonnes";
 
   const deleteMultipleOption = document.createElement("option");
   deleteMultipleOption.value = "delete_multiple";
-  deleteMultipleOption.textContent = "Supprimer plusieurs colonnes";
+  deleteMultipleOption.textContent = "Supprimer des colonnes";
 
   select.appendChild(defaultOption);
   select.appendChild(renameOption);

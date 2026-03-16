@@ -1,10 +1,12 @@
 import { buildSchemaJsonPostgre } from "../JSON_transfer_conversion_backend/json_create_schema_postgre.js";
-/* import { setData } from "../JSON_transfer_conversion_backend/conserve_json.js"; */
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
+
 
 const button = document.getElementById("create_schema_btn_postgre");
 const input = document.getElementById("create_schema_postgre");
 
 button.addEventListener("click", async () => {
+    startSpinner()
     try {
         // 1️⃣ Construire le JSON
         const schemaJson = buildSchemaJsonPostgre(input.value);
@@ -38,5 +40,7 @@ button.addEventListener("click", async () => {
      catch (error) {
         console.error("Erreur lors de la création du schéma :", error.message);
         alert(error.message);
+    }finally{
+        stopSpinner()
     }
 });

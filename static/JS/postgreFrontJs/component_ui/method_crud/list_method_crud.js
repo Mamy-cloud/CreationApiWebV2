@@ -37,13 +37,18 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     option3.value = "add_row";
     option3.textContent = "ajouter une ou plusieurs lignes";
 
-    //ajouter ligne
+    //renommer colonne
     const option4 = document.createElement("option");
     option4.value = "rename_column";
     option4.textContent = "renommer une ou plusieurs colonnes";
 
+    //renommer colonne
+    const option5 = document.createElement("option");
+    option5.value = "modify_value_row";
+    option5.textContent = "modifier une ou plusieurs lignes";
+
     // ajout des options dans le select
-    select.append(defaultOption, option1, option2, option3, option4);
+    select.append(defaultOption, option1, option2, option3, option4, option5);
 
     // ajout du select dans le div
     container.appendChild(select);

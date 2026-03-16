@@ -1,4 +1,4 @@
-import { mapSqlTypeToHtmlInput } from "../postgreSql_data/input_type.js";
+import { mapSqlTypeToHtmlInput } from "../../../postgreSql_data/input_type.js";
 
 // 🔹 objet global pour stocker les modifications
 export const columnUpdates = {};

@@ -22,6 +22,8 @@
         <!-- Bouton retour --> 
         <button id="backBtn">Revenir à la table</button>
         
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
 
             <!-- -----------------------------renommer une colonne----------------------------------- -->
 
@@ -43,7 +45,8 @@
     </div>
 
         
-
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
     <!-- --------------------------------modifier nom d'une colonne--------------------------- -->
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/rename_one_column_form_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/display_name_for_rename_one_colonne.js"></script>

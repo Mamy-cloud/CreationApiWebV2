@@ -1,5 +1,6 @@
 // select_schema.js
 import { createSchemaSelectPostgre } from "../display_list_schema_table/list_schema_postgre.js";
+import { startSpinner , stopSpinner } from "../../../animate_spin.js"
 
 // Sélecteur du div placeholder
 const container = document.querySelector('.select_schema_postgre');
@@ -43,6 +44,7 @@ export function renderSchemaSelect(dataSchemas) {
  * Exemple d'utilisation avec des données fetchées
  */
 export async function initSchemaSelect(apiUrl = '/app/postgre/sync/method_crud/get/schema_table') {
+    startSpinner()
     try {
 
         const response = await fetch(apiUrl);
@@ -56,6 +58,8 @@ export async function initSchemaSelect(apiUrl = '/app/postgre/sync/method_crud/g
     } catch (error) {
         console.error("Erreur lors de la récupération des schemas :", error);
         container.textContent = "Impossible de charger les schemas.";
+    }finally{
+        stopSpinner()
     }
 }
 

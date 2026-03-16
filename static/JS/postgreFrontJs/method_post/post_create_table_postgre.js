@@ -3,6 +3,8 @@
 // get_create_table.js
 import { addColumn } from "../component_ui/display_create_table_column/add_column_postgre.js";
 import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column_postgre.js";
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
+
 
 document.getElementById("createTableFormPostgre").addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -21,7 +23,7 @@ document.getElementById("createTableFormPostgre").addEventListener("submit", asy
 
     console.log(payload);
     
-
+    startSpinner()
     try {
         const response = await fetch("/app/postgre/synchrone/method/post_create_table", {
             method: "POST",
@@ -40,5 +42,7 @@ document.getElementById("createTableFormPostgre").addEventListener("submit", asy
     } catch (error) {
         alert("❌ Il y a eu une erreur. Veuillez vérifier la console.log !");
         console.error("Erreur lors du transfert du JSON :", error);
+    }finally{
+        stopSpinner()
     }
 });

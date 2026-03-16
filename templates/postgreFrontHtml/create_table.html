@@ -21,6 +21,10 @@
         <button id="backBtnPostgre">retourner à la liste des tables</button>
         <br> 
 
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
+
+
         <section>
             <h3>Créer une table</h3>
 
@@ -84,7 +88,8 @@
 
     </div>
     
-
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
     <script>
         // Action du bouton retour
         document.getElementById("backBtnPostgre").addEventListener("click", () => {

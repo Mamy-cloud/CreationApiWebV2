@@ -28,12 +28,12 @@ export function buildTableRowsPostgre(tbody, data, columns) {
 
         const optionDefault = document.createElement("option");
         optionDefault.value = "";
-        optionDefault.textContent = "action sur la ligne";
+        optionDefault.textContent = "action ligne";
         optionDefault.selected = true;
 
         const optionModify = document.createElement("option");
         optionModify.value = "update";
-        optionModify.textContent = "modifier les valeurs";
+        optionModify.textContent = "modifier valeurs";
 
         const optionDelete = document.createElement("option");
         optionDelete.value = "delete";
@@ -56,7 +56,7 @@ export function buildTableRowsPostgre(tbody, data, columns) {
 
           if (this.value === "update") {
             window.location.href =
-              `/admin/${schema_name}/${table_name}/modify_row/value?id=${rowId}`;
+              `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_row/value?id=${rowId}`;
           }
 
         });

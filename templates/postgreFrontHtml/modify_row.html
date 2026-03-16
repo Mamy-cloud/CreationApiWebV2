@@ -3,44 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/table.css">
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/method_crud_postgre.css">
     <title>modify row</title>
 </head>
 <body>
 
-    <!-- Bouton retour --> 
-    <button id="backBtnToTable">Revenir à la table</button>
+
+    <!--  menu -->
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+
+    <div id="id_container_postgre">
+
+        <!-- Bouton retour --> 
+        <button id="backBtnToTable">Revenir à la table</button>
+        
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
+
+        <form id="modifyRowForm">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom de la colonne</th>
+                        <th>Valeurs</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="columnsTypeDataTableList"></tbody>
+
+            </table>
+
+            <div style="margin-top:20px;">
+                <button type="submit" id="validateAllChangesBtn">
+                    Valider tous les changements
+                </button>
+            </div>
+
+        </form>
+
+    </div>
     
 
-    <form id="modifyRowForm">
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom de la colonne</th>
-                    <th>Valeurs</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody id="columnsTypeDataTableList"></tbody>
-
-        </table>
-
-        <div style="margin-top:20px;">
-            <button type="submit" id="validateAllChangesBtn">
-                Valider tous les changements
-            </button>
-        </div>
-
-    </form>
+    <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
 
 
-    
-    <script type="module" src="/static/JS/component_ui/display_columns_list_with_id.js"></script>
-    <script type="module" src="/static/JS/component_ui/action_modify_value_row.js"></script>
-    <script type="module" src="/static/JS/JSON_transfer_conversion_backend/json_modify_row.js"></script>
-    <script type="module" src="/static/JS/method_put/put_modify_row.js"></script>
+    <!-- ------------------------------------------modify value row--------------------------- -->
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/modify_value_row/display_columns_list_with_id_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/modify_value_row/action_modify_value_row_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_modify_row_postgre.js"></script>
+    <script type="module" src="/static/JS/postgreFrontJs/method_put/put_modify_row_postgre.js"></script>
 
     <script>
         // Action du bouton retour
@@ -49,8 +74,7 @@
             const schema_name = path[2];
             const table_name = path[3];
             // Redirection vers la page qui liste les tables
-            window.location.href = `/admin/${schema_name}/${table_name}`;
-        });
+            window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;        });
 
      </script>
 </body>

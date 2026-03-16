@@ -80,7 +80,7 @@ export function renderSchemaTablePostgre(data) {
             });
         } else {
             const emptyDiv = document.createElement("div");
-            emptyDiv.textContent = "Aucune table";
+            emptyDiv.textContent = "Aucune table, créez un db";
             emptyDiv.style.textAlign = "center";
             tablesCell.appendChild(emptyDiv);
         }

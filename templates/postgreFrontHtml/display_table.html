@@ -22,12 +22,21 @@
         <button id="backBtnPostgre">revenir à la liste des tables</button>
         <br>
         <br> 
+
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
+
+
         <!-- input method crud -->
         <div id="list_method_crud_postgre" style="margin-bottom: 5px;"></div>
 
         <!-- -----------------------------indication modifier nom table et modifier valeur colonne---------------------- -->
          <div id="text_indication_modify_column_postgre">
-            <p>Aller sur les colonnes et choisir les actions</p>
+            <p>Aller sur les noms des colonnes et choisir les actions</p>
+        </div>
+
+        <div id="text_indication_modify_row_postgre">
+            <p>Aller sur les id de chaque ligne et choisir les actions</p>
         </div>
 
         <!-- ----------------------------- fin indication modifier nom table et modifier valeur colonne---------------------- -->
@@ -126,6 +135,8 @@
     
      <!-- charger le webSocket de fastApi -->
      <!-- <script src="/static/JS/webSocket.js"></script> -->
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
 
      <script>
         // Action du bouton retour
@@ -136,7 +147,8 @@
 
      </script>
 
-     
+     <!-- liste dans la balise select de méthode crud -->
+      <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/list_method_crud.js"></script>
      <!-- get table -->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_header_postgre.js"></script>
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_row_postgre.js"></script>
@@ -146,13 +158,11 @@
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
 
-     <!-- liste dans la balise select de méthode crud -->
-      <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/list_method_crud.js"></script>
-
+     
     <!-- --------------------rename table--------------------------- -->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_table/rename_table_ui_postgre.js"></script>
-     <script src="/static/JS/postgreFrontJs/method_post/post_rename_table_postgre.js"></script>
-     <!-- verification nom table -->
+     <script type="module" src="/static/JS/postgreFrontJs/method_post/post_rename_table_postgre.js"></script>
+      <!-- verification nom table -->
      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_table/verif_name_table_postgre.js"></script> 
     <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_table/btn_validate_new_name_postgre.js"></script>     
@@ -177,8 +187,15 @@
        <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_row_postgre.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/method_post/post_row_postgre.js"></script>
 
-       <!-- ----------------choix rename one colunm sur le select----------------------------- -->
+
+       
+
+       <!-- ----------------choix rename colunm sur le select----------------------------- -->
         <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/ui_select_option_rename_column.js"></script>
+
+        <!-- ----------------choix modify row sur le select----------------------------- -->
+         <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/modify_value_row/ui_select_option_modify_value_row.js"></script>
+
 
 </body>
 </html>

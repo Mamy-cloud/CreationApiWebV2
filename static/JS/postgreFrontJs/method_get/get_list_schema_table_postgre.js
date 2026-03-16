@@ -1,12 +1,15 @@
 import { renderSchemaTablePostgre } from "../component_ui/display_list_schema_table/display_table_schema_postgre.js";
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
 
 async function getSchemas() {
+    startSpinner()
     try {
         const response = await fetch("/app/postgre/sync/method_crud/get/schema_table");
 
         console.log("réponse backend:" ,response);
         
         const data = await response.json();
+        await new Promise(resolve => setTimeout(resolve, 10));
         console.log("réponse data:" , data);
         
 
@@ -20,6 +23,8 @@ async function getSchemas() {
 
     } catch (error) {
         console.error("Erreur GET schema :", error);
+    }finally{
+        stopSpinner()
     }
 }
 

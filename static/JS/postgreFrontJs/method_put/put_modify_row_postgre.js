@@ -1,6 +1,8 @@
 // put_modify_row.js
 
-import { buildModifyRowJson } from "../JSON_transfer_conversion_backend/json_modify_row.js";
+import { buildModifyRowJson } from "../JSON_transfer_conversion_backend/json_modify_row_postgre.js";
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
+
 
 export function initPutModifyRow() {
 
@@ -16,9 +18,11 @@ export function initPutModifyRow() {
 
     console.log("JSON envoyé :", jsonData);
 
+    startSpinner()
+
     try {
 
-      const response = await fetch("/admin/method/put/modify/value/row/postgresql", {
+      const response = await fetch("/app/postgre/synchrone/method_crud/modify/value_row", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -28,12 +32,15 @@ export function initPutModifyRow() {
 
       const result = await response.json();
 
+      alert("modification réussie")
       console.log("Réponse API :", result);
 
     } catch (error) {
-
+      alert("error")
       console.error("Erreur API :", error);
 
+    }finally{
+      stopSpinner()
     }
 
   });

@@ -25,7 +25,7 @@ export function buildTableHeaderPostgre(thead, columns, schema_name, table_name)
     // div pour afficher le type
     const typeDiv = document.createElement("div");
     typeDiv.classList.add("column-type");
-    typeDiv.textContent = col.type;
+    typeDiv.textContent = `(${col.type})`;;
 
     // div pour les actions
     const actionDiv = document.createElement("div");

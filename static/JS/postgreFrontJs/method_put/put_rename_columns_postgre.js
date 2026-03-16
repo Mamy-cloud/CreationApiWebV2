@@ -1,6 +1,8 @@
 // put_rename_columns.js
 
 import { createRenameColumnsJSON } from "../JSON_transfer_conversion_backend/json_rename_columns_postgre.js";
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
+
 
 export async function putRenameColumns() {
   const path = window.location.pathname.split("/");
@@ -11,7 +13,7 @@ export async function putRenameColumns() {
   const data = createRenameColumnsJSON();
   console.log("json rename one col", data);
   
-
+  startSpinner()
   try {
 
     const response = await fetch("/app/postgre/sync/method/put/rename/colunm", {
@@ -39,6 +41,8 @@ export async function putRenameColumns() {
     console.error("Erreur :", error);
     alert("Error renaming column");
 
+  }finally{
+    stopSpinner()
   }
 
 }

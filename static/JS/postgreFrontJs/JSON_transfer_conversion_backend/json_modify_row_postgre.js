@@ -1,4 +1,4 @@
-import { columnUpdates } from "../component_ui/action_modify_value_row.js";
+import { columnUpdates } from "../component_ui/method_crud/modify_value_row/action_modify_value_row_postgre.js";
 
 /**
  * Construit le JSON prêt à envoyer à l'API

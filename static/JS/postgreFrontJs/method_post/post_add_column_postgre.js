@@ -1,5 +1,6 @@
 // post_column.js
 import { postColumnsJSON } from "../JSON_transfer_conversion_backend/create_json_column_postgre.js";
+import { startSpinner , stopSpinner } from "../../animate_spin.js"
 
 const pathParts = window.location.pathname.split("/");
 
@@ -26,6 +27,7 @@ document.getElementById("validateColumnsBtn").addEventListener("click", async ()
 
   console.log("Payload envoyé :", payload);
 
+  startSpinner()
   try {
     const response = await fetch("/app/method/post/add_column/postgre/synchrone", {
       method: "POST",
@@ -44,5 +46,7 @@ document.getElementById("validateColumnsBtn").addEventListener("click", async ()
   } catch (err) {
     alert("❌ Erreur : " + err.message);
     console.error(err);
+  }finally{
+    stopSpinner()
   }
 });
