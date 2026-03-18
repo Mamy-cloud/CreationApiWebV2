@@ -18,7 +18,6 @@ export function initRenameSchema() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // ✅ Correction : récupérer l'input correctement
     const input = document.querySelector(".newNameSchemaPostgre");
     const newName = input ? input.value.trim() : "";
 
@@ -27,22 +26,34 @@ export function initRenameSchema() {
       return;
     }
 
-    // 🔒 Validation simple côté front (anti erreur utilisateur)
+    // 🔒 Validation simple côté front
     const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
     if (!regex.test(newName)) {
       alert("Nom invalide ! Utilisez uniquement lettres, chiffres et underscore.");
       return;
     }
 
-    // ✅ Nouveau payload
+    // ⚠️ Modal de confirmation personnalisé
+    const confirmRename = window.confirm(
+      "⚠️ Le renommage du schema peut endommager la base de données.\n" +
+      "Veuillez bien vérifier.\n" +
+      "Confirmez-vous le renommage ?"
+    );
+
+    if (!confirmRename) {
+      // l'utilisateur a cliqué sur Annuler
+      return;
+    }
+
     const payload = {
-        schema_name: schemaName.trim(),
-        new_schema_name: newName
+      schema_name: schemaName.trim(),
+      new_schema_name: newName
     };
 
     console.log("Payload à envoyer:", payload);
 
     startSpinner();
+
     try {
       const response = await fetch(
         `/app/postgre/synchrone/method_crud/put/rename_schema`,
@@ -59,7 +70,6 @@ export function initRenameSchema() {
       }
 
       const result = await response.json();
-      alert("renommage schema réussi")
       alert("✅ " + result.message);
 
       // 🔄 Redirection vers le nouveau schema

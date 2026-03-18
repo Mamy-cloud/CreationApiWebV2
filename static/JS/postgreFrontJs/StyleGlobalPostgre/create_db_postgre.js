@@ -43,7 +43,7 @@ export function initCreateDbMenu() {
         // ---- Positionner à droite du div ----
         nav.style.position = "fixed";          // fixe par rapport à l'écran
         nav.style.top = "0";                   // depuis le haut
-        nav.style.left = "90px";                 // collé à droite
+        nav.style.left = "55px";                 // collé à droite
         nav.style.width = "20vw";              // 50% de la largeur de l'écran
         nav.style.height = "100vh";            // toute la hauteur
         nav.style.backgroundColor = "#1a5c0c"; // couleur de fond
