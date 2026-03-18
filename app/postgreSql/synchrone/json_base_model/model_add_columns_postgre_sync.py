@@ -13,7 +13,6 @@ class ColumnDefinition(BaseModel):
     @field_validator("type_of_column")
     @classmethod
     def check_type(cls, v: str) -> str:
-        # Convertit si besoin (ex: URL -> TEXT)
         pg_type = map_type_to_postgres(v)
 
         if pg_type not in ALL_SQL_TYPES:
@@ -25,8 +24,6 @@ class ColumnDefinition(BaseModel):
 
 
 class AddColumnsModelPostgreSync(BaseModel):
-    schema_name: str = Field(..., example="public")
-    table_name: str = Field(..., example="produits")
     columns: List[ColumnDefinition]
 
     @model_validator(mode="after")

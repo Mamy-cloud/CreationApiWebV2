@@ -75,3 +75,9 @@ puis une fois le json construit, on fait l'appel api put_rename_columns.js, et d
     }
   ]
 }
+
+----------------------------rename schema-------------------
+{
+  schema_name: "nom schema",
+  new_schema_name: "nouveau nom",
+}

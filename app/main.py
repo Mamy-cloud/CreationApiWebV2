@@ -24,7 +24,7 @@ from app.postgreSql.synchrone.method_crud.put import put_modify_value_row_postgr
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.responses import FileResponse
-from app.views import router as views_router
+from app.postgreSql.views import router as views_router
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware

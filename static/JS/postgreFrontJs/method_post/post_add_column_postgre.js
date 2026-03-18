@@ -22,14 +22,15 @@ document.getElementById("validateColumnsBtn").addEventListener("click", async ()
 
   console.log("Colonnes à ajouter :", columnsToAdd);
 
-  // Préparer le payload exactement comme attendu par FastAPI
-  const payload = { schema_name: schemaName, table_name: tableName, columns: columnsToAdd };
+  // Payload simplifié (plus besoin de schema/table)
+  const payload = { columns: columnsToAdd };
 
   console.log("Payload envoyé :", payload);
 
   startSpinner()
   try {
-    const response = await fetch("/app/method/post/add_column/postgre/synchrone", {
+    // URL dynamique avec schema et table
+    const response = await fetch(`/app/${schemaName}/${tableName}/method/post/add_column/postgre/synchrone`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)  // ✅ CORRECT
@@ -46,7 +47,7 @@ document.getElementById("validateColumnsBtn").addEventListener("click", async ()
   } catch (err) {
     alert("❌ Erreur : " + err.message);
     console.error(err);
-  }finally{
+  } finally {
     stopSpinner()
   }
 });

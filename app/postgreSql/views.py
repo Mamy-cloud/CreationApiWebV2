@@ -5,7 +5,7 @@ from fastapi import Query
 
 router = APIRouter()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 #get schema table postgre
 @router.get("/admin/method/get/tables/schema/postgresql/interface/views")

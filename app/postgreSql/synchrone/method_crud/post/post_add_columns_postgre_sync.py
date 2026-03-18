@@ -6,42 +6,32 @@ from app.postgreSql.synchrone.json_base_model.model_add_columns_postgre_sync imp
 router = APIRouter()
 
 
-@router.post("/app/method/post/add_column/postgre/synchrone")
-def add_columns_endpoint_postgre_sync(data: AddColumnsModelPostgreSync):
-    """
-    Endpoint pour ajouter une ou plusieurs colonnes à une table PostgreSQL
-    dans un schéma spécifique.
-    """
+@router.post("/app/{schema_name}/{table_name}/method/post/add_column/postgre/synchrone")
+def add_columns_endpoint_postgre_sync(
+    schema_name: str,
+    table_name: str,
+    data: AddColumnsModelPostgreSync
+):
     conn = None
     cursor = None
 
     try:
-        # Connexion à la DB
         conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
 
-        print("verif cursor")
-
-        # ⚠️ Pydantic v2 -> model_dump()
         columns_data = [col.model_dump() for col in data.columns]
-        print("liste colonne", columns_data)
 
-        # Génère la requête SQL sécurisée
         query = request_post_add_columns_postgre_sync(
-            schema_name=data.schema_name,
-            table_name=data.table_name,
+            schema_name=schema_name,
+            table_name=table_name,
             columns=columns_data
         )
-        print("sql créé:", query)
 
-        # Exécute la requête
         cursor.execute(query)
-        print("excécution du cursor")
         conn.commit()
-        print("commit dans le db effectué")
 
         return {
-            "message": f"✅ Colonnes ajoutées avec succès à la table {data.table_name}"
+            "message": f"✅ Colonnes ajoutées avec succès à la table {table_name}"
         }
 
     except Exception as e:

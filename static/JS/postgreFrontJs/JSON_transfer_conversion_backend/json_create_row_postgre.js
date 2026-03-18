@@ -39,8 +39,6 @@ export function constructJsonForRow() {
 
   // 4️⃣ Retour du JSON final
   return {
-    schema_name: schemaName,
-    table_name: tableName,
     columns: columns,
     rows: rows
   };

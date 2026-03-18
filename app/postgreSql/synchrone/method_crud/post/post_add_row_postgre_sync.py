@@ -7,19 +7,27 @@ from app.postgreSql.synchrone.json_base_model.model_add_row_postgre_sync import 
 router = APIRouter()
 
 
-@router.post("/app/postgre/sync/method_crud/add/rows/")
-def add_row_endpoint_postgre_sync(data: AddRowsModelPostgreSync):
+@router.post("/app/{schema_name}/{table_name}/postgre/sync/method_crud/add/rows")
+def add_row_endpoint_postgre_sync(
+    schema_name: str,
+    table_name: str,
+    data: AddRowsModelPostgreSync
+):
     """
     Ajoute une ou plusieurs lignes dans une table PostgreSQL
-    en utilisant schema_name.
+    en utilisant schema_name et table_name passés dans l'URL.
     """
 
     try:
-        # Convertir le modèle en tuple compatible
+        # Convertir le modèle en tuple compatible (columns, rows_as_lists)
         tuple_data = data.to_tuple()
 
-        # Générer la requête SQL
-        query = request_post_add_row_postgre_sync(tuple_data)
+        # Générer la requête SQL avec les noms du schema et de la table
+        query = request_post_add_row_postgre_sync(
+            schema_name=schema_name,
+            table_name=table_name,
+            tuple_data=tuple_data  # <-- ici
+        )
 
         # Connexion à la base
         conn = postgre_sync_connect_to_db()
@@ -36,8 +44,8 @@ def add_row_endpoint_postgre_sync(data: AddRowsModelPostgreSync):
 
         return {
             "message": "Row(s) inserted successfully",
-            "schema": data.schema_name,
-            "table": data.table_name,
+            "schema": schema_name,
+            "table": table_name,
             "rows_inserted": len(data.rows)
         }
 

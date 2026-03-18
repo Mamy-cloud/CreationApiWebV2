@@ -1,58 +1,60 @@
 // put_rename_columns.js
 
 import { createRenameColumnsJSON } from "../JSON_transfer_conversion_backend/json_rename_columns_postgre.js";
-import { startSpinner , stopSpinner } from "../../animate_spin.js"
-
+import { startSpinner , stopSpinner } from "../../animate_spin.js";
 
 export async function putRenameColumns() {
-  const path = window.location.pathname.split("/");
 
+  const path = window.location.pathname.split("/");
   const schema_name = path[2];
   const table_name = path[3];
 
   const data = createRenameColumnsJSON();
   console.log("json rename one col", data);
-  
-  startSpinner()
-  try {
 
-    const response = await fetch("/app/postgre/sync/method/put/rename/colunm", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+  startSpinner();
+
+  try {
+    const response = await fetch(
+      `/app/${schema_name}/${table_name}/postgre/sync/method/put/rename/column`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Erreur serveur", response);
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.detail || `Erreur serveur: ${response.status}`);
     }
 
     const result = await response.json();
 
     console.log("Réponse API :", result);
-    alert("Colonne renommer avec succès");
+    alert("✅ Colonne renommée avec succès");
 
-     window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
+    window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
+
     return result;
 
   } catch (error) {
-
     console.error("Erreur :", error);
-    alert("Error renaming column");
-
-  }finally{
-    stopSpinner()
+    alert("❌ " + error.message);
+  } finally {
+    stopSpinner();
   }
-
 }
 
-// ✅ Ajouter l'event listener pour le bouton directement ici
-const renameButton = document.getElementById("renameColumnForm");
 
-if (renameButton) {
-  renameButton.addEventListener("submit", function(e) {
-    e.preventDefault(); // empêcher le reload de la page
+// Event listener
+const renameForm = document.getElementById("renameColumnForm");
+
+if (renameForm) {
+  renameForm.addEventListener("submit", function(e) {
+    e.preventDefault();
     putRenameColumns();
   });
 }
@@ -71,44 +73,51 @@ export function putRenameMultiColumns() {
       return;
     }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // empêcher le rechargement de la page
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-      // construire le JSON à partir des colonnes renommées
+      const path = window.location.pathname.split("/");
+      const schemaName = path[2];
+      const tableName = path[3];
+
       const data = getRenameColumnsData();
+      console.log("Données envoyées :", data);
 
-      console.log("Données envoyées :", data); // debug
+      startSpinner();
 
-      // appel API PUT
-      fetch("/app/postgre/sync/method/put/rename/colunm", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("Erreur HTTP " + response.status);
-        return response.json();
-      })
-      .then(result => {
+      try {
+        const response = await fetch(
+          `/app/${schemaName}/${tableName}/postgre/sync/method/put/rename/column`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          }
+        );
+
+        if (!response.ok) {
+          const err = await response.json().catch(() => ({}));
+          throw new Error(err.detail || `Erreur HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+
         console.log("Succès :", result);
-        alert("Changements enregistrés avec succès !");
-        const pathParts = window.location.pathname.split("/");
+        alert("✅ Colonnes renommées avec succès !");
 
-        // Exemple d'URL: /admin/public/users
-        const schemaName = pathParts[2];
-        const tableName = pathParts[3];
         window.location.href = `/admin/${schemaName}/${tableName}/postgresql/interface/views`;
-      })
-      .catch(error => {
-        console.error("Erreur :", error);
-        alert("Erreur lors de l'enregistrement des changements !");
-      });
 
+      } catch (error) {
+        console.error("Erreur :", error);
+        alert("❌ " + error.message);
+      } finally {
+        stopSpinner();
+      }
     });
 
   });
-
 }
-putRenameMultiColumns()
+
+putRenameMultiColumns();

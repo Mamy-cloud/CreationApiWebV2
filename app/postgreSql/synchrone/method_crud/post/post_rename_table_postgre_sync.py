@@ -6,17 +6,27 @@ from app.postgreSql.synchrone.json_base_model.model_rename_table_postgre_sync im
 router = APIRouter()
 
 
-@router.post("/app/postgre/synchrone/method/crud/post/rename_table")
-def rename_table_endpoint_postgre_sync(data: RenameTableModelPostgreSync):
+@router.post("/app/{schema_name}/{table_name}/postgre/synchrone/method/crud/post/rename_table")
+def rename_table_endpoint_postgre_sync(
+    schema_name: str,
+    table_name: str,
+    data: RenameTableModelPostgreSync
+):
+    """
+    Renomme une table PostgreSQL
+    - schema_name : dans l'URL
+    - table_name : ancien nom (dans l'URL)
+    - new_name : dans le body
+    """
 
     try:
         conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
 
         query = request_post_rename_table_postgre_sync(
-            data.schema_name,
-            data.old_name,
-            data.new_name
+            schema_name,
+            table_name,      # ancien nom
+            data.new_name    # nouveau nom
         )
 
         cursor.execute(query)
@@ -25,7 +35,12 @@ def rename_table_endpoint_postgre_sync(data: RenameTableModelPostgreSync):
         cursor.close()
         conn.close()
 
-        return {"message": "Table renommée avec succès"}
+        return {
+            "message": "Table renommée avec succès",
+            "schema": schema_name,
+            "old_table": table_name,
+            "new_table": data.new_name
+        }
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,5 +1,7 @@
-from psycopg2 import sql
+from psycopg2 import sql, connect
 import re
+from typing import List, Dict
+
 
 def postgre_sync_request_create_schema_query(schema_name: str):
     """
@@ -82,18 +84,37 @@ def request_get_table_PostgreSql_sync_safe(schema_name: str, table_name: str):
 
     return columns_query, rows_query
 
-# -------------------- post table_name ----------------------------------
+# -------------------- post table_rename ----------------------------------
 
-def request_post_rename_table_postgre_sync(schema_name: str, old_name: str, new_name: str):
+
+def request_post_rename_table_postgre_sync(
+    schema_name: str,
+    old_name: str,
+    new_name: str
+):
     """
-    Retourne la requête SQL sécurisée pour renommer une table
-    PostgreSQL dans un schéma spécifique.
+    Génère une requête SQL sécurisée pour renommer une table PostgreSQL
+    en évitant toute injection SQL.
     """
+
+    # 🔒 Validation supplémentaire (optionnelle mais recommandée)
+    pattern = r"^[a-zA-Z_][a-zA-Z0-9_]*$"
+
+    for value, field in [
+        (schema_name, "schema_name"),
+        (old_name, "old_name"),
+        (new_name, "new_name")
+    ]:
+        if not re.match(pattern, value):
+            raise ValueError(f"Nom invalide pour {field} : {value}")
+
+    # ✅ Requête sécurisée avec psycopg2.sql
     query = sql.SQL("ALTER TABLE {}.{} RENAME TO {}").format(
         sql.Identifier(schema_name),
         sql.Identifier(old_name),
         sql.Identifier(new_name)
     )
+
     return query
 
 # -------------------- add columns to table --------------------
@@ -117,37 +138,27 @@ def request_post_add_columns_postgre_sync(schema_name: str, table_name: str, col
     return query
 
 #-------------------add rows-------------------------------------
-def request_post_add_row_postgre_sync(tuple_data):
+def request_post_add_row_postgre_sync(schema_name: str, table_name: str, tuple_data: tuple):
     """
     Génère une requête SQL INSERT INTO schema.table (...) VALUES (...)
-    - tuple_data : (schema_name, table_name, columns, rows)
+    - schema_name, table_name : path params
+    - tuple_data : (columns, rows_as_lists)
     """
-    schema_name, table_name, columns, rows = tuple_data
+    columns, rows = tuple_data
 
     col_str = ", ".join(columns)
 
     values_str = ", ".join(
-        "(" + ", ".join(
-            "NULL" if val is None else repr(val) for val in row
-        ) + ")"
+        "(" + ", ".join("NULL" if val is None else repr(val) for val in row) + ")"
         for row in rows
     )
 
     sql_query = f'INSERT INTO "{schema_name}"."{table_name}" ({col_str}) VALUES {values_str};'
-
     return sql_query
 
 #--------------------------------rename column----------------------------
-def request_rename_columns_postgre_sync(schema_name: str, table_name: str, rename_map: dict) -> list[str]:
-    """
-    Génère une liste de requêtes SQL pour renommer une ou plusieurs colonnes
-    de manière sécurisée (protège contre l'injection SQL).
-
-    :param schema_name: nom du schema
-    :param table_name: nom de la table
-    :param rename_map: dictionnaire {ancien_nom: nouveau_nom}
-    :return: liste de chaînes SQL
-    """
+""" def request_rename_columns_postgre_sync(schema_name: str, table_name: str, rename_map: dict) -> list[str]:
+    
     # Fonction simple pour sécuriser les identifiants (colonne, table, schema)
     def safe_identifier(name: str) -> str:
         if not name.replace("_", "").isalnum():
@@ -162,6 +173,55 @@ def request_rename_columns_postgre_sync(schema_name: str, table_name: str, renam
         old = safe_identifier(old_col)
         new = safe_identifier(new_col)
         queries.append(f'ALTER TABLE {schema}.{table} RENAME COLUMN {old} TO {new};')
+
+    return queries """
+
+
+def request_rename_columns_postgre_sync(
+    schema_name: str,
+    table_name: str,
+    rename_list: List[Dict[str, str]]
+):
+    """
+    Génère une liste de requêtes SQL sécurisées pour renommer
+    plusieurs colonnes dans PostgreSQL.
+
+    :param schema_name: nom du schema
+    :param table_name: nom de la table
+    :param rename_list: liste [{"old_name": "...", "new_name": "..."}]
+    :return: liste de requêtes SQL psycopg2
+    """
+
+    pattern = r"^[a-zA-Z_][a-zA-Z0-9_]*$"
+
+    def validate(name: str, field: str):
+        if not isinstance(name, str) or not re.match(pattern, name):
+            raise ValueError(f"Nom invalide pour {field} : {name}")
+
+    # 🔒 Validation schema/table
+    validate(schema_name, "schema_name")
+    validate(table_name, "table_name")
+
+    queries = []
+
+    for item in rename_list:
+        old_col = item.get("old_name")
+        new_col = item.get("new_name")
+
+        if not old_col or not new_col:
+            raise ValueError(f"Format invalide : {item}")
+
+        validate(old_col, "old_column")
+        validate(new_col, "new_column")
+
+        query = sql.SQL("ALTER TABLE {}.{} RENAME COLUMN {} TO {}").format(
+            sql.Identifier(schema_name),
+            sql.Identifier(table_name),
+            sql.Identifier(old_col),
+            sql.Identifier(new_col)
+        )
+
+        queries.append(query)
 
     return queries
 
@@ -205,3 +265,21 @@ def request_update_row_postgre_sync(schema_name: str, table_name: str, row_id: i
     values = [col['new_value'] for col in columns] + [row_id]
 
     return query, values
+
+#----------------rename schema----------------------------
+
+
+def request_rename_schema_postgre_sync(conn, old_name: str, new_name: str):
+    try:
+        with conn.cursor() as cursor:
+            query = sql.SQL("ALTER SCHEMA {} RENAME TO {}").format(
+                sql.Identifier(old_name),
+                sql.Identifier(new_name)
+            )
+            cursor.execute(query)
+        conn.commit()
+        return {"message": "Schema renommé avec succès"}
+    
+    except Exception as e:
+        conn.rollback()
+        raise Exception(f"Erreur : {str(e)}")
