@@ -1,12 +1,10 @@
 from typing import List, Optional, Any
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-class ColumnRowItem(BaseModel):
-    column_name: str
-    new_value: Optional[Any]
+class ColumnModifyItem(BaseModel):
+    column_name: str = Field(..., description="Nom de la colonne à modifier")
+    new_value: Optional[Any] = Field(None, description="Nouvelle valeur de la colonne")
 
-class ModifyValueRowModelPostgreSync(BaseModel):
-    schema_name: str
-    table_name: str
-    row_id: int
-    columns: List[ColumnRowItem]
+class ModifyRowModelPostgreSync(BaseModel):
+    row_id: int = Field(..., description="ID de la ligne à modifier")
+    columns: List[ColumnModifyItem] = Field(..., description="Liste des colonnes à modifier")

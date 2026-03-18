@@ -157,24 +157,7 @@ def request_post_add_row_postgre_sync(schema_name: str, table_name: str, tuple_d
     return sql_query
 
 #--------------------------------rename column----------------------------
-""" def request_rename_columns_postgre_sync(schema_name: str, table_name: str, rename_map: dict) -> list[str]:
-    
-    # Fonction simple pour sécuriser les identifiants (colonne, table, schema)
-    def safe_identifier(name: str) -> str:
-        if not name.replace("_", "").isalnum():
-            raise ValueError(f"Nom invalide : {name}")
-        return f'"{name}"'
 
-    schema = safe_identifier(schema_name)
-    table = safe_identifier(table_name)
-
-    queries = []
-    for old_col, new_col in rename_map.items():
-        old = safe_identifier(old_col)
-        new = safe_identifier(new_col)
-        queries.append(f'ALTER TABLE {schema}.{table} RENAME COLUMN {old} TO {new};')
-
-    return queries """
 
 
 def request_rename_columns_postgre_sync(
@@ -229,40 +212,34 @@ def request_rename_columns_postgre_sync(
 # Request_PostgreSql.py
 
 # Request_PostgreSql.py
-from typing import List
+from psycopg2 import sql
+from typing import List, Tuple, Dict, Any
 
-def request_update_row_postgre_sync(schema_name: str, table_name: str, row_id: int, columns: List):
-    """
-    Génère une requête SQL UPDATE sécurisée pour modifier une ou plusieurs colonnes.
-
-    Args:
-        schema_name (str): nom du schéma
-        table_name (str): nom de la table
-        row_id (int): identifiant de la ligne à modifier
-        columns (list): liste d'objets avec 'column_name' et 'new_value'
-
-    Returns:
-        tuple: (query, values) pour cursor.execute()
-    """
-
+def request_update_row_postgre_sync(
+    schema_name: str,
+    table_name: str,
+    row_id: int,
+    columns: List[Dict[str, Any]]
+) -> Tuple[sql.SQL, list]:
+    
     if not columns:
         raise ValueError("Aucune colonne à mettre à jour")
 
-    # construction sécurisée de la clause SET
+    # Construire la clause SET de manière sécurisée
     set_clause = sql.SQL(", ").join(
-        sql.SQL("{} = %s").format(sql.Identifier(col['column_name']))
+        sql.SQL("{} = %s").format(sql.Identifier(col["column_name"]))
         for col in columns
     )
 
-    # construction sécurisée de la requête
+    # Construire la requête complète
     query = sql.SQL("UPDATE {}.{} SET {} WHERE id = %s").format(
         sql.Identifier(schema_name),
         sql.Identifier(table_name),
         set_clause
     )
 
-    # valeurs à injecter
-    values = [col['new_value'] for col in columns] + [row_id]
+    # Préparer les valeurs
+    values = [col["new_value"] for col in columns] + [row_id]
 
     return query, values
 

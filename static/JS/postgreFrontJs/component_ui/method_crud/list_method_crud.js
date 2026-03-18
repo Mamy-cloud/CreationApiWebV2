@@ -22,6 +22,11 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     defaultOption.textContent = "method post / put / delete";
     defaultOption.selected = true;
 
+    //modifier nom schema
+    const option6 = document.createElement("option");
+    option6.value = "rename_schema";
+    option6.textContent = "renommer le schema";
+
     // option 1 : renommer table
     const option1 = document.createElement("option");
     option1.value = "rename_table";
@@ -42,13 +47,15 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     option4.value = "rename_column";
     option4.textContent = "renommer une ou plusieurs colonnes";
 
-    //renommer colonne
+    //modifier valeur ligne
     const option5 = document.createElement("option");
     option5.value = "modify_value_row";
     option5.textContent = "modifier une ou plusieurs lignes";
 
+    
+
     // ajout des options dans le select
-    select.append(defaultOption, option1, option2, option3, option4, option5);
+    select.append(defaultOption, option6, option1, option2, option3, option4, option5);
 
     // ajout du select dans le div
     container.appendChild(select);

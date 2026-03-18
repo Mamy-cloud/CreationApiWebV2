@@ -17,6 +17,7 @@ from app.postgreSql.synchrone.method_crud.get import get_global_bonjour
 #-----------------put--------------------------------------
 from app.postgreSql.synchrone.method_crud.put import put_rename_columns_postgre_sync
 from app.postgreSql.synchrone.method_crud.put import put_modify_value_row_postgre_sync
+from app.postgreSql.synchrone.method_crud.put import put_rename_schema_postgre_sync
 
 
 
@@ -61,6 +62,7 @@ app.include_router(get_global_bonjour.router)
 #------------------put------------------------------------------------
 app.include_router(put_rename_columns_postgre_sync.router)
 app.include_router(put_modify_value_row_postgre_sync.router)
+app.include_router(put_rename_schema_postgre_sync.router)
 #---------------------page d'accueil principal--------------
 @app.get("/")
 def read_root(db = Depends(postgre_sync_connect_to_db)):

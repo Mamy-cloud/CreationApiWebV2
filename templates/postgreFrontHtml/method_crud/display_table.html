@@ -42,17 +42,20 @@
         <!-- ----------------------------- fin indication modifier nom table et modifier valeur colonne---------------------- -->
 
         <!----------------------- schema name / rename schema ---------------------------------->
-        <!-- <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
-            <p style="margin-right: 5px;">Nom de la table : </p> <p id="tableTitlePostgre"></p>
+        <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
+            <p style="margin-right: 5px;">Nom du schema : </p> <p id="schemaTitlePostgre"></p>
         </div>
 
-        <div id="rename_table_postgre" style="margin-bottom: 5px;">
-            <form id="renameTableForm">
-                <input type="text" id="newName" name="newName" placeholder="Nouveau nom de table" required>
-                <button type="submit" id="renameBtnTablePostgre">Renommer</button>
-                <div class="verification_error" data-target="newName"></div>
+        <div id="rename_schema_postgre" style="margin-bottom: 5px;">
+            <form id="renameSchemaForm">
+                <div>
+                    <input type="text" class="newNameSchemaPostgre" id="create_schema_postgre" placeholder="nouveau nom schema" name="create_schema_postgre">
+                    <button type="submit" id="create_schema_btn_postgre">Renommer le schema</button>
+                </div>
+                <!-- Ici tu insères le bloc de règles --> 
+                <div class="verification_error" data-target="create_schema_postgre"></div>
             </form>
-        </div> -->
+        </div>
         <!----------------------- fin schema name / rename schema ---------------------------------->
 
 
@@ -64,7 +67,7 @@
         <div id="rename_table_postgre" style="margin-bottom: 5px;">
             <form id="renameTableForm">
                 <input type="text" id="newName" name="newName" placeholder="Nouveau nom de table" required>
-                <button type="submit" id="renameBtnTablePostgre">Renommer</button>
+                <button type="submit" id="renameBtnTablePostgre">Renommer la table</button>
                 <div class="verification_error" data-target="newName"></div>
             </form>
         </div>
@@ -200,10 +203,17 @@
        <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_row/ui_add_row_postgre.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/add_row/ui_select_option_add_row.js"></script>
        <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_create_row_postgre.js"></script>
-       <script type="module" src="/static/JS/postgreFrontJs/method_post/post_row_postgre.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/method_post/post_add_row_postgre.js"></script>
 
+        <!--  ----------------------------------------rename schema------------------------------------------->  
+        <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_schema/ui_select_option_rename_schema.js"></script>
+        <script type="module" src="/static/JS/postgreFrontJs/method_put/put_rename_schema_postgre.js"></script> 
+        <!--vérification d'orthogaphe pour éviter les erreurs SQL-->
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_name_create_schema.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_button_create_schema.js"></script>
 
-       
+      
 
        <!-- ----------------choix rename colunm sur le select----------------------------- -->
         <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/ui_select_option_rename_column.js"></script>

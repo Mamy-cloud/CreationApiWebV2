@@ -5,10 +5,7 @@ import { columnUpdates } from "../component_ui/method_crud/modify_value_row/acti
  * Format BaseModel : columns = [{column_name, new_value}]
  */
 export function buildModifyRowJson() {
-  const pathParts = window.location.pathname.split("/");
-  const schema_name = pathParts[2];
-  const table_name = pathParts[3];
-
+  // Récupérer row_id depuis l'URL
   const urlParams = new URLSearchParams(window.location.search);
   let row_id = urlParams.get("id");
   if (row_id !== null) row_id = Number(row_id);
@@ -25,6 +22,11 @@ export function buildModifyRowJson() {
     });
   }
 
+  if (!row_id) {
+    console.error("Impossible de déterminer l'id de la ligne !");
+    return null;
+  }
+
   // transformer columnUpdates en liste d'objets {column_name, new_value}
   const columns = Object.entries(columnUpdates).map(([column_name, new_value]) => ({
     column_name,
@@ -34,8 +36,6 @@ export function buildModifyRowJson() {
   console.log("columns final pour API", columns);
 
   return {
-    schema_name,
-    table_name,
     row_id,
     columns
   };

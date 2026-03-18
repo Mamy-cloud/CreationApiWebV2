@@ -9,16 +9,22 @@ router = APIRouter()
 
 @router.put("/app/postgre/synchrone/method_crud/put/rename_schema")
 def rename_schema_endpoint_postgre_sync(data: RenameSchemaModelPostgre):
+    print("base model", data)
     conn = postgre_sync_connect_to_db()
+
+    print("connexion db ouverte")
     
     try:
         old_name = data.schema_name
         new_name = data.new_schema_name
+        print("ancien nom schema", old_name)
+        print("nouveau nom schema", new_name)
 
         # appel de ta fonction métier
         request_rename_schema_postgre_sync(conn, old_name, new_name)
 
         conn.commit()
+        print("renommage succès")
 
         return {
             "message": "Schema renommé avec succès",
