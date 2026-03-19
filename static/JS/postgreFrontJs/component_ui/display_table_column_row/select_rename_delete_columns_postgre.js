@@ -2,6 +2,7 @@
 export function SelectRenameDeleteColumns() {
 
   const select = document.createElement("select");
+  select.id = "id_container_select_rename_delete_col_postgre"
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
@@ -14,7 +15,8 @@ export function SelectRenameDeleteColumns() {
   renameOption.textContent = "Renommer";
 
   const deleteOption = document.createElement("option");
-  deleteOption.value = "delete";
+  deleteOption.id = "id_delete_one_column_postgre"; // ✅ ajout de l'id
+  deleteOption.value = "delete_one_col";
   deleteOption.textContent = "Supprimer";
 
   const renameMultipleOption = document.createElement("option");

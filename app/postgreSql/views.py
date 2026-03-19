@@ -1,11 +1,28 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse
 from pathlib import Path
 from fastapi import Query
+from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+
 
 router = APIRouter()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+#---------------------page d'accueil principal--------------
+@router.get("/")
+def read_root(db = Depends(postgre_sync_connect_to_db)):
+    cursor = db.cursor()
+    cursor.execute("SELECT 1")
+    result = cursor.fetchone()[0]
+    
+    cursor.close()
+    db.close()
+
+    return {
+        "message": "Connexion réussie avec psycopg2",
+        "result": result
+    }
 
 #get schema table postgre
 @router.get("/admin/method/get/tables/schema/postgresql/interface/views")

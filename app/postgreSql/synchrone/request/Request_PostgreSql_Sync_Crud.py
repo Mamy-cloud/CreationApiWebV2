@@ -260,3 +260,58 @@ def request_rename_schema_postgre_sync(conn, old_name: str, new_name: str):
     except Exception as e:
         conn.rollback()
         raise Exception(f"Erreur : {str(e)}")
+    
+#---------------supprimer la table------------------------
+
+def request_delete_table_postgre_sync(schema_name: str, table_name: str):
+    if not schema_name or not table_name:
+        raise ValueError("schema_name and table_name are required")
+
+    return sql.SQL("DROP TABLE IF EXISTS {}.{} CASCADE").format(
+        sql.Identifier(schema_name),
+        sql.Identifier(table_name)
+    )
+
+#------------------------supprimer une ou plusieurs colonnes---------------
+
+
+
+def request_delete_columns_postgre_sync(schema_name: str, table_name: str, columns: List[str]) -> str:
+    """
+    Génère une requête SQL sécurisée pour supprimer une ou plusieurs colonnes
+    dans PostgreSQL, en filtrant les noms pour éviter l'injection SQL.
+
+    Args:
+        schema_name (str): nom du schéma PostgreSQL
+        table_name (str): nom de la table
+        columns (List[str]): liste de colonnes à supprimer
+
+    Returns:
+        str: requête SQL ALTER TABLE
+    """
+
+    # Regex autorisant uniquement lettres, chiffres et underscore
+    valid_name_regex = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
+
+    # Vérification du schéma et table
+    if not isinstance(schema_name, str) or not valid_name_regex.match(schema_name):
+        raise ValueError(f"Nom de schéma invalide : {schema_name}")
+    if not isinstance(table_name, str) or not valid_name_regex.match(table_name):
+        raise ValueError(f"Nom de table invalide : {table_name}")
+
+    # Vérification que columns est une liste de strings
+    if not isinstance(columns, list) or not all(isinstance(c, str) for c in columns):
+        raise ValueError("columns doit être une liste de chaînes de caractères")
+    if not columns:
+        raise ValueError("La liste des colonnes à supprimer est vide.")
+
+    # Vérification et filtrage des colonnes
+    for col in columns:
+        if not valid_name_regex.match(col):
+            raise ValueError(f"Nom de colonne invalide : {col}")
+
+    # Construction sécurisée de la requête
+    columns_sql = ",\n  ".join([f'DROP COLUMN IF EXISTS "{col}"' for col in columns])
+    query = f'ALTER TABLE "{schema_name}"."{table_name}"\n  {columns_sql};'
+
+    return query

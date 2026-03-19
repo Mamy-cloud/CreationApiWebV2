@@ -1,1 +1,9 @@
-delete table
+---------------------------------delete table-----------------------
+{
+  schema_name: "nom schema",
+  table_name : "nom de la table"
+}
+---------------------------------delete columns---------------------
+{
+  "columns": ["age", "email"]
+}

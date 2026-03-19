@@ -1,7 +1,4 @@
 from fastapi import FastAPI, Depends
-from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
-
-
 #----------------post---------------------------------
 from app.postgreSql.synchrone.method_crud.post import postgre_sync_post_create_schema
 from app.postgreSql.synchrone.method_crud.post import post_create_table_postgre_sync
@@ -18,9 +15,9 @@ from app.postgreSql.synchrone.method_crud.get import get_global_bonjour
 from app.postgreSql.synchrone.method_crud.put import put_rename_columns_postgre_sync
 from app.postgreSql.synchrone.method_crud.put import put_modify_value_row_postgre_sync
 from app.postgreSql.synchrone.method_crud.put import put_rename_schema_postgre_sync
-
-
-
+#----------delete-----------------------------------------
+from app.postgreSql.synchrone.method_crud.delete import delete_table_postgre_sync
+from app.postgreSql.synchrone.method_crud.delete import delete_columns_postgre_sync
 #---------------------views--------------------------------------
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -30,12 +27,7 @@ from app.postgreSql.views import router as views_router
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
 
-
-
-
 app = FastAPI()
-
-
 
 # ⚡ Middleware CORS pour autoriser le front
 app.add_middleware(
@@ -63,21 +55,11 @@ app.include_router(get_global_bonjour.router)
 app.include_router(put_rename_columns_postgre_sync.router)
 app.include_router(put_modify_value_row_postgre_sync.router)
 app.include_router(put_rename_schema_postgre_sync.router)
-#---------------------page d'accueil principal--------------
-@app.get("/")
-def read_root(db = Depends(postgre_sync_connect_to_db)):
-    cursor = db.cursor()
-    cursor.execute("SELECT 1")
-    result = cursor.fetchone()[0]
-    
-    cursor.close()
-    db.close()
+#-----------------delete-----------------------------
+app.include_router(delete_table_postgre_sync.router)
+app.include_router(delete_columns_postgre_sync.router)
 
-    return {
-        "message": "Connexion réussie avec psycopg2",
-        "result": result
-    }
-#-----------------------------interface graphique-----------------------
+#-----------------------------interface graphique et fichier statics-----------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # routes

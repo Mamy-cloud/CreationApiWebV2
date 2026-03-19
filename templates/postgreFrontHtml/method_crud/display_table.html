@@ -59,9 +59,10 @@
         <!----------------------- fin schema name / rename schema ---------------------------------->
 
 
-        <!----------------------- table name / rename table ---------------------------------->
+        <!----------------------- table name / rename table / delete table ---------------------------------->
         <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
             <p style="margin-right: 5px;">Nom de la table : </p> <p id="tableTitlePostgre"></p>
+            <button type="button" id="delete_table_postgre">Supprimer la table</button>
         </div>
 
         <div id="rename_table_postgre" style="margin-bottom: 5px;">
@@ -71,7 +72,7 @@
                 <div class="verification_error" data-target="newName"></div>
             </form>
         </div>
-        <!----------------------- fin table name / rename table ---------------------------------->
+        <!----------------------- fin table name / rename table / delete table---------------------------------->
 
         <!-- ------------------------------afficher / ajouter lignes---------------------------- -->
          <div id="container_table_postgre">
@@ -167,7 +168,7 @@
 
      <!-- liste dans la balise select de méthode crud -->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/list_method_crud.js"></script>
-     <!-- get table -->
+     <!-------------------------- get table / recevoir aussi le nom de la colonne pour supprimer une colonne-->
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_header_postgre.js"></script>
       <script type="module" src="/static/JS/postgreFrontJs/component_ui/display_table_column_row/display_table_row_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/method_get/get_table_column_row_postgre.js"></script>
@@ -213,7 +214,13 @@
       <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_name_create_schema.js"></script>
       <script type="module" src="/static/JS/postgreFrontJs/gestion_error/create_schema/verification_button_create_schema.js"></script>
 
-      
+      <!-- -----------------------------------------supprimer table------------------------ -->
+       <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/delete_table_schema/ui_select_input_delete_table_schema.js"></script>
+       <script type="module" src="/static/JS/postgreFrontJs/method_delete/delete_table_postgre.js"></script>
+
+        <!------------------------------------------------supprimer une colonne------------------------>
+     <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_delete_columns_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/method_delete/delete_columns_postgre.js"></script>
 
        <!-- ----------------choix rename colunm sur le select----------------------------- -->
         <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/ui_select_option_rename_column.js"></script>
