@@ -98,3 +98,19 @@ async def modify_value_row_page_postgre(schema_name: str, table_name: str, id: i
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
 
     return FileResponse(file_path)
+
+#supprimer une colonne
+
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/modify_colonnes/delete_one_column")
+async def rename_one_column_page_postgre(
+    schema_name: str,
+    table_name: str,
+    column: str = Query(...),        # query parameter obligatoire
+    type: str = Query(...)           # query parameter obligatoire
+):
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "method_crud" / "delete_one_column.html"
+
+    if not file_path.exists():
+        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
+
+    return FileResponse(file_path)

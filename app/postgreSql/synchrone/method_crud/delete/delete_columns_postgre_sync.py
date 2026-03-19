@@ -13,6 +13,7 @@ def endpoint_delete_columns_postgre_sync(
     table_name: str,
     data: ModelDeleteColumnsPostgre
 ):
+    print("json reçu et base model:", data)
     """
     Endpoint pour supprimer une ou plusieurs colonnes d'une table PostgreSQL.
     """
@@ -33,7 +34,7 @@ def endpoint_delete_columns_postgre_sync(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la construction de la requête SQL: {e}")
-
+    print("sql créé", query)
     # 🔹 Exécution de la requête
     try:
         conn = postgre_sync_connect_to_db()
@@ -45,7 +46,7 @@ def endpoint_delete_columns_postgre_sync(
     finally:
         if conn:
             conn.close()
-
+    print("suppression effectuée")
     return {
         "message": f"Colonnes {data.columns} supprimées de la table '{table_name}' dans le schéma '{schema_name}' avec succès"
     }

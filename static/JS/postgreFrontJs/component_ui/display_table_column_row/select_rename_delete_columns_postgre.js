@@ -1,8 +1,9 @@
 // actionSelect.js
+
 export function SelectRenameDeleteColumns() {
 
   const select = document.createElement("select");
-  select.id = "id_container_select_rename_delete_col_postgre"
+  
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
@@ -63,7 +64,17 @@ export function SelectRenameDeleteColumns() {
 
     }
 
+    if (this.value === "delete_one_col") {
+
+      window.location.href =
+      `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_colonnes/delete_one_column?column=${column_name}&type=${column_type}`;
+
+    }
+
   });
 
+  
+
   return select;
+  
 }

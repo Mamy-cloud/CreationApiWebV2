@@ -4,7 +4,7 @@ import { SelectRenameDeleteColumns } from "./select_rename_delete_columns_postgr
 export let valueColumnName = [];
 
 //---------------------affichage des colonnes sous forme de thead--------------------------------------------
-export function buildTableHeaderPostgre(thead, columns, schema_name, table_name, onDeleteColumn) {
+export function buildTableHeaderPostgre(thead, columns, schema_name, table_name) {
 
   // Vide le thead avant de reconstruire
   thead.innerHTML = "";
@@ -39,30 +39,6 @@ export function buildTableHeaderPostgre(thead, columns, schema_name, table_name,
     if (col.name === "id") {
       select.style.display = "none";
     }
-
-    // 🔹 Événement sur le select
-    select.addEventListener("change", (e) => {
-      if (e.target.value === "delete_one_col") {
-        const columnName = th.dataset.column?.trim();
-        if (!columnName) return;
-
-        // ✅ Ajouter la colonne au tableau global s'il n'y est pas déjà
-        if (!valueColumnName.includes(columnName)) {
-          valueColumnName.push(columnName);
-        }
-
-        console.log("Colonnes sélectionnées pour suppression :", valueColumnName);
-
-        // ✅ callback si fourni
-        if (typeof onDeleteColumn === "function") {
-          onDeleteColumn(columnName, schema_name, table_name);
-        }
-
-        // 🔄 reset du select à valeur neutre
-        e.target.value = "";
-      }
-    });
-
     actionDiv.appendChild(select);
 
     th.appendChild(nameDiv);
@@ -73,4 +49,5 @@ export function buildTableHeaderPostgre(thead, columns, schema_name, table_name,
   });
 
   thead.appendChild(headerRow);
+  
 }
