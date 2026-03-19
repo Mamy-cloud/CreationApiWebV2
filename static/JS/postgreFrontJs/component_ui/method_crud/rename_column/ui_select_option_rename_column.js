@@ -16,8 +16,8 @@ export function initRenameColumnUI() {
 
         const value = e.target.value;
 
-        // afficher formulaire rename column
-        if (value === "rename_column") {
+        // afficher formulaire rename column ou supprimer les colonnes
+        if (value === "rename_column" || value === "delete_one_multi_col") {
             
             divTextIndicationRenameColumn.style.display = "block";
            

@@ -57,7 +57,7 @@ export function SelectRenameDeleteColumns() {
 
     }
 
-    if (this.value === "rename_multiple") {
+    if (this.value === "rename_multiple" || this.value === "delete_multiple") {
 
       window.location.href =
       `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_colonnes/rename_multi_column`;

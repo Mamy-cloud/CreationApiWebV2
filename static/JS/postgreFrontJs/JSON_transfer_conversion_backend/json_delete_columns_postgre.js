@@ -1,10 +1,8 @@
-// json_delete_column_postgre.js
+import { deleteMultiCol } from "../component_ui/method_crud/rename_column/display_multi_colums_list.js";
 
-// On importe le tableau global qui contient toutes les colonnes sélectionnées
-import { valueColumnName } from "../component_ui/display_table_column_row/display_table_header_postgre.js";
-
-export function jsonDeleteColumns() {
+export function generateJsonDeleteColumns() {
+    // Retourne un objet JS, pas une string
     return {
-        columns: [...valueColumnName] // on fait une copie pour éviter les modifications directes
+        columns: deleteMultiCol
     };
 }

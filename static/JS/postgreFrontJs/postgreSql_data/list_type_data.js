@@ -27,22 +27,6 @@ const DEFAULT_VALUES = {
 };
 
 
-
-// list_type_data.js
-/* export function createTypeSelect(name = "type_of_column", id = null) {
-    const select = document.createElement("select");
-    select.name = name;
-    if (id) select.id = id;
-
-    Object.values(SQL_TYPES).flat().forEach(type => {
-        const option = document.createElement("option");
-        option.value = type;
-        option.textContent = type;
-        select.appendChild(option);
-    });
-
-    return select;
-} */
 export function createTypeSelect(name = "type_of_column", id = null) {
     const select = document.createElement("select");
     select.name = name;

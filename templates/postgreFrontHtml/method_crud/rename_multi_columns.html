@@ -24,7 +24,7 @@
         <div id="globalSpinner"></div>
 
 
-        <form id="renameColumnsForm">
+        <div id="renameColumnsForm">
 
             <table>
                 <thead>
@@ -39,12 +39,15 @@
             </table>
 
             <div style="margin-top:15px;">
-                <button type="submit" id="submitRenameColumns">
-                    Valider les changements
+                <button type="button" id="submitRenameColumns">
+                    Valider les nouveaux noms
+                </button>
+                <button type="button" id="submitDeleteMultiCol">
+                    Valider les colonnes à supprimer
                 </button>
             </div>
 
-        </form>
+        </div>
 
     </div>
     
@@ -52,14 +55,17 @@
     <!-- -----------------------------animation de chargement------------------------- -->
     <script type="module" src="/static/JS/animate_spin.js"></script>
 
-    
+    <!------------------------- modification nom de colonne -------------->
     <script type="module" src="/static/JS/postgreFrontJs/component_ui/method_crud/rename_column/display_multi_colums_list.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_rename_columns_postgre.js"></script>
     <script type="module" src="/static/JS/postgreFrontJs/method_put/put_rename_columns_postgre.js"></script>
     <!-- verif rename col -->
      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/verif_multi_col.js"></script>
-     <!-- <script type="module" src="/static/JS/postgreFrontJs/gestion_error/rename_columns/btn_verif_rename_one_column.js"></script> -->
+     <!-- ----------------------------supprimer multi colonne ------------->
+      <script type="module" src="/static/JS/postgreFrontJs/JSON_transfer_conversion_backend/json_delete_columns_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreFrontJs/method_delete/delete_columns_postgre.js"></script>
+    
     <script>
         // Action du bouton retour
         document.getElementById("backBtnToTable").addEventListener("click", () => {

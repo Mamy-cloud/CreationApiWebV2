@@ -45,3 +45,12 @@ export function addRow() {
 document.getElementById("addRowBtn").addEventListener("click", addRow);
 
 
+export function cancelLastRow() {
+  const tbody = document.getElementById("rowsTablePostgre");
+
+  if (tbody.lastChild) {
+    tbody.removeChild(tbody.lastChild);
+  }
+}
+
+document.getElementById("cancelRowBtn").addEventListener("click", cancelLastRow);

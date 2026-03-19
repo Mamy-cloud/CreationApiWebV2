@@ -6,7 +6,7 @@ export function mapSqlTypeToHtmlInput(sqlType, i) {
     case "INTEGER":
     case "REAL":
     case "NUMERIC":
-    case "MONEY":
+    /* case "MONEY": */
       return { type: "number" };
     case "BOOLEAN":
       // retourne directement un <td> avec les radios

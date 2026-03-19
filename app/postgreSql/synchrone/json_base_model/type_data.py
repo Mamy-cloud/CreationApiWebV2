@@ -26,8 +26,12 @@ DEFAULT_VALUES = {
     "URL": "''"
 }
 
+
+
 def map_type_to_postgres(type_name: str) -> str: 
-    """Traduit un type affiché dans le front-end vers un type PostgreSQL valide.""" 
+    
     if type_name == "URL": 
-        return "TEXT" 
-    return type_name
+        return "TEXT"
+    if type_name == "MONEY":
+        return "NUMERIC"  # forcer MONEY à NUMERIC
+    return type_name.upper()

@@ -13,7 +13,7 @@
 #text_indication_modify_column_postgre, #text_indication_modify_row_postgre{
     margin-bottom: 5px;
     padding: 6px;
-    width: 30%;
+    width: 500px;
     background-color: var(--color-second);
 }
 

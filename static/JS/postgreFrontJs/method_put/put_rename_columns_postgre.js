@@ -62,19 +62,20 @@ if (renameForm) {
 //------------------------multi-columns------------------------------------
 import { getRenameColumnsData } from "../JSON_transfer_conversion_backend/json_rename_columns_postgre.js";
 
+
 export function putRenameMultiColumns() {
 
   document.addEventListener("DOMContentLoaded", () => {
 
-    const form = document.getElementById("renameColumnsForm");
+    const submitBtn = document.getElementById("submitRenameColumns");
 
-    if (!form) {
-      console.error("Formulaire introuvable : renameColumnsForm");
+    if (!submitBtn) {
+      console.error("Bouton introuvable : submitRenameColumns");
       return;
     }
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+    submitBtn.addEventListener("click", async function (e) {
+      e.preventDefault(); // facultatif, pas de form submit ici
 
       const path = window.location.pathname.split("/");
       const schemaName = path[2];
