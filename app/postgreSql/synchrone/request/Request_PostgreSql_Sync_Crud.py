@@ -315,3 +315,21 @@ def request_delete_columns_postgre_sync(schema_name: str, table_name: str, colum
     query = f'ALTER TABLE "{schema_name}"."{table_name}"\n  {columns_sql};'
 
     return query
+
+#-------------------------------------supprimer ligne---------------------------
+
+def request_delete_row_id(schema_name: str, table_name: str, row_id: int):
+    """
+    Génère la requête DELETE sécurisée pour supprimer une ligne par ID
+    Évite l'injection SQL en sécurisant le nom du schema et de la table,
+    et en utilisant un paramètre pour l'ID.
+    """
+
+    query = sql.SQL("DELETE FROM {schema}.{table} WHERE id = %s;").format(
+        schema=sql.Identifier(schema_name),
+        table=sql.Identifier(table_name)
+    )
+
+    # La query est prête, row_id doit être passé comme paramètre lors de l'exécution
+    # Exemple d'exécution : cur.execute(query, (row_id,))
+    return query, row_id

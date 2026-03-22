@@ -18,6 +18,7 @@ from app.postgreSql.synchrone.method_crud.put import put_rename_schema_postgre_s
 #----------delete-----------------------------------------
 from app.postgreSql.synchrone.method_crud.delete import delete_table_postgre_sync
 from app.postgreSql.synchrone.method_crud.delete import delete_columns_postgre_sync
+from app.postgreSql.synchrone.method_crud.delete import delete_row_id_postgre_sync
 #---------------------views--------------------------------------
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -58,6 +59,7 @@ app.include_router(put_rename_schema_postgre_sync.router)
 #-----------------delete-----------------------------
 app.include_router(delete_table_postgre_sync.router)
 app.include_router(delete_columns_postgre_sync.router)
+app.include_router(delete_row_id_postgre_sync.router)
 
 #-----------------------------interface graphique et fichier statics-----------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
