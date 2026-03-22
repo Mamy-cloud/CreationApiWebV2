@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Body
 import psycopg2
 from app.postgreSql.synchrone.json_base_model.method_crud.model_delete_row_id_postgre_sync import ModelDeleteRowPostgre
-from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_delete_row_id
+from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_delete_row_id_postgre
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 
 router = APIRouter()
@@ -10,27 +10,29 @@ router = APIRouter()
 def endpoint_delete_row_postgre_sync(
     schema_name: str,
     table_name: str,
-    data: ModelDeleteRowPostgre
+    data: ModelDeleteRowPostgre = Body(...)
 ):
-    print("JSON reçu et BaseModel:", data)
+    print("base Model et json reçu:", data, "/schema name:", schema_name, "/nom table", table_name)
+    """
+    Supprime une ligne par ID dans PostgreSQL.
+    """
 
-    # 🔹 Génération de la requête SQL sécurisée
+    # 🔹 Génération de la requête sécurisée
     try:
-        query, param = request_delete_row_id(
+        query, param = request_delete_row_id_postgre(
             schema_name=schema_name,
             table_name=table_name,
             row_id=data.row_id
         )
+        print("SQL créé:", query, "//avec paramètre row_id =", param)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erreur lors de la construction de la requête SQL: {e}")
-
-    print("SQL créé:", query.as_string(None), "avec paramètre row_id =", param)
+        raise HTTPException(status_code=500, detail=f"Erreur construction requête SQL: {e}")
 
     # 🔹 Exécution de la requête
     try:
         conn = postgre_sync_connect_to_db()
         with conn.cursor() as cur:
-            cur.execute(query, (param,))
+            cur.execute(query, param)
         conn.commit()
     except psycopg2.Error as e:
         raise HTTPException(status_code=500, detail=f"Erreur PostgreSQL: {e.pgerror}")
@@ -38,7 +40,6 @@ def endpoint_delete_row_postgre_sync(
         if conn:
             conn.close()
 
-    print("Suppression effectuée")
     return {
-        "message": f"Ligne avec id {data.row_id} supprimée de la table '{table_name}' dans le schéma '{schema_name}' avec succès"
+        "message": f"Ligne {data.row_id} supprimée de la table '{table_name}' dans le schéma '{schema_name}'"
     }
