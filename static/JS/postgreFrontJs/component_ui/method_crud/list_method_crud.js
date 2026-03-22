@@ -62,8 +62,13 @@ export function listMethodCrudPostgre(containerId = "list_method_crud_postgre") 
     option8.value = "delete_one_multi_col";
     option8.textContent = "supprimer des colonnes";
 
+    //supprimer ligne
+    const option9 = document.createElement("option");
+    option9.value = "delete_row_id";
+    option9.textContent = "supprimer une ligne";
+
     // ajout des options dans le select
-    select.append(defaultOption, option6, option1, option2, option3, option4, option5, option7, option8);
+    select.append(defaultOption, option6, option1, option2, option3, option4, option5, option7, option8, option9);
 
     // ajout du select dans le div
     container.appendChild(select);

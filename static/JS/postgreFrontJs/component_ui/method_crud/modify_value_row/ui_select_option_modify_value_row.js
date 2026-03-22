@@ -17,7 +17,7 @@ export function initModifyValueRowUI() {
         const value = e.target.value;
 
         // afficher formulaire rename column
-        if (value === "modify_value_row") {
+        if (value === "modify_value_row" || value === "delete_row_id") {
             
             divTextIndicationModifyRow.style.display = "block";
            

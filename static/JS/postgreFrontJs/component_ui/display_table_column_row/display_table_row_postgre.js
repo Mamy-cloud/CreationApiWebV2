@@ -57,6 +57,10 @@ export function buildTableRowsPostgre(tbody, data, columns) {
           if (this.value === "update") {
             window.location.href =
               `/admin/${schema_name}/${table_name}/postgresql/interface/views/modify_row/value?id=${rowId}`;
+          };
+          if (this.value === "delete") {
+            window.location.href =
+              `/admin/${schema_name}/${table_name}/postgresql/interface/views/delete_row/value?id=${rowId}`;
           }
 
         });

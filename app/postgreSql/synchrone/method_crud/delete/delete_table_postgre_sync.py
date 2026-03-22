@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 import psycopg2
-from app.postgreSql.synchrone.json_base_model.model_delete_table_postgre import DeleteTablePostgre
+from app.postgreSql.synchrone.json_base_model.method_crud.model_delete_table_postgre import DeleteTablePostgre
 from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_delete_table_postgre_sync
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 

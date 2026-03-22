@@ -7,7 +7,7 @@ from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_
 
 router = APIRouter()
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
 
 #---------------------page d'accueil principal--------------
 @router.get("/")
@@ -109,6 +109,16 @@ async def rename_one_column_page_postgre(
     type: str = Query(...)           # query parameter obligatoire
 ):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "method_crud" / "delete_one_column.html"
+
+    if not file_path.exists():
+        raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")
+
+    return FileResponse(file_path)
+
+#supprimer une ligne row_id
+@router.get("/admin/{schema_name}/{table_name}/postgresql/interface/views/delete_row/value")
+async def modify_value_row_page_postgre(schema_name: str, table_name: str, id: int = Query(...)):
+    file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "method_crud" / "delete_row.html"
 
     if not file_path.exists():
         raise RuntimeError(f"Le fichier HTML n'existe pas : {file_path}")

@@ -23,7 +23,7 @@ from app.postgreSql.synchrone.method_crud.delete import delete_row_id_postgre_sy
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.responses import FileResponse
-from app.postgreSql.views import router as views_router
+from app.postgreSql.views.method_crud.views import router as views_router
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware

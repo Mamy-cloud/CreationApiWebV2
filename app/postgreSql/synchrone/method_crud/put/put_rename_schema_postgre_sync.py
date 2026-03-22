@@ -3,7 +3,7 @@ from psycopg2 import sql
 
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 from app.postgreSql.synchrone.request.Request_PostgreSql_Sync_Crud import request_rename_schema_postgre_sync
-from app.postgreSql.synchrone.json_base_model.model_rename_schema_postgre_synchrone import RenameSchemaModelPostgre
+from app.postgreSql.synchrone.json_base_model.method_crud.model_rename_schema_postgre_synchrone import RenameSchemaModelPostgre
 
 router = APIRouter()
 
