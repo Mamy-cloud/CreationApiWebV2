@@ -23,7 +23,8 @@ from app.postgreSql.synchrone.method_crud.delete import delete_row_id_postgre_sy
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.responses import FileResponse
-from app.postgreSql.views.method_crud.views import router as views_router
+from app.postgreSql.views.method_crud import views_method_crud
+from app.postgreSql.views.receive_var_env import views_receive_var_env
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
@@ -65,6 +66,8 @@ app.include_router(delete_row_id_postgre_sync.router)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # routes
-app.include_router(views_router)
+app.include_router(views_receive_var_env.router)
+app.include_router(views_method_crud.router)
+
 # static
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
