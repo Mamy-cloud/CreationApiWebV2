@@ -1,0 +1,19 @@
+p{
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 12px;
+}
+p:hover{
+    color: #f5063a;
+}
+
+form{
+    border: 3px solid #ffffff;
+    border-radius: 35px;
+    padding: 20px;
+}
+input{
+    display: block;
+    margin: 9px;
+    width: 370px;
+}

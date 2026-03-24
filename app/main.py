@@ -24,6 +24,7 @@ from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.responses import FileResponse
 from app.postgreSql.views.method_crud import views_method_crud
+from app.postgreSql.views.login_signin_signup import views_login_signin_signup
 #-----------------login-----------------------------------
 from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_sync_login
 
@@ -68,6 +69,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # routes
 app.include_router(views_method_crud.router)
+app.include_router(views_login_signin_signup.router)
 
 # static
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
