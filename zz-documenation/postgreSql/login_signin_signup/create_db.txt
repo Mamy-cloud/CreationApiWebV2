@@ -1,0 +1,4 @@
+-------------------------créé la db au moment de lancement du serveur fastApi---------
+back-end
+-créer db si cela n'existe pas
+-ajout de la dépendance bcrypt pour cryter le mot de passe dans le db

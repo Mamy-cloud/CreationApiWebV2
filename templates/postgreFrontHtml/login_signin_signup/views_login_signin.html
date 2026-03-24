@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>connexion ou inscription</title>
+</head>
+<body>
+
+    <!-- text create user -->
+     <input type="button" value="Vous n'avez ">
+    <!-- login -->
+    <form id="loginFormPostgreSync">
+        <label title="nom utilisateur">
+            <input type="text" name="loginNameUserPostgreSync" id="loginIdUserPostgreSync">
+        </label>
+        <label title="mot de passe">
+            <input type="text" name="loginNamePasswordPostgreSync" id="loginIdPasswordPostgreSync">
+        </label>
+        
+        <button type="submit" id="btnSubmitConnectUserPostgre">Se connecter</button>
+        <input type="button" value=" pas d'utilisateur dans le db, créé un utilisateur" id="verifyUserPostgre">
+    </form>
+
+    <!-- signup -->
+    <form id="signupFormPostgreSync">
+        <label title="nom utilisateur">
+            <input type="text" name="signupNameUserPostgreSync" id="signupIdUserPostgreSync">
+        </label>
+        <label title="mot de passe">
+            <input type="text" name="signupNamePasswordPostgreSync" id="signupIdPasswordPostgreSync">
+        </label>
+        <button type="submit" id="btnSubmitCreateUserPostgre">Créé utilisateur</button>
+    </form>
+</body>
+</html>

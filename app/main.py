@@ -24,7 +24,8 @@ from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from fastapi.responses import FileResponse
 from app.postgreSql.views.method_crud import views_method_crud
-from app.postgreSql.views.receive_var_env import views_receive_var_env
+#-----------------login-----------------------------------
+from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_sync_login
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
@@ -66,8 +67,17 @@ app.include_router(delete_row_id_postgre_sync.router)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # routes
-app.include_router(views_receive_var_env.router)
 app.include_router(views_method_crud.router)
 
 # static
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
+
+#------------------------login , sign in------------------------------
+app.include_router(init_db_postgre_sync_login.router)
+
+# 🔹 Exécution automatique au démarrage
+@app.on_event("startup")
+def startup():
+    print("🚀 Initialisation DB login...")
+    result = init_db_postgre_sync_login.init_db_if_not_exist()
+    print(result)
