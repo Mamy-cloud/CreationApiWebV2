@@ -22,7 +22,11 @@
             </label>
             <label for="loginNamePasswordPostgreSync">
     
-                <input type="text" name="loginNamePasswordPostgreSync" id="loginIdPasswordPostgreSync" placeholder="MOT DE PASSE" required>
+                <input type="password" class="getPasswordToShow" name="loginNamePasswordPostgreSync" id="loginIdPasswordPostgreSync" placeholder="MOT DE PASSE" required>
+                <label>
+                <input type="checkbox" id="showPassword">
+                Afficher le mot de passe
+                </label>
             </label>
             
             <button type="submit" id="btnSubmitConnectUserPostgre">Se connecter</button>
@@ -37,17 +41,34 @@
             
             <label for="signupNameUserPostgreSync">
             
-                <input type="text" name="signupNameUserPostgreSync" id="signupIdUserPostgreSync" placeholder="NOM UTILISATEUR" required>
+                <input type="text" name="signupIdUserPostgreSync" id="signupIdUserPostgreSync" placeholder="NOM UTILISATEUR" required>
+                <div class="verification_error" data-target="signupIdUserPostgreSync"></div>
             </label>
             <label for="signupIdPasswordPostgreSync">
     
-                <input type="text" name="signupNamePasswordPostgreSync" id="signupIdPasswordPostgreSync" placeholder="MOT DE PASSE" required>
+                <input type="password" class="getPasswordToShow" name="signupIdPasswordPostgreSync" id="signupIdPasswordPostgreSync" placeholder="MOT DE PASSE" required>
+                <label>
+                <input type="checkbox" id="showPassword">
+                Afficher le mot de passe
+                </label>
+                <div class="verification_password" data-target="signupIdPasswordPostgreSync"></div>
             </label>
             <button type="submit" id="btnSubmitCreateUserPostgre">Créé utilisateur</button>
             <p id="textInviteConnectPostgre">Déjà un compte, se connecter ici</p>
         </form>
      </section>
     
+     <!-- style dynamique -->
      <script type="module" src="/static/JS/postgreLoginSigninJs/stylePageLoginPostgre.js"></script>
+     <!-- Souscription -->
+      <script type="module" src="/static/JS/postgreLoginSigninJs/signUpCreateUserPostgre.js"></script>
+     <!-- gestion erreur -->
+      <script type="module" src="/static/JS/postgreFrontJs/gestion_error/gestion_error_name.js"></script>
+      <script type="module" src="/static/JS/postgreLoginSigninJs/gestion_error/verif_syntaxe_create_user.js"></script>
+      <script type="module" src="/static/JS/postgreLoginSigninJs/gestion_error/verif_password_global.js"></script>
+      <script type="module" src="/static/JS/postgreLoginSigninJs/gestion_error/verif_psswrd_postgre.js"></script>
+      <script type="module" src="/static/JS/postgreLoginSigninJs/gestion_error/btn_signup.js"></script>
+      <!-- affichage mot de passe -->
+       <script type="module" src="/static/JS/show_password.js"></script>
 </body>
 </html>

@@ -15,5 +15,10 @@ form{
 input{
     display: block;
     margin: 9px;
-    width: 370px;
+    width: 400px;
+}
+input[type="checkbox"], label {
+  /* vertical-align: middle; */
+  width: auto;
+  display: inline-block;
 }

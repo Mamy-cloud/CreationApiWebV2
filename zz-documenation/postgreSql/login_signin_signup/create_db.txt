@@ -2,3 +2,19 @@
 back-end
 -créer db si cela n'existe pas
 -ajout de la dépendance bcrypt pour cryter le mot de passe dans le db
+
+-------------------------création de log----------------------------------------
+
+model Json:
+{
+  "columns": ["username", "password_hash", "created_at"],
+  "rows": [
+    {
+      "username": "nom utilisateur",
+      "password_hash": "mot de passe",
+      "created_at": "time stamp",
+      
+    }
+  ]
+}
+route api : /app/login_schema_db_create_api/login_table_db_create_api/postgre/sync/method_crud/add/rows

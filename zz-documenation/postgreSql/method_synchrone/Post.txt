@@ -25,8 +25,7 @@ model Json:
 ------------------add columns---------------------------------
 
 {
-  "schema_name": "nom du schema",
-  "table_name": "nom de la table",
+
   "columns": [
     {
       "column_name": "fer",
@@ -37,8 +36,6 @@ model Json:
 
 ----------------add row-------------------------------------
 {
-  "schema_name": "schema_test",
-  "table_name": "users",
   "columns": ["name", "age", "email", "is_active", "signup_date", "login_time", "last_login"],
   "rows": [
     {

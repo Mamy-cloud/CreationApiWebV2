@@ -12,8 +12,6 @@
 
 -------------------------get table et colonne ligne-------------------
 { 
-  "schema": "nom schema",
-  "table": "nouveau_essai21",
   "columns": [
     {
       "name": "id",
