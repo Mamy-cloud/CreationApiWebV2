@@ -28,6 +28,8 @@ from app.postgreSql.views.login_signin_signup import views_login_signin_signup
 #-----------------login-----------------------------------
 from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_sync_login
 from app.postgreSql.synchrone.action_login_signin_signup import create_log_postgre_sync
+from app.postgreSql.synchrone.action_login_signin_signup import action_verif_log_postgre_sync
+
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
@@ -78,6 +80,7 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 #------------------------login , sign in------------------------------
 app.include_router(create_log_postgre_sync.router)
 app.include_router(init_db_postgre_sync_login.router)
+app.include_router(action_verif_log_postgre_sync.router)
 
 # 🔹 Exécution automatique au démarrage
 @app.on_event("startup")

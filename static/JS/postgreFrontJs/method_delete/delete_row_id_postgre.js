@@ -34,15 +34,15 @@ export async function initDeleteRowIdPostgre() {
   if (!confirmDelete) {
     return window.location.href = `/admin/${schema_name}/${table_name}/postgresql/interface/views`;
   }
+  
 
   // ✅ format JSON attendu par le backend
   const payload = { row_id };
 
   console.log("JSON envoyé :", payload);
   
-  
-
   startSpinner();
+
 
   try {
     const response = await fetch(

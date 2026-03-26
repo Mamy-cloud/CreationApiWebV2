@@ -13,12 +13,12 @@ def endpoint_verif_log_postgre(data: ModelVerifyLogPostgre):
     Endpoint de vérification des identifiants utilisateur.
     Anti-hack : ne révèle jamais si l'utilisateur existe ou non.
     """
-
+    print("json reçu et base model : ", data)
     try:
         # Connexion à la base PostgreSQL
         conn = postgre_sync_connect_to_db()
         cursor = conn.cursor()
-
+        print("connexion db ouverte")
         # 🔐 Appel de la fonction sécurisée
         success, message = request_verify_log_postgre_sync(
             cursor,

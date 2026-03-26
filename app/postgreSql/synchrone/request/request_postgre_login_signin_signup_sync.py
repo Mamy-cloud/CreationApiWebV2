@@ -128,20 +128,24 @@ def request_verify_log_postgre_sync(cursor, username: str, password_hash: str) -
     query = """
         SELECT password_hash
         FROM login_schema_db_create_api.login_table_db_create_api
-        WHERE user_name = %s
+        WHERE username = %s
     """
+    print("sql de vérification : ", query)
     cursor.execute(query, (username,))
     result = cursor.fetchone()
-
+    print("résultat de la vérification user depuis requête : ", result)
+    print("result :", result)
+    print("type :", type(result))
     if not result:
         return False, "Utilisateur inexistant, créez un utilisateur"
 
-    stored_password_hash = result[0]
+    stored_password_hash = result["password_hash"]
 
     # 🔐 2. Vérifier le mot de passe
     # Si le hash stocké ressemble à un hash bcrypt ($2b$ ou $2a$)
     if stored_password_hash.startswith("$2b$") or stored_password_hash.startswith("$2a$"):
         # hashé → utiliser verify_password
+        print("lancement du module de vérification verify_password")
         if verify_password(password_hash, stored_password_hash):
             return True, "Connexion réussie"
         else:
