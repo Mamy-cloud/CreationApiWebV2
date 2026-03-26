@@ -3,6 +3,6 @@ requête postgreSql pour vérifier si le username et le password_hash est dans l
 pas de connexion au db, pas de base model, pas de endpoint, uniquement la requête
 json model:
 {
-    user_name: "nom utilisateur",
+    username: "nom utilisateur",
     password_hash: "mot de passe"
 }

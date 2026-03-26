@@ -27,6 +27,7 @@ from app.postgreSql.views.method_crud import views_method_crud
 from app.postgreSql.views.login_signin_signup import views_login_signin_signup
 #-----------------login-----------------------------------
 from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_sync_login
+from app.postgreSql.synchrone.action_login_signin_signup import create_log_postgre_sync
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
@@ -75,6 +76,7 @@ app.include_router(views_login_signin_signup.router)
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 #------------------------login , sign in------------------------------
+app.include_router(create_log_postgre_sync.router)
 app.include_router(init_db_postgre_sync_login.router)
 
 # 🔹 Exécution automatique au démarrage

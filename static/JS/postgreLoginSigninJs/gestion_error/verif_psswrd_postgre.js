@@ -1,5 +1,5 @@
 // validation_columns.js
-import { verifierMotDePasse, afficherResultatsPassword } from "./verif_password_global.js";
+import { verifierMotDePasse, afficherResultatsPassword } from "../../verif_password_global.js";
 
 export function verifPasswordSignUp() {
   const columnBlock = document.querySelector(".verification_password[data-target='signupIdPasswordPostgreSync']");

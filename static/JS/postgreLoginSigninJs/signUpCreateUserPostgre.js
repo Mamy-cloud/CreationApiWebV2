@@ -33,7 +33,7 @@ export function sendUserPasswordToBackend(event) {
 
     try {
       const response = await fetch(
-        `/app/login_schema_db_create_api/login_table_db_create_api/postgre/sync/method_crud/add/rows`,
+        `/create/user/log/postgre/sync`,
         {
           method: "POST",
           headers: {
@@ -48,10 +48,18 @@ export function sendUserPasswordToBackend(event) {
         throw err;
       }
 
-      const data = await response.json();
-      console.log("Utilisateur ajouté :", data);
+      const result = await response.json();
+      console.log(result);
+      
 
-      alert("✅ Utilisateur créé avec succès !");
+        if (result.success) {
+        // Affiche tous les messages pour chaque utilisateur créé
+        result.results.forEach(r => {
+          alert(r.message);
+        });
+      } else {
+        alert("❌ Erreur : " + (result.message || "Une erreur est survenue"));
+      }
       window.location.href = `/admin/method/get/tables/schema/postgresql/interface/views`;
 
     } catch (error) {
