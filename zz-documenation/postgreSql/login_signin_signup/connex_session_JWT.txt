@@ -17,10 +17,6 @@ b2-génération:
     -ajout expiration du token
     -encodage, création de signature
 
-note: on n'oublie pas:
--login endpoint ✅
--hash password ✅ (ajout important)
-
 c-utilisation du accessToken:
 -les routes et les urls sont maintenants protégés par l'access token si on ajoute du token sur les routes et les urls
 -décode le jwt

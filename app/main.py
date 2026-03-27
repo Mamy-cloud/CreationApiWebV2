@@ -30,6 +30,9 @@ from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_
 from app.postgreSql.synchrone.action_login_signin_signup import create_log_postgre_sync
 from app.postgreSql.synchrone.action_login_signin_signup import action_verif_log_postgre_sync
 
+#---------------------urls crypte with jwt---------------------------
+#refresh token
+from app.postgreSql.protection_secure.refresh_token import endpoint_refresh_token
 
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
@@ -88,3 +91,7 @@ def startup():
     print("🚀 Initialisation DB login...")
     result = init_db_postgre_sync_login.init_db_if_not_exist()
     print(result)
+
+#------------------------------- token -------------------------
+#refresh token
+app.include_router(endpoint_refresh_token.router)

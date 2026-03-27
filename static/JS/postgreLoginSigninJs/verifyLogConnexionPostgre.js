@@ -37,6 +37,7 @@ export function verifLoginUserPasswordToBackend(event) {
       // ✅ Correction ici
       if (result.success) {
         alert("✅ " + result.message);
+        alert("token est généré")
 
         // redirection uniquement si succès
         window.location.href = `/admin/method/get/tables/schema/postgresql/interface/views`;

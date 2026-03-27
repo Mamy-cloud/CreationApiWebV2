@@ -3,9 +3,13 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 from fastapi import Query
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.protection_secure.token_JWT.verify_access_token import verify_access_token
 
+router = APIRouter(
+    prefix="/admin",
+    dependencies=[Depends(verify_access_token)]
+)
 
-router = APIRouter()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
 
@@ -70,7 +74,7 @@ async def rename_one_column_page_postgre(
     schema_name: str,
     table_name: str,
     column: str = Query(...),        # query parameter obligatoire
-    type: str = Query(...)           # query parameter obligatoire
+    type: str = Query(...),
 ):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "method_crud" / "rename_one_columns.html"
 
@@ -106,7 +110,8 @@ async def rename_one_column_page_postgre(
     schema_name: str,
     table_name: str,
     column: str = Query(...),        # query parameter obligatoire
-    type: str = Query(...)           # query parameter obligatoire
+    type: str = Query(...),
+    
 ):
     file_path = BASE_DIR / "templates" / "postgreFrontHtml" / "method_crud" / "delete_one_column.html"
 
