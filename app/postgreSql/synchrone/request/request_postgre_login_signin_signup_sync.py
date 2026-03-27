@@ -43,7 +43,7 @@ def request_create_db_login_if_not_exist(cur):
 
 #---------------------------création log----------------------------------
 
-from app.postgreSql.synchrone.protection_secure.hash_password.protection_hash_password_log_postgre import hash_password
+from app.postgreSql.protection_secure.hash_password.protection_hash_password_log_postgre import hash_password
 
 def request_create_user_log(cursor, row_data: dict) -> dict:
     """
@@ -111,7 +111,7 @@ def request_create_user_log(cursor, row_data: dict) -> dict:
 #---------------------verify log -------------------------------
 # modification de request_verify_log_postgre_sync.py
 
-from app.postgreSql.synchrone.protection_secure.hash_password.protection_hash_password_log_postgre import verify_password
+from app.postgreSql.protection_secure.hash_password.protection_hash_password_log_postgre import verify_password
 
 def request_verify_log_postgre_sync(cursor, username: str, password_hash: str) -> tuple[bool, str]:
     """
