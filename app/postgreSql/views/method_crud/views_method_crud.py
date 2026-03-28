@@ -5,11 +5,13 @@ from fastapi import Query
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 from app.postgreSql.protection_secure.token_JWT.verify_access_token import verify_access_token
 
-router = APIRouter(
+print("lancement de l'interface graphique views")
+
+""" router = APIRouter(
     prefix="/admin",
     dependencies=[Depends(verify_access_token)]
-)
-
+) """
+router = APIRouter(dependencies=[Depends(verify_access_token)])
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
 

@@ -64,6 +64,29 @@ function loadPostgreMenu() {
     // ---- insertion dans le menu ----
     menu.append(divDisplay, divCrud);
 
+    // ------------------------------- dernier bloc ---------------------------------------
+    const divProfile = document.createElement("div");
+    divProfile.id = "id_menu_style_postgre";
+    divProfile.className = "menu_profile_postgre";
+
+    const imgProfile = document.createElement("img");
+    imgProfile.src = "/static/img/postgre/menu/icons8-profile-96.png";
+    imgProfile.alt = "method-crud";
+
+    const pModifyProfile = document.createElement("p");
+    pModifyProfile.textContent = "My";
+
+    const pProfile = document.createElement("p");
+    pProfile.textContent = "Profile";
+
+    divProfile.append(imgProfile, pModifyProfile, pProfile);
+    divProfile.addEventListener("click", () => {
+            window.location.href = "/admin/profile/postgresql/interface/views";
+        });
+
+    // ---- insertion dans le menu ----
+    menu.append(divProfile);
+
     // activation du système de sélection
     selectedMenuPostgre();
 }

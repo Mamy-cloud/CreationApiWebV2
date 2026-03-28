@@ -1,7 +1,7 @@
 # refresh_token_endpoint.py
 
 from fastapi import APIRouter, Request, HTTPException
-from app.postgreSql.protection_secure.refresh_token.GenerateRefreshTokenLogin import generate_access_token_postgre
+from app.postgreSql.protection_secure.refresh_token.GenerateRefreshTokenLogin import generate_refresh_token
 from app.postgreSql.protection_secure.refresh_token.verify_refresh_token import verify_refresh_token
 
 router = APIRouter()
@@ -22,7 +22,7 @@ def refresh_token(request: Request):
         raise HTTPException(status_code=401, detail="Refresh token invalide ou expiré")
 
     # Génération d'un nouveau access token
-    access_token = generate_access_token_postgre(user_data)
+    access_token = generate_refresh_token(user_data)
 
     # Retour du nouveau token au front-end (JSON)
     return {"access_token": access_token, "token_type": "bearer"}

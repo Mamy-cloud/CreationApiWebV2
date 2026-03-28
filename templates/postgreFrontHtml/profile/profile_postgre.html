@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/global_postgre.css">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="id_menu_global">
+        <menu id="id_menu_global_postgre">
+        </menu>
+    </div>
+
+    <div id="id_container_postgre">
+        
+        <!-- Bouton retour --> 
+        <button id="backBtnPostgre">retourner à la liste des tables</button>
+        <br> 
+
+        <!-- chargement --> 
+        <div id="globalSpinner"></div>
+
+        <!-- profile -->
+        <section>
+
+        </section>
+        
+    </div>
+
+    <!-- -----------------------------animation de chargement------------------------- -->
+    <script type="module" src="/static/JS/animate_spin.js"></script>
+    
+    <script>
+        // Action du bouton retour
+        document.getElementById("backBtnPostgre").addEventListener("click", () => {
+            // Redirection vers la page qui liste les tables
+            window.location.href = "/admin/method/get/tables/schema/postgresql/interface/views";
+        });
+
+     </script>
+    <!-- ------------------------------menu container------------------------- -->
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
+</body>
+</html>

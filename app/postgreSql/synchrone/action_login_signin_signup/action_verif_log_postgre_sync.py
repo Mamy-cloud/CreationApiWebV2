@@ -1,15 +1,15 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Response
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
 from app.postgreSql.synchrone.request.request_postgre_login_signin_signup_sync import request_verify_log_postgre_sync
 from app.postgreSql.synchrone.json_base_model.login_signup.model_verify_log_postgre import ModelVerifyLogPostgre
-from app.postgreSql.protection_secure.token_JWT.generateAccessTokenLogin import generate_access_token_postgre  # <- import
+from app.postgreSql.protection_secure.token_JWT.generateAccessTokenLogin import generate_access_token_postgre
 import psycopg2
 
 router = APIRouter()
 
 
 @router.post("/verif/login/db/postgre/sync")
-def endpoint_verif_log_postgre(data: ModelVerifyLogPostgre):
+def endpoint_verif_log_postgre(data: ModelVerifyLogPostgre, response: Response):
     """
     Endpoint de vérification des identifiants utilisateur.
     Anti-hack : ne révèle jamais si l'utilisateur existe ou non.
@@ -21,7 +21,7 @@ def endpoint_verif_log_postgre(data: ModelVerifyLogPostgre):
         cursor = conn.cursor()
         print("connexion db ouverte")
 
-        # 🔐 Appel de la fonction sécurisée de vérification
+        # 🔐 Vérification sécurisée
         success, db_user = request_verify_log_postgre_sync(
             cursor,
             data.username,
@@ -32,19 +32,28 @@ def endpoint_verif_log_postgre(data: ModelVerifyLogPostgre):
         conn.close()
 
         if success:
-            # ✅ Génération du token après validation
+            # ✅ Génération du token
             token = generate_access_token_postgre({
-                "id": None,               # ou 0 / uuid / récupérer depuis la DB si possible
-                "username": data.username # on utilise directement le username reçu
+                "id": None,               # ou récupérer depuis la DB si possible
+                "username": data.username
             })
+
+            # 🔹 Stockage du token dans cookie httpOnly pour le front-end
+            response.set_cookie(
+                key="access_token",
+                value=token,
+                httponly=True,          # empêche l'accès via JS
+                samesite="strict",      # protection CSRF
+                secure=True             # obligatoire HTTPS (mettre False en dev local si pas HTTPS)
+            )
+
             return {
                 "success": True,
                 "message": "Connexion réussie",
-                "access_token": token,
                 "token_type": "bearer"
             }
 
-        # 🔒 Si échec de login
+        # 🔒 Si échec
         return {
             "success": False,
             "message": "Identifiants invalides, créez un compte"
