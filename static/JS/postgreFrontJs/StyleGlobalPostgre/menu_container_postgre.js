@@ -1,5 +1,6 @@
 import { selectedMenuPostgre } from "./selected_menu_postgre.js";
 import { initCreateDbMenu } from "./create_db_postgre.js";
+import { logOutSessionToBackend } from "../../postgreLoginSigninJs/log_out_postgre.js";
 
 function loadPostgreMenu() {
 
@@ -64,7 +65,7 @@ function loadPostgreMenu() {
     // ---- insertion dans le menu ----
     menu.append(divDisplay, divCrud);
 
-    // ------------------------------- dernier bloc ---------------------------------------
+    // ------------------------------- bloc profile ---------------------------------------
     const divProfile = document.createElement("div");
     divProfile.id = "id_menu_style_postgre";
     divProfile.className = "menu_profile_postgre";
@@ -86,6 +87,27 @@ function loadPostgreMenu() {
 
     // ---- insertion dans le menu ----
     menu.append(divProfile);
+
+    // ------------------------------- bloc déconnexion ---------------------------------------
+    const divLogout = document.createElement("div");
+    divLogout.id = "id_menu_style_postgre";
+    divLogout.className = "menu_logout_postgre";
+
+    const imgLogout = document.createElement("img");
+    imgLogout.src = "/static/img/postgre/menu/icons8-logout-100.png";
+    imgLogout.alt = "logout";
+
+    const pModifyLogout = document.createElement("p");
+    pModifyLogout.textContent = "Quitter";
+
+    const pLogout = document.createElement("p");
+    pLogout.textContent = "Session";
+
+    divLogout.append(imgLogout, pModifyLogout, pLogout);
+    divLogout.addEventListener("click", logOutSessionToBackend);
+
+    // ---- insertion dans le menu ----
+    menu.append(divLogout);
 
     // activation du système de sélection
     selectedMenuPostgre();

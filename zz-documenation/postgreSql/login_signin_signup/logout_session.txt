@@ -1,0 +1,17 @@
+-----------------objectif-----------------------------
+
+❌ invalider le refresh token côté serveur
+❌ supprimer le cookie HttpOnly
+❌ supprimer l’access token côté front
+
+---------------aspect technique------------------
+-créé un db logout_table si il n'existe pas
+-créé une relation entre le db de login et le db access_token via les id
+-ajouter le access_token dans le db
+-vérifier si access_token est valide dans le middleware pour les routes et url (optionnel car cela ralentit beaucoup le chargement des pages web car à chaque fois il faut vérifier dans le db)
+-supprimer l'access_token du db lorsque l'access_token token expire via l'appel api du refresh token:
+    il faut mettre le fichier activate_refresh_token.js dans chaque page html qu'on veut protéger avec le token
+-lancer le log out
+-mettre access_token dans blacklist middleware
+-supprimer access_token dans front-end 
+-arrêter refresh token dans le back-end avec suppression de cache cookie, cache html

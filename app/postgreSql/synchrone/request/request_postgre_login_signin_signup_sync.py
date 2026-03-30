@@ -113,7 +113,7 @@ def request_create_user_log(cursor, row_data: dict) -> dict:
 
 from app.postgreSql.protection_secure.hash_password.protection_hash_password_log_postgre import verify_password
 
-def request_verify_log_postgre_sync(cursor, username: str, password_hash: str) -> tuple[bool, str]:
+def request_verify_log_postgre_sync(cursor, username: str, password_hash: str) -> tuple[bool, dict | None, str]:
     """
     Vérifie :
     1. Si l'utilisateur existe
@@ -121,38 +121,34 @@ def request_verify_log_postgre_sync(cursor, username: str, password_hash: str) -
 
     Retourne :
     - success (bool)
+    - user_data (dict) ou None
     - message (str)
     """
 
-    # 🔍 1. Vérifier si l'utilisateur existe et récupérer le password_hash stocké
+    # 🔍 1. Vérifier si l'utilisateur existe et récupérer id + password_hash
     query = """
-        SELECT password_hash
+        SELECT id, username, password_hash
         FROM login_schema_db_create_api.login_table_db_create_api
         WHERE username = %s
     """
-    print("sql de vérification : ", query)
     cursor.execute(query, (username,))
     result = cursor.fetchone()
-    print("résultat de la vérification user depuis requête : ", result)
-    print("result :", result)
-    print("type :", type(result))
+
     if not result:
-        return False, "Utilisateur inexistant, créez un utilisateur"
+        return False, None, "Utilisateur inexistant, créez un compte"
 
     stored_password_hash = result["password_hash"]
 
     # 🔐 2. Vérifier le mot de passe
-    # Si le hash stocké ressemble à un hash bcrypt ($2b$ ou $2a$)
     if stored_password_hash.startswith("$2b$") or stored_password_hash.startswith("$2a$"):
         # hashé → utiliser verify_password
-        print("lancement du module de vérification verify_password")
         if verify_password(password_hash, stored_password_hash):
-            return True, "Connexion réussie"
+            return True, {"id": result["id"], "username": result["username"]}, "Connexion réussie"
         else:
-            return False, "Mot de passe incorrect"
+            return False, None, "Mot de passe incorrect"
     else:
         # pas hashé → comparer directement
         if password_hash == stored_password_hash:
-            return True, "Connexion réussie"
+            return True, {"id": result["id"], "username": result["username"]}, "Connexion réussie"
         else:
-            return False, "Mot de passe incorrect"
+            return False, None, "Mot de passe incorrect"

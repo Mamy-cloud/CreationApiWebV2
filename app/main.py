@@ -31,24 +31,20 @@ from app.postgreSql.views.profile import views_profile_postgre
 from app.postgreSql.synchrone.action_login_signin_signup import init_db_postgre_sync_login
 from app.postgreSql.synchrone.action_login_signin_signup import create_log_postgre_sync
 from app.postgreSql.synchrone.action_login_signin_signup import action_verif_log_postgre_sync
-
-#---------------------urls crypte with jwt---------------------------
-#refresh token
-from app.postgreSql.protection_secure.refresh_token import endpoint_refresh_token
-
+#------------------logout--------------------------------------
+from app.postgreSql.synchrone.action_log_out import create_db_access_token_postgre
+from app.postgreSql.synchrone.action_log_out import action_log_out
 #------------------protection--------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
+#block cache html 
+from app.postgreSql.protection_secure.middleware.blockCacheHtml import NoCacheHTMLMiddleware
+#refresh token
+from app.postgreSql.protection_secure.refresh_token import endpoint_refresh_token
+from app.postgreSql.protection_secure.middleware.middlewareBlacklistLogout import AccessTokenCookieMiddleware
 
 app = FastAPI()
 
-# ⚡ Middleware CORS pour autoriser le front
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # remplacer par ton front si besoin, ex: ["http://localhost:3000"]
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 #-----------------------post--------------------------------------------
 app.include_router(postgre_sync_post_create_schema.router)
@@ -82,10 +78,11 @@ app.include_router(views_profile_postgre.router)
 # static
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
-#------------------------login , sign in------------------------------
+#------------------------login , sign in, log out------------------------------
 app.include_router(create_log_postgre_sync.router)
 app.include_router(init_db_postgre_sync_login.router)
 app.include_router(action_verif_log_postgre_sync.router)
+app.include_router(action_log_out.router)
 
 # 🔹 Exécution automatique au démarrage
 @app.on_event("startup")
@@ -94,6 +91,24 @@ def startup():
     result = init_db_postgre_sync_login.init_db_if_not_exist()
     print(result)
 
-#------------------------------- token -------------------------
+# 🔹 Exécution automatique au démarrage
+@app.on_event("startup")
+def startup():
+    print("🚀 Initialisation DB access token...")
+    result = create_db_access_token_postgre.endpoint_table_accesstoken_if_not_exist()
+    print(result)
+
+#------------------------------- protection -------------------------
 #refresh token
 app.include_router(endpoint_refresh_token.router)
+# ⚡ Middleware CORS pour autoriser le front
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # remplacer par ton front si besoin, ex: ["http://localhost:3000"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.add_middleware(NoCacheHTMLMiddleware)
+app.add_middleware(AccessTokenCookieMiddleware)
+

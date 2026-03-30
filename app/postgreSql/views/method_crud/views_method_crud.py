@@ -1,16 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import FileResponse
 from pathlib import Path
 from fastapi import Query
 from app.postgreSql.synchrone.connexion_db.Postgre_sync_web import postgre_sync_connect_to_db
+from app.postgreSql.protection_secure.token_JWT.verify_access_token_in_middleware import verify_access_token_in_middleware
 from app.postgreSql.protection_secure.token_JWT.verify_access_token import verify_access_token
 
-print("lancement de l'interface graphique views")
-
-""" router = APIRouter(
-    prefix="/admin",
-    dependencies=[Depends(verify_access_token)]
-) """
 router = APIRouter(dependencies=[Depends(verify_access_token)])
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent

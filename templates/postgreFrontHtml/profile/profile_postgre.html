@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/global_postgre.css">
     <link rel="stylesheet" href="/static/css/global.css">
@@ -14,10 +17,6 @@
     </div>
 
     <div id="id_container_postgre">
-        
-        <!-- Bouton retour --> 
-        <button id="backBtnPostgre">retourner à la liste des tables</button>
-        <br> 
 
         <!-- chargement --> 
         <div id="globalSpinner"></div>
@@ -32,17 +31,13 @@
     <!-- -----------------------------animation de chargement------------------------- -->
     <script type="module" src="/static/JS/animate_spin.js"></script>
     
-    <script>
-        // Action du bouton retour
-        document.getElementById("backBtnPostgre").addEventListener("click", () => {
-            // Redirection vers la page qui liste les tables
-            window.location.href = "/admin/method/get/tables/schema/postgresql/interface/views";
-        });
-
-     </script>
     <!-- ------------------------------menu container------------------------- -->
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/menu_container_postgre.js"></script>
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/selected_menu_postgre.js"></script>
+     
      <script type="module" src="/static/JS/postgreFrontJs/StyleGlobalPostgre/create_db_postgre.js"></script>
+
+     <!-- activate refresh token -->
+     <script type="module" src="/static/JS/activate_refresh_token.js"></script>
 </body>
 </html>
