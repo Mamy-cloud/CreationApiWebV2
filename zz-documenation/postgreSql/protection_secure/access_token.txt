@@ -1,0 +1,20 @@
+-----------------------------création access token--------------------------
+1-variables d’environnement ✅
+a- ajout dans .env, création fichier app/postgre/protection_secure/token_JWT/envToken.py pour recevoir les variables d'env
+
+b- génération JWT ✅
+b1-structure: 
+    header:
+    payload:
+    signature:
+b2-génération:
+    on se log, si ok le back-end génère le token avec:
+    -ajout expiration du token
+    -encodage, création de signature
+    -il met l'access_token en cookies HttpOnly, on ne mets pas dans le localStorage pour éviter les attaques XSS via js car le js peut accéder au localStorage
+
+c-utilisation du accessToken:
+-les routes et les urls sont maintenants protégés par l'access token si on ajoute du token sur les routes et les urls
+-décode le jwt
+-vérifie 
+-autorise ou non l'accès aux routes et aux urls

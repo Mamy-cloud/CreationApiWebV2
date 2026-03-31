@@ -60,7 +60,7 @@ export function sendUserPasswordToBackend(event) {
       } else {
         alert("❌ Erreur : " + (result.message || "Une erreur est survenue"));
       }
-      window.location.href = `/admin/method/get/tables/schema/postgresql/interface/views`;
+      window.location.href = `/admin/login/sigin/creation/add/password/postgresql/sync/interface/views`;
 
     } catch (error) {
       console.error("Erreur :", error);

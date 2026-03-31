@@ -13,5 +13,4 @@
     il faut mettre le fichier activate_refresh_token.js dans chaque page html qu'on veut protéger avec le token
 -lancer le log out
 -mettre access_token dans blacklist middleware
--supprimer access_token dans front-end 
--arrêter refresh token dans le back-end avec suppression de cache cookie, cache html
+-supprimer les cookies access_token, refresh_token dans le back-end

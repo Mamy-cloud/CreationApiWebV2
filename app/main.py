@@ -35,12 +35,15 @@ from app.postgreSql.synchrone.action_login_signin_signup import action_verif_log
 from app.postgreSql.synchrone.action_log_out import create_db_access_token_postgre
 from app.postgreSql.synchrone.action_log_out import action_log_out
 #------------------protection--------------------------------------
+#middleware
 from fastapi.middleware.cors import CORSMiddleware
+from app.postgreSql.protection_secure.middleware.middlewareBlacklistLogout import AccessTokenCookieMiddleware
 #block cache html 
 from app.postgreSql.protection_secure.middleware.blockCacheHtml import NoCacheHTMLMiddleware
 #refresh token
 from app.postgreSql.protection_secure.refresh_token import endpoint_refresh_token
-from app.postgreSql.protection_secure.middleware.middlewareBlacklistLogout import AccessTokenCookieMiddleware
+#api key
+from app.postgreSql.protection_secure.api_key import action_create_db_key_api
 
 app = FastAPI()
 
@@ -111,4 +114,11 @@ app.add_middleware(
 )
 app.add_middleware(NoCacheHTMLMiddleware)
 app.add_middleware(AccessTokenCookieMiddleware)
+#api key
+app.include_router(action_create_db_key_api.router)
+@app.on_event("startup")
+def startup():
+    print("🚀 Initialisation DB access token...")
+    result = action_create_db_key_api.endpoint_create_db_key_api_if_not_exist()
+    print(result)
 

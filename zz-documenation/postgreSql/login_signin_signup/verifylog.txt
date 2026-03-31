@@ -1,6 +1,4 @@
 -------------------------vérification des logs----------------------
-requête postgreSql pour vérifier si le username et le password_hash est dans le db, en fonction de SCHEMA_NAME_POSTGRE_LOGIN = "login_schema_db_create_api" et TABLE_NAME_POSTGRE_LOGIN = "login_table_db_create_api"
-pas de connexion au db, pas de base model, pas de endpoint, uniquement la requête
 json model:
 {
     username: "nom utilisateur",

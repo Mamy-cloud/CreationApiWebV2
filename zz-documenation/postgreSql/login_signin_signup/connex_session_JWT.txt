@@ -3,27 +3,6 @@
 - création de refresh token pour que le token se créé automatiquement sans entrer à nouveau le login
 - lorsque je me déconnecte cela arrêtera le refresh token
 
------------------------------création access token--------------------------
-1-variables d’environnement ✅
-a- ajout dans .env, création fichier app/postgre/protection_secure/token_JWT/envToken.py pour recevoir les variables d'env
 
-b- génération JWT ✅
-b1-structure: 
-    header:
-    payload:
-    signature:
-b2-génération:
-    on se log, si ok le back-end génère le token avec:
-    -ajout expiration du token
-    -encodage, création de signature
 
-c-utilisation du accessToken:
--les routes et les urls sont maintenants protégés par l'access token si on ajoute du token sur les routes et les urls
--décode le jwt
--vérifie 
--autorise ou non l'accès aux routes et aux urls
--------------------------------------rôles ou permission--------------
 
-----------------------------------création refresh token---------------------------
-création de refresh token
-protection des routes ✅
