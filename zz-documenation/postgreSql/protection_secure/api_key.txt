@@ -1,7 +1,15 @@
-------------------------automatisation de la création de clé api-------------------
-1-on utilise cron job
+---------------------------création de clé api au moment de login génération automatique----------
+-requête qui créé une clé api à insérer dans l'endpoint login si la clé n'existe pas pour l'user_id
+-récupération de l'user_id dans le cookie HttpOnly
+------------------------renouvellement de clé api automatique-------------------
+1-on utilise APScheduler
 2- voici comment ça marche :
-    -cron s'active au moment du lancement de serveur 
-    -lorsque expired_at arrive, on met is_active fale grâce aux requêtes
-    -puis cron vérifie périodiquement la db si is_active est false, il lance la requête de création de clé api et supprime la clé api "is_active = false" de chaque utilisateur
-
+    -s'active au moment du lancement de serveur 
+    -créer la table automatiquement au lancement du serveur si table n'existe pas
+    -créer les clé api pour chaque user_id via la relation des table login_schema_db_create_api.login_table_db_create_api et key_api_schema.key_api_table si clé api pour l'user_id n'existe pas
+    -lorsque expired_at arrive, on met is_active = fale grâce aux requêtes
+    -cron vérifie périodiquement la db si is_active est false
+    -il récupère l'user_id dont is_active = false
+    -créer une nouvelle clé api
+    -supprime tous les clé api is_active = false
+    

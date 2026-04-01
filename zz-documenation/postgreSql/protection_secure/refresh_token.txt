@@ -3,3 +3,5 @@
 2-faire l'appel dans l'endpoint /refresh/token pour qu'il génère un access_token lors de son expiration:
     -décaler de quelques seconde en back-end l'expiration de access_token : "leedway" pour éviter que l'appel front-end soit trop tard et mettre une marge de manoeuvre
     -recevoir le délai d'expiration d'access_token pour que l'appel se fait quelques secondes avant l'expiration pour une marge de manoeuvre car sinon access_token expriré et session fermé
+
+-------------------------------cron job qui supprime tous les cookies pour les access_token et refresh_token et user_id au moment de lancement du serveur---------------------

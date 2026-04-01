@@ -1,4 +1,7 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response, Request
+#--------------------automatisation de tache-------------------------------
+from apscheduler.schedulers.background import BackgroundScheduler
+from app.postgreSql.cron_job import cron_db_api_key
 #----------------post---------------------------------
 from app.postgreSql.synchrone.method_crud.post import postgre_sync_post_create_schema
 from app.postgreSql.synchrone.method_crud.post import post_create_table_postgre_sync
@@ -44,6 +47,7 @@ from app.postgreSql.protection_secure.middleware.blockCacheHtml import NoCacheHT
 from app.postgreSql.protection_secure.refresh_token import endpoint_refresh_token
 #api key
 from app.postgreSql.protection_secure.api_key import action_create_db_key_api
+from app.postgreSql.protection_secure.api_key import action_create_api_key
 
 app = FastAPI()
 
@@ -90,16 +94,17 @@ app.include_router(action_log_out.router)
 # 🔹 Exécution automatique au démarrage
 @app.on_event("startup")
 def startup():
-    print("🚀 Initialisation DB login...")
-    result = init_db_postgre_sync_login.init_db_if_not_exist()
-    print(result)
+    init_db_postgre_sync_login.init_db_if_not_exist()
+    
 
 # 🔹 Exécution automatique au démarrage
 @app.on_event("startup")
 def startup():
-    print("🚀 Initialisation DB access token...")
-    result = create_db_access_token_postgre.endpoint_table_accesstoken_if_not_exist()
-    print(result)
+    create_db_access_token_postgre.endpoint_table_accesstoken_if_not_exist()
+
+@app.on_event("startup")
+def startup():
+    action_create_db_key_api.endpoint_create_db_key_api_if_not_exist()
 
 #------------------------------- protection -------------------------
 #refresh token
@@ -121,4 +126,52 @@ def startup():
     print("🚀 Initialisation DB access token...")
     result = action_create_db_key_api.endpoint_create_db_key_api_if_not_exist()
     print(result)
+app.include_router(action_create_api_key.router)
+
+
+
+@app.on_event("startup")
+async def clear_http_only_cookies():
+    """
+    Supprime tous les cookies HTTP-only sensibles
+    (access_token, refresh_token, user_id) au démarrage du serveur.
+    """
+    # Création d'une réponse temporaire pour effacer les cookies
+    response = Response()
+    
+    # Liste des cookies sensibles
+    cookies_to_clear = ["access_token", "refresh_token", "user_id"]
+    
+    for cookie_name in cookies_to_clear:
+        response.delete_cookie(cookie_name, path="/", httponly=True)
+    
+    # Optionnel : log pour confirmation
+    print(f"Cookies HTTP-only supprimés : {', '.join(cookies_to_clear)}")
+
+
+
+@app.middleware("http")
+async def clear_admin_cookies(request: Request, call_next):
+    response = await call_next(request)
+    
+    # Vérifie si l'URL commence par /admin
+    if request.url.path.startswith("/admin"):
+        cookies_to_clear = ["access_token", "refresh_token", "user_id"]
+        for cookie_name in cookies_to_clear:
+            response.delete_cookie(cookie_name, path="/admin", httponly=True)
+        print(f"Cookies supprimés pour /admin : {', '.join(cookies_to_clear)}")
+    
+    return response
+#--------------------automatisation de tache-------------------------------
+
+# 🔹 Scheduler en arrière-plan
+scheduler = BackgroundScheduler()
+
+
+@app.on_event("startup")
+def start_scheduler():
+    scheduler.add_job(cron_db_api_key.main, 'interval', minutes=3)
+    scheduler.start()
+    print("Scheduler démarré, cron_db_api_key s'exécutera toutes les 3 minutes")
+
 
